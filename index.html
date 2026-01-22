@@ -125,10 +125,14 @@
       border: 1px solid var(--stroke);
       border-radius: var(--radius2);
       padding: 22px 20px;
+      /* Photo + bright overlay (NOT black) */
       background:
         radial-gradient(900px 420px at 10% 10%, rgba(6,182,212,.10), transparent 60%),
         radial-gradient(900px 420px at 90% 20%, rgba(124,58,237,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.76), rgba(255,255,255,.54));
+        linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.62)),
+        url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=70");
+      background-size: auto, auto, auto, cover;
+      background-position: center, center, center, center;
       box-shadow: var(--shadow);
       overflow:hidden;
     }
@@ -139,8 +143,9 @@
       background:
         radial-gradient(260px 140px at 20% 25%, rgba(249,115,22,.18), transparent 60%),
         radial-gradient(240px 130px at 70% 30%, rgba(34,197,94,.16), transparent 60%),
-        radial-gradient(260px 140px at 50% 120%, rgba(6,182,212,.16), transparent 60%);
-      opacity:.8;
+        radial-gradient(260px 140px at 50% 120%, rgba(6,182,212,.16), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.08));
+      opacity:.9;
       pointer-events:none;
     }
     .hero > *{position:relative}
@@ -181,11 +186,47 @@
       padding: 8px 10px;
       border-radius: 999px;
       border:1px solid var(--stroke);
-      background: rgba(255,255,255,.62);
+      background: rgba(255,255,255,.66);
       color: var(--muted);
       font-size: 13px;
       display:inline-flex; align-items:center; gap:8px;
       box-shadow: 0 10px 22px rgba(20,33,61,.08);
+    }
+
+    /* Photo strip under hero (adds real photos, teen-friendly) */
+    .photoStrip{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:10px;
+      margin-top: 14px;
+    }
+    @media (max-width: 860px){
+      .photoStrip{grid-template-columns: repeat(2, minmax(0,1fr));}
+    }
+    .pthumb{
+      border:1px solid var(--stroke);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 12px 34px rgba(20,33,61,.10);
+      min-height: 84px;
+      position:relative;
+    }
+    .pthumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.06) contrast(1.02);
+    }
+    .pthumb span{
+      position:absolute;
+      left:10px; bottom:8px;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 6px 18px rgba(0,0,0,.35);
+      letter-spacing:.2px;
     }
 
     .miniCard{
@@ -244,12 +285,17 @@
 
     .q{
       border:1px solid rgba(20,33,61,.10);
-      background: rgba(255,255,255,.62);
+      background: rgba(255,255,255,.70);
       border-radius: var(--radius);
       padding: 14px;
       overflow:hidden;
       box-shadow: 0 10px 26px rgba(20,33,61,.08);
       position:relative;
+      transition: border-color .18s ease, transform .06s ease, filter .15s ease;
+    }
+    .q:hover{
+      border-color: rgba(6,182,212,.22);
+      filter: brightness(1.01);
     }
 
     /* Cute corner sticker */
@@ -287,7 +333,7 @@
       padding: 6px 8px;
       border: 1px solid rgba(20,33,61,.12);
       border-radius: 999px;
-      background: rgba(255,255,255,.62);
+      background: rgba(255,255,255,.70);
       flex: 0 0 auto;
       margin-top: 2px;
       box-shadow: 0 8px 18px rgba(20,33,61,.06);
@@ -327,14 +373,14 @@
       padding: 12px 12px;
       border-radius: 16px;
       border: 1px solid rgba(20,33,61,.12);
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.78);
       cursor:pointer;
       transition: transform .06s ease, filter .15s ease, border-color .2s ease;
       user-select:none;
       min-height: 58px;
       box-shadow: 0 10px 22px rgba(20,33,61,.06);
     }
-    .opt:hover{filter: brightness(1.02)}
+    .opt:hover{filter: brightness(1.02); border-color: rgba(124,58,237,.18);}
     .opt:active{transform: translateY(1px)}
 
     .opt input{
@@ -347,7 +393,7 @@
       margin-top: 2px;
       flex: 0 0 auto;
       position:relative;
-      background: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.95);
     }
     .opt input:checked{
       border-color: rgba(6,182,212,.95);
@@ -399,7 +445,7 @@
       background:
         radial-gradient(900px 500px at 10% 0%, rgba(6,182,212,.18), transparent 60%),
         radial-gradient(900px 500px at 90% 0%, rgba(124,58,237,.14), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+        linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.74));
       color: var(--ink);
       box-shadow: 0 22px 80px rgba(20,33,61,.22);
       padding: 0;
@@ -435,7 +481,7 @@
     }
     .resultCard{
       border:1px solid rgba(20,33,61,.12);
-      background: rgba(255,255,255,.72);
+      background: rgba(255,255,255,.78);
       border-radius: 20px;
       padding: 14px;
       overflow:hidden;
@@ -457,10 +503,28 @@
       background:
         radial-gradient(circle at 30% 30%, rgba(6,182,212,.20), transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(124,58,237,.16), transparent 60%),
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.86);
       display:grid;
       place-items:center;
       flex:0 0 auto;
+    }
+
+    /* Profile photo (real photo inside results) */
+    .profilePhoto{
+      border:1px solid rgba(20,33,61,.12);
+      border-radius: 18px;
+      overflow:hidden;
+      height: 132px;
+      box-shadow: 0 12px 34px rgba(20,33,61,.10);
+      margin: 8px 0 12px;
+      background: rgba(255,255,255,.86);
+    }
+    .profilePhoto img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.06) contrast(1.02);
     }
 
     .pname{
@@ -510,7 +574,7 @@
     .callout{
       margin-top: 12px;
       border:1px dashed rgba(20,33,61,.18);
-      background: rgba(255,255,255,.66);
+      background: rgba(255,255,255,.72);
       border-radius: 18px;
       padding: 12px;
       color: var(--muted);
@@ -657,6 +721,26 @@
               Private by default
             </div>
           </div>
+
+          <!-- NEW: photo strip -->
+          <div class="photoStrip" aria-label="Inspiration photos">
+            <div class="pthumb">
+              <img alt="Students collaborating" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70">
+              <span>Teamwork</span>
+            </div>
+            <div class="pthumb">
+              <img alt="Student speaking in class" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=70">
+              <span>Voice</span>
+            </div>
+            <div class="pthumb">
+              <img alt="Students volunteering" src="https://images.unsplash.com/photo-1559027615-02807f75b7f8?auto=format&fit=crop&w=900&q=70">
+              <span>Action</span>
+            </div>
+            <div class="pthumb">
+              <img alt="Student researching on laptop" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=70">
+              <span>Think</span>
+            </div>
+          </div>
         </div>
 
         <div class="miniCard">
@@ -788,6 +872,14 @@
       `
     };
 
+    // NEW: real photos per profile (used in results)
+    const profilePhotos = {
+      Voice: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1400&q=70",
+      Supporter: "https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=1400&q=70",
+      Doer: "https://images.unsplash.com/photo-1559027615-02807f75b7f8?auto=format&fit=crop&w=1400&q=70",
+      Thinker: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=70"
+    };
+
     const profiles = {
       Voice: {
         name: "The Voice",
@@ -912,7 +1004,7 @@
         ]
       },
 
-      /* Added 10 more questions (11–20) */
+      /* 11–20 */
       { t:"If your group is quiet, you usually…",
         h:"Think of the last time you worked in a team.",
         o:[
@@ -1157,6 +1249,12 @@
             <p class="ptag">${subtitle}</p>
           </div>
         </div>
+
+        ${blend ? "" : `
+          <div class="profilePhoto" aria-label="Profile photo">
+            <img alt="${profileKey} profile photo" src="${profilePhotos[profileKey]}">
+          </div>
+        `}
 
         <div class="barWrap">
           <div class="barLine"><span>What you bring</span><span style="color:rgba(74,90,120,.95)">${blend ? "Multiple strengths" : "Your top strengths"}</span></div>
