@@ -5,7 +5,32 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Youth Voice & Social Involvement — Profile Survey</title>
   <meta name="description" content="A bright, teen-friendly survey that assigns students a social involvement profile." />
-  <style>
+ /* ===== FIX: Results modal should not be cut off ===== */
+dialog#resultDialog{
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+dialog#resultDialog .modalHead{
+  flex: 0 0 auto;
+}
+
+dialog#resultDialog .modalBody{
+  flex: 1 1 auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+dialog#resultDialog .footerBtns{
+  flex: 0 0 auto;
+}
+
+/* Optional: keep a little space for scrollbars */
+dialog#resultDialog .modalBody{
+  padding-bottom: 18px;
+}
+ <style>
     :root{
       /* Bright theme */
       --bgA:#f7fbff;
