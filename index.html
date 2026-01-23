@@ -4,31 +4,29 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Youth Voice & Social Involvement — Profile Survey</title>
-  <meta name="description" content="A bright, teen-friendly survey that assigns students a social involvement profile." />
+  <meta name="description" content="A bright, teen-friendly survey that assigns students a social involvement profile and lets the teacher export results to CSV." />
 
   <style>
     :root{
-      /* Brighter + more playful */
       --bgA:#f6fbff;
       --bgB:#fff7fb;
       --bgC:#f7fff7;
       --ink:#10213a;
-      --muted:#475a7a;
+      --muted:#485a79;
 
-      --card: rgba(255,255,255,.82);
-      --card2: rgba(255,255,255,.70);
+      --card: rgba(255,255,255,.84);
       --stroke: rgba(16,33,58,.12);
       --shadow: 0 18px 60px rgba(16,33,58,.14);
 
       --radius: 18px;
       --radius2: 26px;
 
-      --a1:#7c3aed;   /* purple */
-      --a2:#06b6d4;   /* cyan */
-      --a3:#f97316;   /* orange */
-      --a4:#22c55e;   /* green */
-      --a5:#ef4444;   /* red */
-      --a6:#facc15;   /* yellow */
+      --a1:#7c3aed; /* purple */
+      --a2:#06b6d4; /* cyan */
+      --a3:#f97316; /* orange */
+      --a4:#22c55e; /* green */
+      --a5:#ef4444; /* red */
+      --a6:#facc15; /* yellow */
 
       --focus: 0 0 0 4px rgba(6,182,212,.25);
       --max: 1100px;
@@ -52,12 +50,12 @@
       overflow-x:hidden;
     }
 
-    /* Background doodles (soft) */
+    /* Background doodles */
     .doodle{
       position: fixed;
       inset: 0;
       pointer-events:none;
-      opacity:.72;
+      opacity:.7;
       z-index:0;
       filter: drop-shadow(0 10px 18px rgba(16,33,58,.08));
     }
@@ -86,7 +84,7 @@
       padding: 10px 12px;
       border: 1px solid var(--stroke);
       border-radius: 999px;
-      background: rgba(255,255,255,.74);
+      background: rgba(255,255,255,.76);
       backdrop-filter: blur(8px);
       box-shadow: 0 12px 34px rgba(16,33,58,.12);
       letter-spacing: .2px;
@@ -100,7 +98,7 @@
     .btn{
       cursor:pointer;
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.80);
       color: var(--ink);
       padding: 10px 12px;
       border-radius: 14px;
@@ -109,12 +107,13 @@
       box-shadow: 0 12px 30px rgba(16,33,58,.12);
       transition: transform .06s ease, filter .15s ease, background .2s ease, border-color .2s ease;
       user-select:none;
+      white-space:nowrap;
     }
     .btn:hover{filter: brightness(1.03)}
     .btn:active{transform: translateY(1px)}
     .btn.primary{
-      border-color: rgba(6,182,212,.32);
-      background: linear-gradient(135deg, rgba(6,182,212,.22), rgba(124,58,237,.14));
+      border-color: rgba(6,182,212,.34);
+      background: linear-gradient(135deg, rgba(6,182,212,.24), rgba(124,58,237,.14));
     }
     .btn.danger{
       border-color: rgba(239,68,68,.22);
@@ -122,7 +121,6 @@
     }
     .btn:focus{outline:none; box-shadow: var(--focus), 0 12px 30px rgba(16,33,58,.12)}
 
-    /* HERO with bright photo overlay */
     header.hero{
       position:relative;
       border: 1px solid var(--stroke);
@@ -131,7 +129,7 @@
       background:
         radial-gradient(900px 420px at 10% 10%, rgba(6,182,212,.14), transparent 60%),
         radial-gradient(900px 420px at 90% 20%, rgba(124,58,237,.14), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.66)),
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.66)),
         url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=70");
       background-size: auto, auto, auto, cover;
       background-position: center, center, center, center;
@@ -166,7 +164,7 @@
       line-height: 1.05;
     }
     .sub{
-      margin:0 0 14px;
+      margin:0 0 10px;
       color: var(--muted);
       font-size: 15px;
       line-height: 1.55;
@@ -190,7 +188,7 @@
       box-shadow: 0 10px 22px rgba(16,33,58,.10);
     }
 
-    /* FIXED PHOTO STRIP (all same height, no broken layout) */
+    /* Photo strip (stable height so "third photo" never breaks layout) */
     .photoStrip{
       display:grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -205,7 +203,7 @@
       overflow:hidden;
       background: rgba(255,255,255,.78);
       box-shadow: 0 12px 34px rgba(16,33,58,.12);
-      height: 96px;              /* ✅ FIX: stable height */
+      height: 96px;              /* FIXED HEIGHT */
       position:relative;
     }
     .pthumb img{
@@ -259,14 +257,14 @@
       height:100%;
       width: 0%;
       background: linear-gradient(90deg, rgba(6,182,212,.90), rgba(124,58,237,.78), rgba(249,115,22,.78), rgba(34,197,94,.72));
-      transition: width .3s ease;
+      transition: width .25s ease;
     }
 
     main{ margin-top: 16px; }
 
     .panel{
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.76);
+      background: rgba(255,255,255,.78);
       border-radius: var(--radius2);
       padding: 18px;
       box-shadow: var(--shadow);
@@ -278,6 +276,36 @@
       line-height:1.6;
     }
 
+    .nameRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      margin-top: 12px;
+      padding: 12px;
+      border: 1px solid rgba(16,33,58,.10);
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      box-shadow: 0 10px 22px rgba(16,33,58,.08);
+    }
+    .nameBox{flex:1; min-width:240px}
+    .nameBox label{
+      display:block;
+      font-weight: 950;
+      letter-spacing: -.1px;
+      margin-bottom: 6px;
+    }
+    .nameBox input{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(16,33,58,.18);
+      background: rgba(255,255,255,.92);
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .nameBox input:focus{outline:none; box-shadow: var(--focus)}
+
     .grid{
       display:grid;
       grid-template-columns: 1fr;
@@ -287,7 +315,7 @@
 
     .q{
       border:1px solid rgba(16,33,58,.10);
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.84);
       border-radius: var(--radius);
       padding: 14px;
       overflow:hidden;
@@ -366,7 +394,7 @@
       padding: 12px 12px;
       border-radius: 16px;
       border: 1px solid rgba(16,33,58,.12);
-      background: rgba(255,255,255,.86);
+      background: rgba(255,255,255,.92);
       cursor:pointer;
       transition: transform .06s ease, filter .15s ease, border-color .2s ease;
       user-select:none;
@@ -418,7 +446,7 @@
     /* ===== RESULTS MODAL (FIXED SCROLLING) ===== */
     dialog#resultDialog{
       width: min(940px, calc(100% - 22px));
-      max-height: 92vh;                 /* ✅ FIX */
+      max-height: 92vh;                 /* key fix */
       border: 1px solid rgba(16,33,58,.14);
       border-radius: 22px;
       background:
@@ -428,9 +456,9 @@
       color: var(--ink);
       box-shadow: 0 24px 90px rgba(16,33,58,.26);
       padding: 0;
-      overflow: hidden;                /* ✅ FIX: internal scroll handled by modalBody */
-      display:flex;                    /* ✅ FIX */
-      flex-direction: column;          /* ✅ FIX */
+      overflow: hidden;                /* internal scroll in modalBody */
+      display:flex;
+      flex-direction: column;
     }
     dialog#resultDialog::backdrop{
       background: rgba(16,33,58,.52);
@@ -444,7 +472,7 @@
       gap: 14px;
       padding: 16px 16px 10px;
       border-bottom: 1px solid rgba(16,33,58,.10);
-      flex: 0 0 auto;                 /* ✅ FIX */
+      flex: 0 0 auto;
     }
     .modalHead h2{
       margin:0;
@@ -454,8 +482,8 @@
 
     .modalBody{
       padding: 14px 16px 18px;
-      flex: 1 1 auto;                 /* ✅ FIX */
-      overflow: auto;                 /* ✅ FIX */
+      flex: 1 1 auto;
+      overflow: auto;                 /* scroll here */
       -webkit-overflow-scrolling: touch;
     }
 
@@ -468,7 +496,7 @@
 
     .resultCard{
       border:1px solid rgba(16,33,58,.12);
-      background: rgba(255,255,255,.84);
+      background: rgba(255,255,255,.86);
       border-radius: 20px;
       padding: 14px;
       overflow:hidden;
@@ -486,18 +514,18 @@
       background:
         radial-gradient(circle at 30% 30%, rgba(6,182,212,.22), transparent 60%),
         radial-gradient(circle at 70% 70%, rgba(124,58,237,.18), transparent 60%),
-        rgba(255,255,255,.90);
+        rgba(255,255,255,.92);
       display:grid;
       place-items:center;
       flex:0 0 auto;
     }
 
-    /* Profile photo: always the same height + centered */
+    /* Profile photo in results (stable height so nothing looks "broken") */
     .profilePhoto{
       border:1px solid rgba(16,33,58,.12);
       border-radius: 18px;
       overflow:hidden;
-      height: 140px;                 /* ✅ stable height */
+      height: 140px;
       box-shadow: 0 12px 34px rgba(16,33,58,.12);
       margin: 8px 0 12px;
       background: rgba(255,255,255,.92);
@@ -527,13 +555,13 @@
       height:100%;
       width:0%;
       background: linear-gradient(90deg, rgba(6,182,212,.92), rgba(124,58,237,.80), rgba(249,115,22,.80));
-      transition: width .35s ease;
+      transition: width .25s ease;
     }
 
     .callout{
       margin-top: 12px;
       border:1px dashed rgba(16,33,58,.18);
-      background: rgba(255,255,255,.78);
+      background: rgba(255,255,255,.80);
       border-radius: 18px;
       padding: 12px;
       color: var(--muted);
@@ -554,11 +582,10 @@
       padding: 12px 16px 16px;
       border-top: 1px solid rgba(16,33,58,.10);
       flex-wrap:wrap;
-      flex: 0 0 auto;               /* ✅ FIX */
+      flex: 0 0 auto;
       background: rgba(255,255,255,.55);
     }
 
-    /* Print */
     @media print{
       body{background:white; color:black}
       .doodle, .topbar, .toolbar, .btn, .meter, dialog{display:none !important}
@@ -603,16 +630,6 @@
           fill="none" stroke="url(#g1)" stroke-width="16" stroke-linecap="round" opacity=".35"/>
     <path d="M-40 560 C 160 520, 220 650, 420 600 C 600 555, 720 620, 880 560 C 1010 510, 1080 590, 1240 520"
           fill="none" stroke="url(#g2)" stroke-width="18" stroke-linecap="round" opacity=".26"/>
-
-    <g opacity=".26" transform="translate(70,260)">
-      <path d="M40 10c20 0 36 16 36 36S60 82 40 82 4 66 4 46 20 10 40 10z" fill="none" stroke="rgba(124,58,237,.7)" stroke-width="5"/>
-      <path d="M22 46h36" stroke="rgba(6,182,212,.75)" stroke-width="5" stroke-linecap="round"/>
-      <path d="M40 28v36" stroke="rgba(249,115,22,.75)" stroke-width="5" stroke-linecap="round"/>
-    </g>
-    <g opacity=".22" transform="translate(980,520)">
-      <path d="M10 80 L40 20 L70 80 Z" fill="none" stroke="rgba(6,182,212,.75)" stroke-width="5" stroke-linejoin="round"/>
-      <path d="M20 65h40" stroke="rgba(124,58,237,.75)" stroke-width="5" stroke-linecap="round"/>
-    </g>
   </svg>
 
   <div class="wrap">
@@ -622,12 +639,12 @@
           <path d="M12 2l8 4v6c0 5-3.3 9.4-8 10-4.7-.6-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
           <path d="M8.5 12l2.2 2.3L15.5 9.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <strong>Youth Voice Survey</strong> <span>— profile at the end</span>
+        <strong>Youth Voice Survey</strong> <span>— your profile at the end</span>
       </div>
 
       <div class="toolbar">
-        <button class="btn" id="btnAutofill" type="button" title="Fill randomly for demo/testing">Demo fill</button>
-        <button class="btn danger" id="btnReset" type="button" title="Clear all answers">Reset</button>
+        <button class="btn" id="btnAutofill" type="button" title="Fill randomly (demo)">Demo fill</button>
+        <button class="btn danger" id="btnReset" type="button" title="Clear answers">Reset</button>
         <button class="btn primary" id="btnResults" type="button">See my profile</button>
       </div>
     </div>
@@ -635,46 +652,27 @@
     <header class="hero">
       <div class="hgrid">
         <div>
-          <h1>How do you make a difference?</h1>
+          <h1>How do you help your school?</h1>
           <p class="sub">
-            This quick survey helps you discover your <strong>Social Involvement Profile</strong>.
-            Every profile matters—real change needs different strengths working together.
+            Answer 20 quick questions. At the end, you get a profile:
+            <strong>Voice</strong>, <strong>Supporter</strong>, <strong>Doer</strong>, or <strong>Thinker</strong>.
           </p>
 
           <div class="notes">
-            <div class="chip" title="Takes about 8–10 minutes">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 7v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9z" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
-              </svg>
-              8–10 minutes
+            <div class="chip" title="Time">
+              ⏱️ 6–8 minutes
             </div>
             <div class="chip" title="No right or wrong">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 21s-7-4.4-7-11a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 6.6-7 11-7 11z" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
-              </svg>
-              No right/wrong answers
+              ✅ No right / wrong
             </div>
-            <div class="chip" title="Works on paper or digital">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M7 3h10v18H7z" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
-                <path d="M9 7h6M9 11h6M9 15h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-              </svg>
-              Classroom-friendly
-            </div>
-            <div class="chip" title="Private on this device">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
-                <path d="M6 11h12v10H6z" stroke="currentColor" stroke-width="1.8" opacity=".9"/>
-              </svg>
-              Private by default
+            <div class="chip" title="Privacy">
+              🔒 Private on this device
             </div>
           </div>
 
-          <!-- Bright, stable photo strip -->
           <div class="photoStrip" aria-label="Inspiration photos">
             <div class="pthumb">
-              <img alt="Students collaborating" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70">
+              <img alt="Teamwork" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=70">
               <span>Teamwork</span>
             </div>
             <div class="pthumb">
@@ -682,11 +680,11 @@
               <span>Voice</span>
             </div>
             <div class="pthumb">
-              <img alt="Community support" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=70">
+              <img alt="Support and community" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=70">
               <span>Support</span>
             </div>
             <div class="pthumb">
-              <img alt="Thinking and research" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=70">
+              <img alt="Thinking and planning" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=70">
               <span>Think</span>
             </div>
           </div>
@@ -697,23 +695,37 @@
             <span>Progress</span>
             <strong id="progressText">0 / 20</strong>
           </div>
-          <p class="miniText">Answer all questions for the most accurate profile.</p>
+          <p class="miniText">Answer all questions for the best result.</p>
           <div class="meter" aria-label="Progress"><div id="progressBar"></div></div>
-          <p class="miniText" style="margin-top:10px">Tip: If you tie between profiles, you’ll get a “blend.”</p>
+          <p class="miniText" style="margin-top:10px">
+            If you tie, you will get a “blend”.
+          </p>
         </div>
       </div>
     </header>
 
     <main class="panel" aria-label="Survey">
       <div class="small">
-        Choose one option per question. This survey sorts answers into 4 profiles:
-        <strong>Voice</strong>, <strong>Supporter</strong>, <strong>Doer</strong>, <strong>Thinker</strong>.
+        <strong>Teacher note:</strong> Students type a name (or initials). When results open, the page saves the score on this device.
+        You can export a CSV for Google Sheets / Excel.
+      </div>
+
+      <div class="nameRow" aria-label="Student info and export">
+        <div class="nameBox">
+          <label for="studentName">Student name (or initials)</label>
+          <input id="studentName" type="text" placeholder="e.g., Alex R." autocomplete="off" />
+          <div class="small" style="margin-top:6px">Use initials if you prefer privacy.</div>
+        </div>
+        <button class="btn" type="button" id="btnExportCSV" title="Download results as CSV">Export CSV</button>
+        <button class="btn danger" type="button" id="btnClearClass" title="Clear saved results on this device">Clear saved results</button>
       </div>
 
       <div class="grid" id="questions"></div>
 
       <div class="bottomActions">
-        <div class="small"><strong>Privacy note:</strong> answers stay on this device unless you copy/share them.</div>
+        <div class="small">
+          <strong>Tip:</strong> Click an option. You can change your answer.
+        </div>
         <div style="display:flex; gap:10px; flex-wrap:wrap">
           <button class="btn" type="button" id="btnPrint">Print</button>
           <button class="btn primary" type="button" id="btnResults2">See my profile</button>
@@ -724,7 +736,7 @@
 
   <dialog id="resultDialog" aria-label="Results">
     <div class="modalHead">
-      <h2>Your Social Involvement Profile</h2>
+      <h2>Your Profile</h2>
       <button class="btn" type="button" id="btnClose">Close</button>
     </div>
 
@@ -736,7 +748,7 @@
           <div class="profileRow">
             <div class="avatar" aria-hidden="true" id="blendIcon"></div>
             <div>
-              <p class="pname" style="margin:0">Your score breakdown</p>
+              <p class="pname" style="margin:0">Score</p>
               <p class="ptag" id="scoreLine">—</p>
             </div>
           </div>
@@ -760,8 +772,12 @@
             </div>
           </div>
 
-          <div class="callout" id="tieNote">
-            If two profiles are tied, that’s normal. It means you have strengths in more than one role.
+          <div class="callout" id="tieNote" style="display:none">
+            Tie = you are strong in more than one role. That is good.
+          </div>
+
+          <div class="callout" id="saveNote" style="margin-top:10px">
+            Saved: If you entered a name and finished all questions, your result is saved for CSV export.
           </div>
         </div>
       </div>
@@ -773,13 +789,13 @@
     </div>
 
     <div class="footerBtns">
-      <button class="btn" type="button" id="btnCopy">Copy results text</button>
+      <button class="btn" type="button" id="btnCopy">Copy results</button>
       <button class="btn primary" type="button" id="btnPrintResult">Print results</button>
     </div>
   </dialog>
 
   <script>
-    // Inline avatars (no external icons needed)
+    // ===== Icons (no external files) =====
     const icons = {
       Voice: `
         <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
@@ -788,20 +804,17 @@
           <path d="M46 34h8c4 0 6 3 6 6v4H50" stroke="currentColor" stroke-width="2" opacity=".9"/>
           <path d="M24 52c2 3 5 5 8 5s6-2 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           <path d="M26 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-          <path d="M22 22l-8-6M42 22l8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".7"/>
         </svg>
       `,
       Supporter: `
         <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M32 56s-18-10-18-28c0-7 6-12 13-12 3 0 6 1 8 4 2-3 5-4 8-4 7 0 13 5 13 12 0 18-18 28-18 28z" stroke="currentColor" stroke-width="2"/>
-          <path d="M22 30c3 1 6 1 10-3M42 30c-3 1-6 1-10-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
           <path d="M24 40c2 3 5 5 8 5s6-2 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
         </svg>
       `,
       Doer: `
         <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <path d="M22 50h20l6-22H16l6 22z" stroke="currentColor" stroke-width="2"/>
-          <path d="M20 28l-4-8h32l-4 8" stroke="currentColor" stroke-width="2" opacity=".9"/>
           <path d="M26 34h12M26 40h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
           <path d="M10 50h44" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".7"/>
         </svg>
@@ -811,11 +824,11 @@
           <path d="M24 50h16v-6c5-3 8-8 8-14 0-9-7-16-16-16S16 21 16 30c0 6 3 11 8 14v6z" stroke="currentColor" stroke-width="2"/>
           <path d="M26 56h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".8"/>
           <path d="M26 30h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-          <path d="M28 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"/>
         </svg>
       `
     };
 
+    // Stable photo set (no "broken third photo" sizing issues)
     const profilePhotos = {
       Voice: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=70",
       Supporter: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=70",
@@ -823,220 +836,214 @@
       Thinker: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&q=70"
     };
 
+    // Simplified language for 3º ESO
     const profiles = {
       Voice: {
-        name: "The Voice",
-        tag: "You start conversations and help people speak up in a respectful way.",
-        strengths: ["Brave communicator", "Confident sharing ideas", "Raises awareness", "Persuasive speaker"],
-        helpsBy: ["Presenting ideas", "Leading discussions", "Encouraging others to speak", "Building a message"],
-        classroom: "Best in roles like spokesperson, presenter, discussion leader."
+        name: "Voice",
+        tag: "You speak up and share ideas respectfully.",
+        strengths: ["Clear speaker", "Starts discussions", "Shares ideas", "Encourages others"],
+        helpsBy: ["Explain the message", "Present to others", "Start a class talk", "Raise awareness"],
+        classroom: "Good roles: spokesperson, presenter, discussion leader."
       },
       Supporter: {
-        name: "The Supporter",
-        tag: "You notice feelings and help make the group safe, fair, and included.",
-        strengths: ["Empathy", "Team builder", "Cares about fairness", "Good listener"],
-        helpsBy: ["Including others", "Helping classmates", "Building a respectful culture", "Coaching conflict resolution"],
-        classroom: "Best in roles like peer helper, inclusion monitor, community builder."
+        name: "Supporter",
+        tag: "You help people feel safe, included, and respected.",
+        strengths: ["Kind", "Good listener", "Team helper", "Fair-minded"],
+        helpsBy: ["Include others", "Support classmates", "Calm conflict", "Build a good vibe"],
+        classroom: "Good roles: peer helper, inclusion leader, community builder."
       },
       Doer: {
-        name: "The Doer",
-        tag: "You turn ideas into action and keep projects moving forward.",
-        strengths: ["Action-focused", "Reliable", "Problem solver", "Gets things done"],
-        helpsBy: ["Organizing tasks", "Following through", "Building/creating solutions", "Making plans real"],
-        classroom: "Best in roles like organizer, project manager, builder."
+        name: "Doer",
+        tag: "You turn ideas into action and get things done.",
+        strengths: ["Action-focused", "Reliable", "Organized", "Practical"],
+        helpsBy: ["Plan tasks", "Follow through", "Set up materials", "Make it happen"],
+        classroom: "Good roles: organizer, project manager, logistics."
       },
       Thinker: {
-        name: "The Thinker",
-        tag: "You ask smart questions and help the group understand the real problem.",
-        strengths: ["Curious", "Critical thinker", "Sees patterns", "Evidence-minded"],
-        helpsBy: ["Researching", "Asking why", "Finding strong evidence/solutions", "Improving decisions"],
-        classroom: "Best in roles like researcher, strategist, fact-checker."
+        name: "Thinker",
+        tag: "You ask smart questions and look for good reasons.",
+        strengths: ["Curious", "Logical", "Evidence-based", "Good planner"],
+        helpsBy: ["Research", "Ask why", "Check facts", "Improve decisions"],
+        classroom: "Good roles: researcher, strategist, fact-checker."
       }
     };
 
+    // 20 questions, simpler wording
     const Q = [
-      { t:"When you notice something unfair at school, you usually…",
-        h:"Pick what feels most like you, even if you sometimes do more than one.",
+      { t:"If something feels unfair at school, you usually…",
+        h:"Choose the option that fits you best.",
         o:[
-          {k:"Voice", title:"Speak up", desc:"I say something or start a conversation."},
-          {k:"Supporter", title:"Support someone", desc:"I check in with the person affected."},
-          {k:"Doer", title:"Fix what I can", desc:"I look for a practical way to improve it."},
-          {k:"Thinker", title:"Ask why", desc:"I try to understand what caused it first."}
+          {k:"Voice", title:"Speak up", desc:"I say something politely."},
+          {k:"Supporter", title:"Support someone", desc:"I check on the person."},
+          {k:"Doer", title:"Fix what I can", desc:"I take action to help."},
+          {k:"Thinker", title:"Ask why", desc:"I try to understand the cause."}
         ]
       },
-      { t:"In a group project to improve the school, you would most likely…",
-        h:"Think about what you naturally do in groups.",
+      { t:"In a group project, you are usually the one who…",
+        h:"Think about what you do most.",
         o:[
-          {k:"Voice", title:"Share ideas out loud", desc:"I help the group express its message."},
-          {k:"Supporter", title:"Keep everyone included", desc:"I make sure no one is left out."},
-          {k:"Doer", title:"Organize the work", desc:"I plan tasks and follow through."},
-          {k:"Thinker", title:"Research the issue", desc:"I gather info so choices make sense."}
+          {k:"Voice", title:"Shares ideas", desc:"I talk and explain the message."},
+          {k:"Supporter", title:"Includes everyone", desc:"I make sure all join in."},
+          {k:"Doer", title:"Organizes tasks", desc:"I plan and start the work."},
+          {k:"Thinker", title:"Researches", desc:"I find info and facts."}
         ]
       },
-      { t:"Which sentence sounds most like you?",
-        h:"Choose the one that fits best today.",
+      { t:"Which line sounds most like you?",
+        h:"Pick one.",
         o:[
-          {k:"Voice", title:"“People need to hear this.”", desc:"I want others to notice the issue."},
-          {k:"Supporter", title:"“People need to feel safe.”", desc:"I focus on respect and kindness."},
-          {k:"Doer", title:"“Let’s do something.”", desc:"I want real action and progress."},
-          {k:"Thinker", title:"“Let’s understand it first.”", desc:"I want the full picture before acting."}
+          {k:"Voice", title:"“People should hear this.”", desc:"I want to share the message."},
+          {k:"Supporter", title:"“People should feel safe.”", desc:"I care about respect."},
+          {k:"Doer", title:"“Let’s do something now.”", desc:"I want action."},
+          {k:"Thinker", title:"“Let’s understand first.”", desc:"I want the full picture."}
         ]
       },
-      { t:"If your class planned a community project, you’d prefer to…",
-        h:"Imagine a real class activity (posters, cleanup, fundraiser, etc.).",
+      { t:"For a class event, you prefer to…",
+        h:"Example: posters, fundraiser, clean-up.",
         o:[
-          {k:"Voice", title:"Present or persuade", desc:"I’d explain the project to others."},
-          {k:"Supporter", title:"Welcome and encourage", desc:"I’d help people feel comfortable joining."},
-          {k:"Doer", title:"Build / set up / run it", desc:"I’d handle tasks and logistics."},
-          {k:"Thinker", title:"Plan the best approach", desc:"I’d help design a smart plan."}
+          {k:"Voice", title:"Present", desc:"I talk to others and promote it."},
+          {k:"Supporter", title:"Welcome people", desc:"I help others feel comfortable."},
+          {k:"Doer", title:"Set it up", desc:"I handle tasks and materials."},
+          {k:"Thinker", title:"Plan it", desc:"I design a smart plan."}
         ]
       },
       { t:"When someone disagrees with you, you usually…",
-        h:"Pick your most common response.",
+        h:"Pick your most common reaction.",
         o:[
-          {k:"Voice", title:"Explain my point", desc:"I share my reasons clearly."},
-          {k:"Supporter", title:"Try to understand them", desc:"I listen for feelings and reasons."},
-          {k:"Doer", title:"Look for a solution", desc:"I ask: what can we do now?"},
-          {k:"Thinker", title:"Ask questions", desc:"I ask for evidence and details."}
+          {k:"Voice", title:"Explain my point", desc:"I share reasons clearly."},
+          {k:"Supporter", title:"Listen first", desc:"I try to understand them."},
+          {k:"Doer", title:"Find a solution", desc:"I ask: what can we do?"},
+          {k:"Thinker", title:"Ask questions", desc:"I ask for details and facts."}
         ]
       },
-      { t:"What makes the biggest difference in a community?",
-        h:"There isn’t one right answer—this reveals your style.",
+      { t:"What matters most for a better school?",
+        h:"No wrong answer.",
         o:[
-          {k:"Voice", title:"Speaking up", desc:"Ideas spread when people talk about them."},
-          {k:"Supporter", title:"Caring for others", desc:"People thrive when they feel respected."},
-          {k:"Doer", title:"Taking action", desc:"Results come from doing the work."},
-          {k:"Thinker", title:"Understanding the issue", desc:"Good solutions need good thinking."}
+          {k:"Voice", title:"Students speak up", desc:"People share ideas."},
+          {k:"Supporter", title:"Respect and kindness", desc:"People feel safe."},
+          {k:"Doer", title:"Real action", desc:"Things actually change."},
+          {k:"Thinker", title:"Good understanding", desc:"Better ideas and choices."}
         ]
       },
-      { t:"If a classmate is being treated unfairly, you’re more likely to…",
-        h:"Choose what you would probably do first.",
+      { t:"If someone is treated unfairly, you are more likely to…",
+        h:"What do you do first?",
         o:[
-          {k:"Voice", title:"Call it out", desc:"I say something respectfully."},
-          {k:"Supporter", title:"Check on them", desc:"I offer support and kindness."},
-          {k:"Doer", title:"Get help / change the situation", desc:"I take steps to stop it."},
-          {k:"Thinker", title:"Figure out what’s happening", desc:"I try to understand the situation."}
+          {k:"Voice", title:"Say something", desc:"I speak up respectfully."},
+          {k:"Supporter", title:"Check on them", desc:"I offer support."},
+          {k:"Doer", title:"Stop it / get help", desc:"I take steps quickly."},
+          {k:"Thinker", title:"Understand the situation", desc:"I find out what happened."}
         ]
       },
-      { t:"Which task would you enjoy most?",
-        h:"Think about what feels energizing.",
+      { t:"Which task sounds fun for you?",
+        h:"Pick what gives you energy.",
         o:[
-          {k:"Voice", title:"Debate or present", desc:"I like sharing ideas and persuading."},
-          {k:"Supporter", title:"Mentor or welcome", desc:"I like helping people feel included."},
-          {k:"Doer", title:"Build or organize", desc:"I like hands-on action."},
-          {k:"Thinker", title:"Investigate or analyze", desc:"I like research and problem-solving."}
+          {k:"Voice", title:"Present or debate", desc:"I like speaking."},
+          {k:"Supporter", title:"Help someone", desc:"I like supporting people."},
+          {k:"Doer", title:"Build / organize", desc:"I like hands-on work."},
+          {k:"Thinker", title:"Investigate", desc:"I like research and thinking."}
         ]
       },
-      { t:"When a plan isn’t working, you usually…",
-        h:"Pick your most common move.",
+      { t:"When a plan is not working, you usually…",
+        h:"Pick what you do most.",
         o:[
-          {k:"Voice", title:"Suggest a new direction", desc:"I propose a change and explain it."},
-          {k:"Supporter", title:"Support the team", desc:"I help people cooperate."},
-          {k:"Doer", title:"Try another method", desc:"I test a different way to get it done."},
-          {k:"Thinker", title:"Diagnose the problem", desc:"I look for the root cause."}
+          {k:"Voice", title:"Suggest a new idea", desc:"I explain a better direction."},
+          {k:"Supporter", title:"Help the team", desc:"I keep the group calm."},
+          {k:"Doer", title:"Try a different method", desc:"I test another way."},
+          {k:"Thinker", title:"Find the root problem", desc:"I diagnose what’s wrong."}
         ]
       },
-      { t:"If you could improve ONE thing at school, you’d choose…",
-        h:"Pick what matters most to you.",
+      { t:"If you could improve ONE thing at school, it would be…",
+        h:"Pick the closest.",
         o:[
-          {k:"Voice", title:"Students having more say", desc:"More student voice in decisions."},
-          {k:"Supporter", title:"A more respectful culture", desc:"Less bullying; more belonging."},
-          {k:"Doer", title:"A better system", desc:"Clearer routines, spaces, or resources."},
-          {k:"Thinker", title:"Better understanding", desc:"More learning about real problems and solutions."}
+          {k:"Voice", title:"More student voice", desc:"More say in decisions."},
+          {k:"Supporter", title:"More respect", desc:"Less bullying, more belonging."},
+          {k:"Doer", title:"Better routines", desc:"Clear systems and spaces."},
+          {k:"Thinker", title:"Better understanding", desc:"Learn about real problems + solutions."}
         ]
       },
       { t:"If your group is quiet, you usually…",
-        h:"Think of the last time you worked in a team.",
+        h:"What do you do first?",
         o:[
-          {k:"Voice", title:"Start the conversation", desc:"I break the silence and get people talking."},
-          {k:"Supporter", title:"Invite quieter people in", desc:"I ask others what they think."},
-          {k:"Doer", title:"Start doing a task", desc:"I begin something practical to get momentum."},
-          {k:"Thinker", title:"Ask a guiding question", desc:"I ask: what’s our goal and why?"}
+          {k:"Voice", title:"Start talking", desc:"I open the conversation."},
+          {k:"Supporter", title:"Invite others", desc:"I ask quiet people to share."},
+          {k:"Doer", title:"Start a task", desc:"I begin something practical."},
+          {k:"Thinker", title:"Ask a guiding question", desc:"I ask: what is our goal?"}
         ]
       },
-      { t:"Your teacher gives a big challenge. Your first move is…",
-        h:"Pick the most natural reaction.",
+      { t:"A big challenge is given. Your first move is…",
+        h:"Pick the closest.",
         o:[
-          {k:"Voice", title:"Share an idea", desc:"I say what could work and get feedback."},
-          {k:"Supporter", title:"Check how people feel", desc:"I help the group stay calm and positive."},
-          {k:"Doer", title:"Make a quick plan", desc:"I list steps and start the first one."},
-          {k:"Thinker", title:"Understand the requirements", desc:"I read carefully and clarify the problem."}
+          {k:"Voice", title:"Share an idea", desc:"I say a possible solution."},
+          {k:"Supporter", title:"Boost the group", desc:"I keep people positive."},
+          {k:"Doer", title:"Make steps", desc:"I list steps and start."},
+          {k:"Thinker", title:"Understand the task", desc:"I read carefully and clarify."}
         ]
       },
-      { t:"If there’s a conflict between two classmates, you tend to…",
-        h:"Choose what you would do first.",
+      { t:"If two classmates have conflict, you tend to…",
+        h:"What do you do first?",
         o:[
-          {k:"Voice", title:"Speak up for fairness", desc:"I say what I think is right and respectful."},
-          {k:"Supporter", title:"Help them feel heard", desc:"I listen and help them calm down."},
-          {k:"Doer", title:"Get an adult or set a plan", desc:"I take action to stop it and move forward."},
-          {k:"Thinker", title:"Ask what happened", desc:"I gather facts before judging."}
+          {k:"Voice", title:"Speak for fairness", desc:"I say what’s respectful."},
+          {k:"Supporter", title:"Help them calm down", desc:"I listen and support."},
+          {k:"Doer", title:"Get help / set a plan", desc:"I take action to stop it."},
+          {k:"Thinker", title:"Ask what happened", desc:"I gather facts first."}
         ]
       },
-      { t:"You’re planning an event (club, class activity, etc.). You are best at…",
-        h:"Think: what would people thank you for?",
+      { t:"When planning an event, you are best at…",
+        h:"What would people thank you for?",
         o:[
-          {k:"Voice", title:"Promoting it", desc:"I create the message and convince people to join."},
-          {k:"Supporter", title:"Making it welcoming", desc:"I make sure everyone feels included."},
-          {k:"Doer", title:"Running logistics", desc:"I handle materials, timing, and setup."},
-          {k:"Thinker", title:"Designing the structure", desc:"I plan the smartest format and rules."}
+          {k:"Voice", title:"Promoting it", desc:"I create the message."},
+          {k:"Supporter", title:"Making it welcoming", desc:"I include everyone."},
+          {k:"Doer", title:"Logistics", desc:"I handle time, materials, setup."},
+          {k:"Thinker", title:"Structure", desc:"I plan rules and format."}
         ]
       },
-      { t:"If someone says “That will never work,” you…",
-        h:"Pick your most likely response.",
+      { t:"If someone says “That won’t work,” you…",
+        h:"Choose your likely response.",
         o:[
-          {k:"Voice", title:"Explain why it could work", desc:"I defend the idea clearly."},
-          {k:"Supporter", title:"Keep the tone respectful", desc:"I help the group stay kind."},
+          {k:"Voice", title:"Explain why it can work", desc:"I defend the idea clearly."},
+          {k:"Supporter", title:"Keep it respectful", desc:"I protect the tone."},
           {k:"Doer", title:"Test a small version", desc:"I try a quick experiment."},
-          {k:"Thinker", title:"Ask what evidence they have", desc:"I look for reasons and data."}
+          {k:"Thinker", title:"Ask for evidence", desc:"I ask: why do you think so?"}
         ]
       },
       { t:"When you learn about a problem, you want to…",
-        h:"What helps you feel confident?",
+        h:"Pick what you need most.",
         o:[
-          {k:"Voice", title:"Talk about it", desc:"Discussing helps me understand and influence."},
-          {k:"Supporter", title:"Connect it to people", desc:"I focus on how it affects others."},
-          {k:"Doer", title:"Find an action step", desc:"I want something doable right away."},
-          {k:"Thinker", title:"Study it deeper", desc:"I want reliable information and patterns."}
+          {k:"Voice", title:"Talk about it", desc:"Discussion helps me."},
+          {k:"Supporter", title:"Think about people", desc:"I focus on feelings + impact."},
+          {k:"Doer", title:"Find a first step", desc:"I want something doable now."},
+          {k:"Thinker", title:"Study it deeper", desc:"I want reliable info."}
         ]
       },
-      { t:"A new student joins your class. You’re most likely to…",
-        h:"Choose what you’d naturally do.",
+      { t:"A new student joins your class. You are most likely to…",
+        h:"Pick what you would do.",
         o:[
-          {k:"Voice", title:"Introduce them to others", desc:"I help them feel seen and included publicly."},
-          {k:"Supporter", title:"Check in privately", desc:"I ask if they’re okay and need anything."},
-          {k:"Doer", title:"Show them how things work", desc:"I explain routines and help them get set."},
-          {k:"Thinker", title:"Help them understand expectations", desc:"I clarify rules and school systems."}
+          {k:"Voice", title:"Introduce them", desc:"I connect them to others."},
+          {k:"Supporter", title:"Check in privately", desc:"I ask if they are okay."},
+          {k:"Doer", title:"Show routines", desc:"I explain how things work."},
+          {k:"Thinker", title:"Explain expectations", desc:"I clarify rules and systems."}
         ]
       },
-      { t:"If you had to choose a superpower for school projects, you’d pick…",
-        h:"Choose the one you’d actually use.",
+      { t:"You feel proud of a project when…",
+        h:"What feels like success?",
         o:[
-          {k:"Voice", title:"A megaphone of confidence", desc:"Speak clearly in any situation."},
-          {k:"Supporter", title:"A kindness shield", desc:"Help everyone feel safe and respected."},
-          {k:"Doer", title:"A fast-build toolkit", desc:"Turn ideas into real things quickly."},
-          {k:"Thinker", title:"A truth scanner", desc:"Spot what’s accurate and what’s not."}
+          {k:"Voice", title:"People got the message", desc:"It changed minds."},
+          {k:"Supporter", title:"People felt included", desc:"The team felt safe."},
+          {k:"Doer", title:"It happened for real", desc:"We delivered something."},
+          {k:"Thinker", title:"It was well-planned", desc:"Good reasons and evidence."}
         ]
       },
-      { t:"When you’re proud of a project, it’s usually because…",
-        h:"What feels like success to you?",
+      { t:"If you could lead a school club, you’d choose…",
+        h:"Pick your vibe.",
         o:[
-          {k:"Voice", title:"People understood the message", desc:"It changed how people think."},
-          {k:"Supporter", title:"People felt included", desc:"The group felt safe and connected."},
-          {k:"Doer", title:"It actually happened", desc:"We delivered something real."},
-          {k:"Thinker", title:"It was well-reasoned", desc:"The choices were smart and evidence-based."}
-        ]
-      },
-      { t:"If you could lead a club at school, you’d choose…",
-        h:"Pick the one that fits your vibe.",
-        o:[
-          {k:"Voice", title:"Debate / Media / Student voice", desc:"Share ideas and communicate."},
-          {k:"Supporter", title:"Welcome / Peer support", desc:"Help people feel connected."},
-          {k:"Doer", title:"Service / Makers / Sports support", desc:"Build, organize, and do."},
-          {k:"Thinker", title:"Science / Research / Strategy", desc:"Investigate and improve decisions."}
+          {k:"Voice", title:"Debate / Media", desc:"Share ideas and speak."},
+          {k:"Supporter", title:"Peer support", desc:"Help people connect."},
+          {k:"Doer", title:"Service / Makers", desc:"Build and organize."},
+          {k:"Thinker", title:"Science / Research", desc:"Investigate and improve."}
         ]
       }
     ];
 
+    // ===== Render questions =====
     const questionsEl = document.getElementById("questions");
     const progressText = document.getElementById("progressText");
     const progressBar = document.getElementById("progressBar");
@@ -1117,16 +1124,20 @@
     function updateProgress(){
       const {answered, total} = getAnswers();
       progressText.textContent = `${answered} / ${total}`;
-      const pct = Math.round((answered/total)*100);
+      const pct = total ? Math.round((answered/total)*100) : 0;
       progressBar.style.width = `${pct}%`;
     }
     updateProgress();
 
+    // ===== Results UI elements =====
     const dlg = document.getElementById("resultDialog");
     const primaryCard = document.getElementById("primaryCard");
     const teamTips = document.getElementById("teamTips");
     const nextStep = document.getElementById("nextStep");
     const scoreLine = document.getElementById("scoreLine");
+    const tieNote = document.getElementById("tieNote");
+    const saveNote = document.getElementById("saveNote");
+    const blendIcon = document.getElementById("blendIcon");
 
     const vScore = document.getElementById("vScore");
     const sScore = document.getElementById("sScore");
@@ -1137,9 +1148,6 @@
     const sBar = document.getElementById("sBar");
     const dBar = document.getElementById("dBar");
     const tBar = document.getElementById("tBar");
-
-    const tieNote = document.getElementById("tieNote");
-    const blendIcon = document.getElementById("blendIcon");
 
     function rankProfiles(counts){
       const entries = Object.entries(counts).sort((a,b)=> b[1]-a[1]);
@@ -1153,27 +1161,118 @@
       return Math.round((n/total)*100);
     }
 
+    function updateBars(counts){
+      const total = Q.length;
+      vScore.textContent = counts.Voice;
+      sScore.textContent = counts.Supporter;
+      dScore.textContent = counts.Doer;
+      tScore.textContent = counts.Thinker;
+
+      vBar.style.width = pct(counts.Voice, total) + "%";
+      sBar.style.width = pct(counts.Supporter, total) + "%";
+      dBar.style.width = pct(counts.Doer, total) + "%";
+      tBar.style.width = pct(counts.Thinker, total) + "%";
+    }
+
+    // ===== Save class results + Export CSV =====
+    const STORAGE_KEY = "youth_voice_class_results_v1";
+
+    function loadClassResults(){
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+      catch { return []; }
+    }
+    function saveClassResults(rows){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
+    }
+    function nowISO(){
+      return new Date().toISOString();
+    }
+    function topLabel(winners){
+      return winners.length > 1 ? `Blend: ${winners.join(" + ")}` : winners[0];
+    }
+
+    function recordResultIfPossible(){
+      const nameEl = document.getElementById("studentName");
+      const studentName = (nameEl?.value || "").trim();
+
+      const {counts, answered, total} = getAnswers();
+      if (answered !== total) return {saved:false, reason:"incomplete"};
+      if (!studentName) return {saved:false, reason:"missing-name"};
+
+      const {winners, top} = rankProfiles(counts);
+
+      const row = {
+        timestamp: nowISO(),
+        studentName,
+        topProfile: topLabel(winners),
+        topScore: top,
+        voice: counts.Voice,
+        supporter: counts.Supporter,
+        doer: counts.Doer,
+        thinker: counts.Thinker,
+        totalQuestions: total
+      };
+
+      const rows = loadClassResults();
+      rows.push(row);
+      saveClassResults(rows);
+      return {saved:true, row};
+    }
+
+    function toCSV(rows){
+      const headers = ["timestamp","studentName","topProfile","topScore","voice","supporter","doer","thinker","totalQuestions"];
+      const esc = (v) => `"${String(v ?? "").replaceAll('"','""')}"`;
+      const lines = [headers.join(",")].concat(
+        rows.map(r => headers.map(h => esc(r[h])).join(","))
+      );
+      return lines.join("\n");
+    }
+
+    function downloadTextFile(filename, content, mime="text/csv"){
+      const blob = new Blob([content], {type:mime});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("btnExportCSV").addEventListener("click", () => {
+      const rows = loadClassResults();
+      if (!rows.length){
+        alert("No saved results yet. Students must enter a name and finish all questions.");
+        return;
+      }
+      downloadTextFile("class_survey_results.csv", toCSV(rows));
+    });
+
+    document.getElementById("btnClearClass").addEventListener("click", () => {
+      if (confirm("Clear all saved results on this device?")){
+        localStorage.removeItem(STORAGE_KEY);
+        alert("Saved results cleared.");
+      }
+    });
+
+    // ===== Render results cards =====
     function renderPrimary(profileKey, winners){
       const p = profiles[profileKey];
       const blend = winners.length > 1;
 
-      const title = blend
-        ? `Blend: ${winners.map(w => profiles[w].name.replace("The ","")).join(" + ")}`
-        : p.name;
-
+      const title = blend ? `Blend: ${winners.join(" + ")}` : p.name;
       const subtitle = blend
-        ? "You showed strengths across more than one role. That is a leadership advantage."
+        ? "You are strong in more than one role."
         : p.tag;
 
       const strengths = (blend ? winners.flatMap(w => profiles[w].strengths.slice(0,2)) : p.strengths).slice(0,6);
       const helpsBy = (blend ? winners.flatMap(w => profiles[w].helpsBy.slice(0,2)) : p.helpsBy).slice(0,6);
 
       const icon = blend
-        ? `
-          <div style="display:flex; gap:8px; align-items:center">
+        ? `<div style="display:flex; gap:8px; align-items:center">
             ${winners.slice(0,2).map(w => `<div class="avatar" style="width:54px;height:54px;border-radius:18px">${icons[w]}</div>`).join("")}
-          </div>
-        `
+          </div>`
         : `<div class="avatar">${icons[profileKey]}</div>`;
 
       const photoBlock = blend ? "" : `
@@ -1194,19 +1293,19 @@
         ${photoBlock}
 
         <div class="barWrap">
-          <div class="barLine"><span>What you bring</span><span style="color:rgba(71,90,122,.95)">${blend ? "Multiple strengths" : "Your top strengths"}</span></div>
+          <div class="barLine"><span>Your strengths</span><span style="color:rgba(71,90,122,.95)">${blend ? "Mixed" : "Top"}</span></div>
           <ul class="list">
             ${strengths.map(s => `<li>${s}</li>`).join("")}
           </ul>
 
           <div style="height:10px"></div>
-          <div class="barLine"><span>How you help</span><span style="color:rgba(71,90,122,.95)">${blend ? "Different ways" : "Your style"}</span></div>
+          <div class="barLine"><span>Your style</span><span style="color:rgba(71,90,122,.95)">${blend ? "Flexible" : "Typical"}</span></div>
           <ul class="list">
             ${helpsBy.map(h => `<li>${h}</li>`).join("")}
           </ul>
 
           <div class="callout" style="margin-top:12px">
-            <strong>Classroom fit:</strong> ${blend ? "You can flex roles depending on the task." : p.classroom}
+            <strong>Class role:</strong> ${blend ? "You can switch roles depending on the task." : p.classroom}
           </div>
         </div>
       `;
@@ -1214,25 +1313,19 @@
 
     function renderTeamTips(winners){
       const suggestions = {
-        Voice: ["Pair with a Thinker to strengthen evidence.", "Pair with a Supporter to keep tone respectful."],
-        Supporter: ["Pair with a Voice to share your ideas out loud.", "Pair with a Doer to turn care into action."],
-        Doer: ["Pair with a Thinker to plan the best solution.", "Pair with a Supporter to keep the group connected."],
-        Thinker: ["Pair with a Voice to communicate your findings.", "Pair with a Doer to test solutions quickly."]
+        Voice: ["Work with a Thinker for facts.", "Work with a Supporter for a good tone."],
+        Supporter: ["Work with a Voice to share ideas.", "Work with a Doer to turn care into action."],
+        Doer: ["Work with a Thinker to plan better.", "Work with a Supporter to keep the team connected."],
+        Thinker: ["Work with a Voice to share findings.", "Work with a Doer to test ideas fast."]
       };
       const unique = [...new Set(winners.flatMap(w => suggestions[w]))];
 
       teamTips.innerHTML = `
         <div class="profileRow">
-          <div class="avatar" aria-hidden="true">
-            <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
-              <path d="M20 44c8 10 16 10 24 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M12 22c6-8 14-12 20-12s14 4 20 12" stroke="currentColor" stroke-width="2" opacity=".85"/>
-              <path d="M10 48c10-6 34-6 44 0" stroke="currentColor" stroke-width="2" opacity=".7"/>
-            </svg>
-          </div>
+          <div class="avatar" aria-hidden="true">🤝</div>
           <div>
-            <p class="pname" style="margin:0">Best teammates for you</p>
-            <p class="ptag">Strong teams mix roles on purpose.</p>
+            <p class="pname" style="margin:0">Good teammates</p>
+            <p class="ptag">Strong teams mix roles.</p>
           </div>
         </div>
         <ul class="list">
@@ -1244,25 +1337,19 @@
     function renderNextStep(answered, total){
       const missing = total - answered;
       const prompt = (missing === 0)
-        ? "Pick one small action you could take this week at school."
-        : "Answer all questions to get your most accurate profile.";
+        ? "Choose one small action for this week."
+        : "Finish all questions for a better result.";
 
       const steps = [
-        "Notice one thing that could be more fair or more kind in our classroom.",
-        "Write one sentence: “A small improvement I’d like to see is…”",
-        "Choose one role you want to practice this unit (Voice, Supporter, Doer, Thinker).",
-        "Team up with someone who has a different role than you."
+        "Notice one thing that could be more respectful.",
+        "Write one sentence: “A small change I want is…”",
+        "Choose one role you want to practice (Voice / Supporter / Doer / Thinker).",
+        "Work with someone who has a different role."
       ];
 
       nextStep.innerHTML = `
         <div class="profileRow">
-          <div class="avatar" aria-hidden="true">
-            <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
-              <path d="M18 46l8-12 8 8 12-18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 52h40" stroke="currentColor" stroke-width="2" opacity=".7" stroke-linecap="round"/>
-              <path d="M12 12h40v40H12z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-            </svg>
-          </div>
+          <div class="avatar" aria-hidden="true">✅</div>
           <div>
             <p class="pname" style="margin:0">Next step</p>
             <p class="ptag">${prompt}</p>
@@ -1274,29 +1361,20 @@
       `;
     }
 
-    function updateBars(counts){
-      const total = Q.length;
-      vScore.textContent = counts.Voice;
-      sScore.textContent = counts.Supporter;
-      dScore.textContent = counts.Doer;
-      tScore.textContent = counts.Thinker;
-
-      vBar.style.width = pct(counts.Voice, total) + "%";
-      sBar.style.width = pct(counts.Supporter, total) + "%";
-      dBar.style.width = pct(counts.Doer, total) + "%";
-      tBar.style.width = pct(counts.Thinker, total) + "%";
-    }
-
     function showResults(){
       const {counts, answered, total} = getAnswers();
+
+      // If incomplete, still show profile but warn student
       const {winners, top} = rankProfiles(counts);
       const primary = winners[0];
 
-      scoreLine.textContent = `Answered ${answered}/${total}. Highest: ${winners.join(" + ")} (${top})`;
+      scoreLine.textContent = `Answered ${answered}/${total}. Top: ${topLabel(winners)} (${top})`;
       tieNote.style.display = winners.length > 1 ? "block" : "none";
 
       blendIcon.innerHTML = winners.length > 1
-        ? `<div style="display:flex; gap:6px">${winners.slice(0,2).map(w => `<div style="width:36px;height:36px;border-radius:14px;border:1px solid rgba(16,33,58,.12);display:grid;place-items:center;background:rgba(255,255,255,.88)">${icons[w]}</div>`).join("")}</div>`
+        ? `<div style="display:flex; gap:6px">
+            ${winners.slice(0,2).map(w => `<div style="width:36px;height:36px;border-radius:14px;border:1px solid rgba(16,33,58,.12);display:grid;place-items:center;background:rgba(255,255,255,.92)">${icons[w]}</div>`).join("")}
+          </div>`
         : icons[primary];
 
       renderPrimary(primary, winners);
@@ -1304,10 +1382,21 @@
       renderTeamTips(winners);
       renderNextStep(answered, total);
 
+      // Save result (only if name + complete)
+      const saved = recordResultIfPossible();
+      if (saved.saved){
+        saveNote.innerHTML = `<strong>Saved:</strong> Result saved for CSV export (Name: ${saved.row.studentName}).`;
+      } else if (saved.reason === "missing-name"){
+        saveNote.innerHTML = `<strong>Not saved:</strong> Add your name (or initials) and open results again.`;
+      } else if (saved.reason === "incomplete"){
+        saveNote.innerHTML = `<strong>Not saved:</strong> Please answer all questions to save your result.`;
+      }
+
       if (typeof dlg.showModal === "function") dlg.showModal();
       else dlg.setAttribute("open","open");
     }
 
+    // Buttons
     document.getElementById("btnResults").addEventListener("click", showResults);
     document.getElementById("btnResults2").addEventListener("click", showResults);
     document.getElementById("btnClose").addEventListener("click", () => dlg.close());
@@ -1336,17 +1425,17 @@
     document.getElementById("btnCopy").addEventListener("click", async () => {
       const {counts, answered, total} = getAnswers();
       const {winners, top} = rankProfiles(counts);
+      const studentName = (document.getElementById("studentName").value || "").trim();
 
       const lines = [
-        "Social Involvement Profile Results",
+        "Youth Voice Survey — Results",
+        studentName ? `Student: ${studentName}` : "Student: (not provided)",
         `Answered: ${answered}/${total}`,
-        `Top profile: ${winners.join(" + ")} (score ${top})`,
+        `Top profile: ${topLabel(winners)} (score ${top})`,
         `Voice: ${counts.Voice}`,
         `Supporter: ${counts.Supporter}`,
         `Doer: ${counts.Doer}`,
-        `Thinker: ${counts.Thinker}`,
-        "",
-        "Note: Profiles are strengths-based. Teams work best when roles mix."
+        `Thinker: ${counts.Thinker}`
       ].join("\n");
 
       try{
@@ -1354,13 +1443,13 @@
         const btn = document.getElementById("btnCopy");
         const old = btn.textContent;
         btn.textContent = "Copied!";
-        setTimeout(()=> btn.textContent = old, 1200);
+        setTimeout(()=> btn.textContent = old, 1100);
       }catch(e){
-        alert("Copy not available in this browser. You can select text manually from the results screen.");
+        alert("Copy not available here. You can select and copy text manually.");
       }
     });
 
-    // close modal on outside click
+    // Close dialog on outside click
     dlg.addEventListener("click", (e) => {
       const rect = dlg.getBoundingClientRect();
       const inDialog =
