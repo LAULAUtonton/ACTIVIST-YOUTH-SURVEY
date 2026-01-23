@@ -642,12 +642,18 @@
         <strong>Youth Voice Survey</strong> <span>— your profile at the end</span>
       </div>
 
-      <div class="toolbar">
-        <button class="btn" id="btnAutofill" type="button" title="Fill randomly (demo)">Demo fill</button>
-        <button class="btn danger" id="btnReset" type="button" title="Clear answers">Reset</button>
-        <button class="btn primary" id="btnResults" type="button">See my profile</button>
-      </div>
-    </div>
+        <div class="toolbar">
+  <label style="display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--stroke); border-radius:14px; background:rgba(255,255,255,.70); box-shadow: 0 10px 26px rgba(20,33,61,.10);">
+    <span style="font-weight:780; color:var(--muted); font-size:13px;">Name</span>
+    <input id="studentName" type="text" placeholder="e.g., Mario G."
+      style="border:1px solid rgba(20,33,61,.14); border-radius:10px; padding:8px 10px; min-width:180px; background:white; outline:none;">
+  </label>
+
+  <button class="btn" id="btnAutofill" type="button" title="Fill randomly for demo/testing">Demo fill</button>
+  <button class="btn danger" id="btnReset" type="button" title="Clear all answers">Reset</button>
+  <button class="btn primary" id="btnResults" type="button">See my profile</button>
+</div>
+
 
     <header class="hero">
       <div class="hgrid">
