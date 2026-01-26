@@ -1,148 +1,1064 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Involvement Survey - Make a Difference</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        .question {
-            margin-bottom: 20px;
-        }
-        .question p {
-            font-weight: bold;
-        }
-        .options {
-            list-style-type: none;
-            padding: 0;
-        }
-        .options li {
-            margin-bottom: 10px;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-        }
-        .submit-btn, .reset-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .reset-btn {
-            background-color: #f44336;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: green;
-            display: none;
-        }
-        .profile-section {
-            margin-bottom: 30px;
-        }
-        .profile-section input[type="text"], .profile-section input[type="number"] {
-            padding: 8px;
-            width: 100%;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Youth Activism — Social Involvement Profile Survey</title>
+  <meta name="description" content="A colorful, classroom-ready survey that gives students a profile at the end." />
+
+  <style>
+    :root{
+      /* Light + colorful */
+      --bgA:#F7FAFF;
+      --bgB:#F1FFFB;
+
+      --card: rgba(255,255,255,.82);
+      --card2: rgba(255,255,255,.66);
+      --stroke: rgba(15,20,40,.12);
+
+      --txt: rgba(8,10,20,.92);
+      --mut: rgba(8,10,20,.68);
+      --mut2: rgba(8,10,20,.50);
+
+      --shadow: 0 20px 60px rgba(10,20,40,.12);
+      --r1: 18px;
+      --r2: 26px;
+
+      /* Accent palette */
+      --p:#7C3AED;   /* purple */
+      --c:#06B6D4;   /* cyan */
+      --g:#10B981;   /* green */
+      --y:#F59E0B;   /* amber */
+      --pk:#F43F5E;  /* rose */
+      --b:#2563EB;   /* blue */
+      --o:#FB923C;   /* orange */
+
+      --focus: 0 0 0 4px rgba(6,182,212,.22);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--txt);
+      background:
+        radial-gradient(900px 520px at 10% 10%, rgba(124,58,237,.16), transparent 60%),
+        radial-gradient(900px 560px at 90% 20%, rgba(6,182,212,.16), transparent 60%),
+        radial-gradient(900px 650px at 55% 110%, rgba(244,63,94,.12), transparent 55%),
+        linear-gradient(180deg, var(--bgA), var(--bgB));
+      overflow-x:hidden;
+    }
+
+    /* floating color blobs */
+    .blob{
+      position: fixed;
+      width: 520px; height: 520px;
+      border-radius: 999px;
+      filter: blur(18px);
+      opacity: .55;
+      pointer-events:none;
+      animation: floaty 14s ease-in-out infinite;
+      mix-blend-mode: multiply;
+    }
+    .b1{left:-240px; top:-260px; background: radial-gradient(circle at 30% 30%, rgba(6,182,212,.35), rgba(124,58,237,.18), transparent 60%);}
+    .b2{right:-260px; top:30px; background: radial-gradient(circle at 30% 30%, rgba(244,63,94,.22), rgba(245,158,11,.20), transparent 62%); animation-duration: 18s;}
+    .b3{left: 32%; bottom:-330px; background: radial-gradient(circle at 30% 30%, rgba(16,185,129,.22), rgba(37,99,235,.18), transparent 62%); animation-duration: 20s;}
+    @keyframes floaty{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(18px,-16px,0) scale(1.05); }
+    }
+
+    .wrap{
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 26px 18px 90px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.60));
+      box-shadow: 0 14px 40px rgba(10,20,40,.10);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo{
+      width: 46px; height: 46px;
+      border-radius: 16px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(15,20,40,.10);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(6,182,212,.22), rgba(124,58,237,.18)),
+        linear-gradient(135deg, rgba(244,63,94,.12), rgba(16,185,129,.10));
+    }
+    .brand h1{margin:0;font-size:14px;letter-spacing:.2px}
+    .brand p{margin:0;font-size:12px;color:var(--mut2)}
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.70);
+      color: var(--mut);
+      font-size: 12px;
+      box-shadow: 0 10px 26px rgba(10,20,40,.07);
+      white-space:nowrap;
+    }
+    .spark{
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(16,185,129,1), rgba(6,182,212,.7));
+      box-shadow: 0 0 0 5px rgba(16,185,129,.14);
+    }
+
+    /* sections */
+    .panel{
+      border: 1px solid var(--stroke);
+      border-radius: var(--r2);
+      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.62));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow:hidden;
+    }
+
+    .hero{
+      position:relative;
+    }
+    .heroInner{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 14px;
+      align-items:stretch;
+    }
+    @media (max-width: 920px){
+      .heroInner{grid-template-columns:1fr;}
+    }
+
+    .hero h2{
+      margin:0 0 8px;
+      font-size: 30px;
+      letter-spacing: .2px;
+      line-height: 1.10;
+    }
+    .hero .sub{
+      margin:0 0 12px;
+      color: var(--mut);
+      line-height: 1.55;
+      font-size: 14.5px;
+    }
+
+    .pillRow{display:flex; flex-wrap:wrap; gap:8px; margin-top: 10px;}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.68);
+      color: var(--mut);
+      font-size: 12px;
+    }
+
+    .mini{
+      border: 1px solid var(--stroke);
+      border-radius: var(--r1);
+      background: rgba(255,255,255,.72);
+      padding: 14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .mini h3{margin:0 0 8px; font-size: 14px;}
+    .mini ul{margin:0; padding-left:18px; color: var(--mut); font-size: 12.8px; line-height: 1.55;}
+    .mini li{margin:6px 0;}
+    .mini .note{
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px dashed rgba(15,20,40,.18);
+      color: var(--mut2);
+      font-size: 12px;
+      background: rgba(255,255,255,.60);
+    }
+
+    /* illustrated dimension chips */
+    .illusRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      margin-top: 10px;
+    }
+    .illus{
+      display:flex; align-items:center; gap:10px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,.68);
+      color: var(--mut);
+      font-size: 12px;
+    }
+    .illus svg{display:block}
+
+    /* Survey card */
+    .card{
+      margin-top: 14px;
+    }
+
+    .head{
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(15,20,40,.08);
+      background: linear-gradient(90deg, rgba(124,58,237,.08), rgba(6,182,212,.07), rgba(16,185,129,.06), rgba(245,158,11,.06), rgba(244,63,94,.05));
+      flex-wrap: wrap;
+    }
+
+    .leftHead{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.74);
+      color: var(--mut);
+      font-size: 12px;
+    }
+    .tag strong{color: rgba(8,10,20,.92); font-weight:900}
+
+    .prog{
+      display:flex; align-items:center; gap:10px;
+      min-width: 280px;
+    }
+    .bar{
+      flex:1;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.65);
+      overflow:hidden;
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(124,58,237,.90), rgba(6,182,212,.85), rgba(16,185,129,.85), rgba(245,158,11,.82), rgba(244,63,94,.78));
+      transition: width .35s ease;
+    }
+    .ptxt{font-size:12px; color: var(--mut); white-space:nowrap;}
+
+    .body{padding: 16px}
+
+    .qTitle{margin:0 0 10px; font-size: 19px; letter-spacing:.2px;}
+    .qHint{margin:0 0 14px; color: var(--mut); font-size: 13.6px; line-height: 1.55;}
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 760px){ .grid{grid-template-columns: 1fr;} }
+
+    .opt{
+      display:flex;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.74);
+      cursor: pointer;
+      user-select: none;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      min-height: 84px;
+      outline:none;
+      position:relative;
+      overflow:hidden;
+    }
+    .opt:hover{
+      transform: translateY(-1px);
+      border-color: rgba(6,182,212,.35);
+      box-shadow: 0 14px 24px rgba(10,20,40,.10);
+    }
+    .opt:focus-visible{ box-shadow: var(--focus); }
+
+    .opt[data-selected="true"]{
+      border-color: rgba(124,58,237,.45);
+      background: linear-gradient(180deg, rgba(124,58,237,.10), rgba(6,182,212,.08));
+      box-shadow: 0 0 0 3px rgba(124,58,237,.10) inset, 0 14px 28px rgba(10,20,40,.10);
+    }
+
+    .iconBox{
+      width: 54px; height: 54px;
+      border-radius: 18px;
+      display:grid; place-items:center;
+      border: 1px solid rgba(15,20,40,.10);
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.98), rgba(255,255,255,.70));
+      flex: 0 0 auto;
+    }
+
+    .txt{min-width:0}
+    .txt strong{display:block; font-size: 14.4px}
+    .txt span{display:block; margin-top:3px; color: var(--mut); font-size: 13px; line-height: 1.35}
+
+    .btnRow{
+      margin-top: 14px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap: wrap;
+    }
+    .btn{
+      appearance:none;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.78);
+      color: var(--txt);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 13px;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+      box-shadow: 0 10px 18px rgba(10,20,40,.06);
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(6,182,212,.35);
+      box-shadow: 0 14px 24px rgba(10,20,40,.10);
+    }
+    .btn:disabled{ opacity: .45; cursor:not-allowed; transform:none; box-shadow:none; }
+    .primary{
+      border-color: rgba(124,58,237,.35);
+      background: linear-gradient(90deg, rgba(124,58,237,.20), rgba(6,182,212,.14));
+    }
+    .danger{
+      border-color: rgba(244,63,94,.30);
+      background: rgba(244,63,94,.10);
+    }
+
+    .small{
+      margin-top: 10px;
+      color: var(--mut2);
+      font-size: 12.3px;
+      line-height: 1.55;
+    }
+
+    /* RESULTS */
+    .results{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+    }
+    @media (max-width: 920px){ .results{grid-template-columns:1fr;} }
+
+    .profile{
+      border: 1px solid rgba(15,20,40,.12);
+      border-radius: var(--r2);
+      background: rgba(255,255,255,.78);
+      padding: 16px;
+      position: relative;
+      overflow:hidden;
+    }
+    .profile::before{
+      content:"";
+      position:absolute; inset:-70px -70px auto auto;
+      width: 320px; height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(6,182,212,.18), rgba(124,58,237,.14), transparent 70%);
+      pointer-events:none;
+    }
+
+    .pTop{display:flex; align-items:center; gap: 12px; position:relative; z-index:1;}
+    .avatar{
+      width: 70px; height: 70px;
+      border-radius: 22px;
+      border: 1px solid rgba(15,20,40,.10);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(245,158,11,.22), rgba(244,63,94,.14)),
+        linear-gradient(135deg, rgba(6,182,212,.18), rgba(124,58,237,.14));
+      box-shadow: 0 16px 36px rgba(10,20,40,.12);
+      display:grid; place-items:center;
+      overflow:hidden;
+    }
+    .pTitle{margin:0; font-size: 18.4px;}
+    .pTag{margin:4px 0 0; color: var(--mut); font-size: 13px;}
+    .pBody{margin-top: 12px; color: var(--mut); line-height: 1.65; font-size: 13.8px; position:relative; z-index:1;}
+
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top: 12px; position:relative; z-index:1;}
+    .cchip{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.84);
+      font-size: 12.3px;
+      color: var(--mut);
+    }
+
+    .meters{
+      border: 1px solid rgba(15,20,40,.12);
+      border-radius: var(--r2);
+      background: rgba(255,255,255,.76);
+      padding: 14px;
+    }
+    .meters h4{margin:0 0 10px; font-size: 14px;}
+    .rows{display:grid; gap: 10px;}
+    .row{display:grid; grid-template-columns: 140px 1fr 44px; gap: 10px; align-items:center;}
+    .lbl{font-size: 12px; color: var(--mut);}
+    .mbar{
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,20,40,.12);
+      background: rgba(255,255,255,.70);
+      overflow:hidden;
+    }
+    .mbar i{
+      display:block;
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      transition: width .45s ease;
+    }
+    .val{font-size: 12px; color: var(--mut); text-align:right;}
+    .printRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+
+    /* START SCREEN BUTTONS */
+    .startRow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;}
+    .btnBig{
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+    }
+
+    /* print */
+    @media print{
+      body{ background:white; color:black; }
+      .blob,.top,.panel.hero,.btnRow,.small,.printRow,.startRow{ display:none !important; }
+      .panel{ box-shadow:none; border:1px solid #ccc; background:white; }
+      .profile, .meters{ border:1px solid #ccc; background:white; }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
 
-    <div class="container">
-        <h2>3rd Grade Survey: Social Involvement and Making a Difference</h2>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- megaphone illustration -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 11v2a3 3 0 0 0 3 3h2l2 4h2l-1.2-4.8L20 16V8l-6.2 1.8L14 5h-2l-2 4H7a3 3 0 0 0-3 3Z"
+              stroke="rgba(8,10,20,.85)" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M20 8v8" stroke="rgba(6,182,212,.95)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Youth Activism Survey</h1>
+          <p>Social involvement profile</p>
+        </div>
+      </div>
 
-        <!-- Profile Section -->
-        <div class="profile-section">
-            <p><strong>Profile Information</strong></p>
-            <label for="name">Your Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
-            <label for="age">Your Age:</label>
-            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+      <div class="chip">
+        <span class="spark"></span>
+        6–8 minutes • No “right/wrong” answers
+      </div>
+    </div>
+
+    <!-- START / INTRO PANEL -->
+    <section class="panel hero" id="startPanel" aria-label="Start">
+      <div class="heroInner">
+        <div>
+          <h2>How do you show up when something matters?</h2>
+          <p class="sub">
+            Answer real situations from school and social media. At the end you’ll get a <strong>profile</strong> with strengths
+            and one practical “next step” to try.
+          </p>
+
+          <div class="pillRow">
+            <span class="pill">🎨 Colorful + visual</span>
+            <span class="pill">⚡ Fast</span>
+            <span class="pill">🧠 Reflective</span>
+            <span class="pill">🗣️ Optional class discussion</span>
+          </div>
+
+          <div class="illusRow" aria-label="Illustrations">
+            <span class="illus">${badge("VOICE","--c")}</span>
+            <span class="illus">${badge("INFO","--y")}</span>
+            <span class="illus">${badge("ACTION","--g")}</span>
+            <span class="illus">${badge("LEADERSHIP","--p")}</span>
+            <span class="illus">${badge("CARE","--pk")}</span>
+          </div>
+
+          <div class="startRow">
+            <button class="btn btnBig primary" id="startBtn">Start the survey</button>
+            <button class="btn btnBig" id="previewBtn" title="Shows the profiles (no answers saved)">Preview profiles</button>
+          </div>
+
+          <div class="small">
+            Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.
+          </div>
         </div>
 
-        <!-- Survey Questions -->
-        <div class="question">
-            <p>1. Do you think it’s important to help others in your community?</p>
-            <ul class="options">
-                <li><input type="radio" name="q1" value="Yes, it's very important"> Yes, it's very important</li>
-                <li><input type="radio" name="q1" value="Sometimes, depending on the situation"> Sometimes, depending on the situation</li>
-                <li><input type="radio" name="q1" value="No, I don’t think about it"> No, I don’t think about it</li>
-            </ul>
+        <div class="mini">
+          <h3>Teacher quick-use</h3>
+          <ul>
+            <li>Students can take it individually or on the projector.</li>
+            <li>At the end: screenshot the profile or copy text.</li>
+            <li>1-minute reflection: “One strength I have… One step I can try…”</li>
+          </ul>
+          <div class="note">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SURVEY PANEL -->
+    <section class="panel card" id="surveyCard" style="display:none" role="region" aria-label="Survey">
+      <div class="head">
+        <div class="leftHead">
+          <span class="tag"><strong id="qLabel">Question</strong></span>
+          <span class="tag" id="topicTag">Topic</span>
         </div>
 
-        <div class="question">
-            <p>2. Do you participate in activities that help improve the environment (e.g., recycling, reducing waste)?</p>
-            <ul class="options">
-                <li><input type="radio" name="q2" value="Yes, I always try to help"> Yes, I always try to help</li>
-                <li><input type="radio" name="q2" value="Sometimes, if I can"> Sometimes, if I can</li>
-                <li><input type="radio" name="q2" value="No, I don’t usually do that"> No, I don’t usually do that</li>
-            </ul>
+        <div class="prog" aria-label="Progress">
+          <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+          <div class="ptxt" id="ptxt">0 / 0</div>
+        </div>
+      </div>
+
+      <div class="body" id="body"></div>
+    </section>
+
+    <!-- RESULTS PANEL -->
+    <section class="panel card" id="resultCard" style="display:none" role="region" aria-label="Results">
+      <div class="head">
+        <div class="leftHead">
+          <span class="tag"><strong>Your profile</strong></span>
+          <span class="tag">Results</span>
+        </div>
+        <div class="prog"><div class="ptxt">Done</div></div>
+      </div>
+
+      <div class="body" id="resultBody"></div>
+    </section>
+
+    <div class="small">
+      If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong> (or open in an Incognito window).
+    </div>
+  </div>
+
+  <script>
+    /******************** UTIL ********************/
+    function escapeHtml(s){
+      return String(s ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function badge(text, cssVar){
+      const col = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim() || "#06B6D4";
+      return `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2l2.7 6.2L21 9l-5 4.2L17.4 20 12 16.8 6.6 20 8 13.2 3 9l6.3-.8L12 2z"
+            stroke="${col}" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        ${escapeHtml(text)}
+      `;
+    }
+
+    function svgIcon(...paths){
+      const p = paths.map(d => `<path d="${d}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>`).join("");
+      return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">${p}</svg>`;
+    }
+
+    /******************** CONFIG (ENGLISH) ********************/
+    const DIMENSIONS = [
+      { key:"voice",     label:"Voice",      grad:"linear-gradient(90deg, rgba(6,182,212,.95), rgba(124,58,237,.55))" },
+      { key:"action",    label:"Action",     grad:"linear-gradient(90deg, rgba(16,185,129,.95), rgba(6,182,212,.45))" },
+      { key:"care",      label:"Care",       grad:"linear-gradient(90deg, rgba(244,63,94,.95), rgba(245,158,11,.35))" },
+      { key:"leadership",label:"Leadership", grad:"linear-gradient(90deg, rgba(124,58,237,.95), rgba(244,63,94,.45))" },
+      { key:"info",      label:"Info",       grad:"linear-gradient(90deg, rgba(245,158,11,.95), rgba(6,182,212,.35))" },
+    ];
+
+    const ICONS = {
+      mic:  svgIcon("M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z","M19 11a7 7 0 0 1-14 0","M12 18v4","M8 22h8"),
+      bolt: svgIcon("M13 2L3 14h7l-1 8 12-14h-7l-1-6Z"),
+      heart:svgIcon("M12 21s-7-4.6-9.2-9C1.2 8.7 3.2 6 6.2 6c1.7 0 3 .8 3.8 2 0 0 .9-2 3.9-2 3 0 5 2.7 3.4 6-2.2 4.4-9.2 9-9.2 9Z"),
+      search:svgIcon("M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z","M16.2 16.2 21 21"),
+      flag: svgIcon("M5 3v18","M5 4h11l-1.5 3L16 10H5"),
+      tools:svgIcon("M14 7l3 3-7.5 7.5H6.5V14.5L14 7Z","M13 6l2-2 5 5-2 2"),
+      chat: svgIcon("M7 8h10","M7 12h7","M21 12a8 8 0 0 1-8 8H8l-5 3 1.4-4.2A8 8 0 1 1 21 12Z"),
+    };
+
+    // 6 QUESTIONS (complete survey)
+    const QUESTIONS = [
+      {
+        topic: "School",
+        title: "You hear an offensive comment about someone in class. What do you do first?",
+        hint: "Your first move (no overthinking).",
+        options: [
+          { icon:"mic",  title:"Stop it respectfully", desc:"I say something like, “Not cool,” without making a scene.", pts:{ voice:2, leadership:1 } },
+          { icon:"heart",title:"Check on the person", desc:"I ask if they’re okay and support them.", pts:{ care:2, voice:1 } },
+          { icon:"chat", title:"Talk later calmly", desc:"I find a better moment to talk it through.", pts:{ voice:2, info:1 } },
+          { icon:"bolt", title:"Get help right away", desc:"If it’s serious, I tell an adult.", pts:{ action:2, leadership:1 } },
+        ]
+      },
+      {
+        topic: "Social media",
+        title: "A viral video about a social issue shows up in your feed. What do you do?",
+        hint: "Think TikTok / IG / YouTube.",
+        options: [
+          { icon:"search",title:"Verify it", desc:"I check sources before sharing.", pts:{ info:2, voice:1 } },
+          { icon:"mic",  title:"Comment thoughtfully", desc:"I try to add something useful and respectful.", pts:{ voice:2, care:1 } },
+          { icon:"flag", title:"Report if harmful", desc:"I use tools if there’s hate, harassment, or misinformation.", pts:{ action:1, info:1 } },
+          { icon:"bolt", title:"Create a response post", desc:"I make a reel/post with a better take.", pts:{ leadership:2, voice:1 } },
+        ]
+      },
+      {
+        topic: "Participation",
+        title: "If your school runs an event and asks for help, you usually…",
+        hint: "Choose what feels most like you.",
+        options: [
+          { icon:"tools",title:"Handle practical tasks", desc:"Setup, logistics, supplies, planning the details.", pts:{ action:2, leadership:1 } },
+          { icon:"mic",  title:"Do the promo", desc:"Posters, announcements, social media, presentations.", pts:{ voice:2, info:1 } },
+          { icon:"heart",title:"Make it welcoming", desc:"I make sure nobody feels left out.", pts:{ care:2, voice:1 } },
+          { icon:"search",title:"Research & propose", desc:"I bring facts, ideas, and realistic solutions.", pts:{ info:2, action:1 } },
+        ]
+      },
+      {
+        topic: "Conflict",
+        title: "Your group is arguing and nobody understands each other. What do you do?",
+        hint: "In projects or debates.",
+        options: [
+          { icon:"chat", title:"Create fair turn-taking", desc:"I help everyone get heard.", pts:{ voice:2, care:1 } },
+          { icon:"tools",title:"Divide clear roles", desc:"Simple tasks so the group can move forward.", pts:{ action:2, leadership:1 } },
+          { icon:"search",title:"Ask for evidence", desc:"What do we actually know? What works?", pts:{ info:2 } },
+          { icon:"bolt", title:"Propose a plan fast", desc:"I suggest a plan and push it to launch.", pts:{ leadership:2, action:1 } },
+        ]
+      },
+      {
+        topic: "Impact",
+        title: "Which project sounds most exciting to you right now?",
+        hint: "Pick the one you’d actually try.",
+        options: [
+          { icon:"tools",title:"Improve something at school", desc:"Recycling, cleanup, mural, campus improvement.", pts:{ action:2, leadership:1 } },
+          { icon:"mic",  title:"Creative awareness campaign", desc:"Video/comic/posters about an issue.", pts:{ voice:2, info:1 } },
+          { icon:"heart",title:"Support & belonging", desc:"Welcoming plans, peer support, kindness culture.", pts:{ care:2, voice:1 } },
+          { icon:"search",title:"Survey & solutions", desc:"Collect data and propose realistic changes.", pts:{ info:2, action:1 } },
+        ]
+      },
+      {
+        topic: "Your next step",
+        title: "When I feel nervous or unmotivated, what helps me most is…",
+        hint: "Be honest — this is about growth.",
+        options: [
+          { icon:"heart",title:"Doing it with someone", desc:"Having a friend/team makes me braver.", pts:{ care:1, leadership:1 } },
+          { icon:"search",title:"A clear small step", desc:"I need a simple next action.", pts:{ info:2 } },
+          { icon:"tools",title:"Seeing quick results", desc:"Visible progress motivates me.", pts:{ action:2 } },
+          { icon:"bolt", title:"Knowing it matters", desc:"If it has meaning, I’ll move.", pts:{ leadership:2, voice:1 } },
+        ]
+      }
+    ];
+
+    // 5 PROFILES
+    const PROFILES = [
+      {
+        id:"The Voice Starter",
+        emoji:"🎤",
+        tag:"You connect people through ideas. You communicate without tearing others down.",
+        match: s => topKey(s)==="voice",
+        desc:"You speak up, explain, defend, and shape culture. Your challenge: turn strong messages into concrete actions.",
+        strengths:["Clear communicator","Amplifies others","Can debate respectfully"],
+        next:["Pair your message with one action you can do this week","Verify one source before sharing","Practice disagreeing without attacking"],
+      },
+      {
+        id:"The Action Maker",
+        emoji:"🛠️",
+        tag:"You make things happen. Your strength is practical problem-solving.",
+        match: s => topKey(s)==="action",
+        desc:"You’re about logistics, building, organizing, and improving. Your challenge: listen first and bring more people into the plan.",
+        strengths:["Gets things done","Organizes resources","Finishes tasks"],
+        next:["Invite someone new into the team","Try a small pilot before scaling up","Assign 3 roles in 60 seconds"],
+      },
+      {
+        id:"The Community Caregiver",
+        emoji:"💛",
+        tag:"You create safety and belonging. That is real leadership.",
+        match: s => topKey(s)==="care",
+        desc:"You notice who’s left out and help people feel seen. Your challenge: set boundaries and share the load.",
+        strengths:["Empathetic","Builds trust","Inclusive"],
+        next:["Set one boundary so you don’t burn out","Ask someone to help you","Turn kindness into a routine (buddy/check-in)"],
+      },
+      {
+        id:"The Energy Leader",
+        emoji:"⚡",
+        tag:"You mobilize people and bring momentum. Used well, it’s powerful.",
+        match: s => topKey(s)==="leadership",
+        desc:"You initiate, organize, and push ideas forward. Your challenge: slow down for 10 seconds to listen before you move.",
+        strengths:["Starts things","Motivates others","Keeps momentum"],
+        next:["Ask: “Who hasn’t spoken yet?”","Plan 3 steps with 1 owner each","Pick one issue and stay consistent"],
+      },
+      {
+        id:"The Strategic Mind",
+        emoji:"🔎",
+        tag:"You bring facts and clarity. You make action smarter.",
+        match: s => topKey(s)==="info",
+        desc:"You verify, research, and improve quality. Your challenge: move from thinking to testing one small action.",
+        strengths:["Spots misinformation","Adds clarity","Realistic solutions"],
+        next:["Share your findings in a 60-second summary","Test one small action (a pilot)","Teach a friend how to verify sources"],
+      },
+    ];
+
+    /******************** APP STATE ********************/
+    const startPanel = document.getElementById("startPanel");
+    const surveyCard = document.getElementById("surveyCard");
+    const body = document.getElementById("body");
+    const resultCard = document.getElementById("resultCard");
+    const resultBody = document.getElementById("resultBody");
+
+    const qLabel = document.getElementById("qLabel");
+    const topicTag = document.getElementById("topicTag");
+    const fill = document.getElementById("fill");
+    const ptxt = document.getElementById("ptxt");
+
+    const state = {
+      idx: 0,
+      answers: Array(QUESTIONS.length).fill(null),
+      scores: Object.fromEntries(DIMENSIONS.map(d=>[d.key,0])),
+    };
+
+    // Build the illustrated row correctly (badge() needs computed styles after paint)
+    (function paintBadges(){
+      const illus = startPanel.querySelectorAll(".illus");
+      const labels = [
+        ["VOICE","--c"],
+        ["INFO","--y"],
+        ["ACTION","--g"],
+        ["LEADERSHIP","--p"],
+        ["CARE","--pk"],
+      ];
+      illus.forEach((el,i)=>{
+        const [t,v] = labels[i];
+        el.innerHTML = badge(t,v);
+      });
+    })();
+
+    function topKey(scores){
+      const arr = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+      return arr[0][0];
+    }
+
+    function maxScore(){ return QUESTIONS.length * 2; }
+
+    function percent(scores, key){
+      const p = Math.round((scores[key] / maxScore()) * 100);
+      return Math.max(0, Math.min(100, p));
+    }
+
+    function iconSvg(name){ return ICONS[name] || ICONS.chat; }
+
+    function optColor(i){
+      const palette = ["var(--c)","var(--g)","var(--pk)","var(--p)"];
+      return palette[i % palette.length];
+    }
+
+    function showStart(){
+      startPanel.style.display = "block";
+      surveyCard.style.display = "none";
+      resultCard.style.display = "none";
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function startSurvey(){
+      state.idx = 0;
+      state.answers = Array(QUESTIONS.length).fill(null);
+      state.scores = Object.fromEntries(DIMENSIONS.map(d=>[d.key,0]));
+      startPanel.style.display = "none";
+      resultCard.style.display = "none";
+      surveyCard.style.display = "block";
+      renderQuestion();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function renderQuestion(){
+      const q = QUESTIONS[state.idx];
+      const total = QUESTIONS.length;
+      const cur = state.idx + 1;
+
+      qLabel.textContent = `Question ${cur}`;
+      topicTag.textContent = q.topic;
+
+      ptxt.textContent = `${cur} / ${total}`;
+      const w = total === 1 ? 100 : Math.round((state.idx/(total-1))*100);
+      fill.style.width = `${w}%`;
+
+      const selected = state.answers[state.idx];
+
+      body.innerHTML = `
+        <h3 class="qTitle">${escapeHtml(q.title)}</h3>
+        <p class="qHint">${escapeHtml(q.hint || "")}</p>
+
+        <div class="grid" role="list">
+          ${q.options.map((o,i)=>`
+            <div class="opt" role="listitem" tabindex="0"
+                 data-i="${i}" data-selected="${selected===i}">
+              <div class="iconBox" style="color:${optColor(i)}">
+                ${iconSvg(o.icon)}
+              </div>
+              <div class="txt">
+                <strong>${escapeHtml(o.title)}</strong>
+                <span>${escapeHtml(o.desc)}</span>
+              </div>
+            </div>
+          `).join("")}
         </div>
 
-        <div class="question">
-            <p>3. Do you think it’s important to treat everyone equally, regardless of their gender, race, or background?</p>
-            <ul class="options">
-                <li><input type="radio" name="q3" value="Yes, everyone should be treated equally"> Yes, everyone should be treated equally</li>
-                <li><input type="radio" name="q3" value="Sometimes, but it can be difficult"> Sometimes, but it can be difficult</li>
-                <li><input type="radio" name="q3" value="No, I don’t think about that"> No, I don’t think about that</li>
-            </ul>
+        <div class="btnRow">
+          <button class="btn" id="back" ${state.idx===0 ? "disabled":""}>${arrowLeft()} Back</button>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn danger" id="reset">${resetIcon()} Restart</button>
+            <button class="btn primary" id="next" ${selected===null ? "disabled":""}>
+              ${state.idx===total-1 ? "Get profile " + checkIcon() : "Next " + arrowRight()}
+            </button>
+          </div>
         </div>
 
-        <div class="question">
-            <p>4. Are you involved in any community or school events that help others (e.g., fundraising, helping at food banks)?</p>
-            <ul class="options">
-                <li><input type="radio" name="q4" value="Yes, I enjoy helping in these events"> Yes, I enjoy helping in these events</li>
-                <li><input type="radio" name="q4" value="Sometimes, if I am asked to help"> Sometimes, if I am asked to help</li>
-                <li><input type="radio" name="q4" value="No, I don’t participate in these events"> No, I don’t participate in these events</li>
-            </ul>
-        </div>
+        <div class="small">Pick what fits you best <strong>today</strong>. People grow and change.</div>
+      `;
 
-        <div class="question">
-            <p>5. Do you think that by making small changes (e.g., reducing plastic use) you can make a big difference in the world?</p>
-            <ul class="options">
-                <li><input type="radio" name="q5" value="Yes, every little change counts"> Yes, every little change counts</li>
-                <li><input type="radio" name="q5" value="Maybe, but I don’t know how much difference it makes"> Maybe, but I don’t know how much difference it makes</li>
-                <li><input type="radio" name="q5" value="No, it won’t make a big difference"> No, it won’t make a big difference</li>
-            </ul>
-        </div>
+      body.querySelectorAll(".opt").forEach(el=>{
+        el.addEventListener("click", ()=> choose(+el.dataset.i));
+        el.addEventListener("keydown", (e)=>{
+          if(e.key==="Enter" || e.key===" "){ e.preventDefault(); choose(+el.dataset.i); }
+        });
+      });
 
-        <div class="question">
-            <p>6. How often do you talk to your family about global issues, like climate change, poverty, or racism?</p>
-            <ul class="options">
-                <li><input type="radio" name="q6" value="We talk about it a lot"> We talk about it a lot</li>
-                <li><input type="radio" name="q6" value="Sometimes, but not often"> Sometimes, but not often</li>
-                <li><input type="radio" name="q6" value="Never, I don’t discuss these topics"> Never, I don’t discuss these topics</li>
-            </ul>
-        </div>
+      document.getElementById("back").onclick = ()=> { if(state.idx>0){ state.idx--; renderQuestion(); } };
+      document.getElementById("reset").onclick = ()=> startSurvey();
+      document.getElementById("next").onclick = ()=> next();
+    }
 
-        <div class="question">
-            <p>7. Do you believe that volunteering (helping others for free) is important?</p>
-            <ul class="options">
-                <li><input type="radio" name="q7" value="Yes, volunteering is very important"> Yes, volunteering is very important</li>
-                <li><input type="radio" name="q7" value="Sometimes, it can be fun to help"> Sometimes, it can be fun to help</li>
-                <li><input type="radio" name="q7" value="No, I don’t see the point of volunteering"> No, I don’t see the point of volunteering</li>
-            </ul>
-        </div>
+    function choose(i){
+      state.answers[state.idx] = i;
+      renderQuestion();
+    }
 
-        <div class="question">
-            <p>8. Do you think it is important for kids to speak up about things that matter to them (
+    function next(){
+      if(state.answers[state.idx] === null) return;
+      if(state.idx < QUESTIONS.length-1){
+        state.idx++;
+        renderQuestion();
+      }else{
+        computeScores();
+        showResults();
+      }
+    }
+
+    function computeScores(){
+      state.scores = Object.fromEntries(DIMENSIONS.map(d=>[d.key,0]));
+      state.answers.forEach((a,qi)=>{
+        const opt = QUESTIONS[qi].options[a];
+        if(!opt || !opt.pts) return;
+        for(const [k,v] of Object.entries(opt.pts)){
+          state.scores[k] = (state.scores[k] || 0) + v;
+        }
+      });
+    }
+
+    function pickProfile(){
+      const found = PROFILES.find(p=>p.match(state.scores));
+      return found || PROFILES[0];
+    }
+
+    function showResults(){
+      const p = pickProfile();
+
+      surveyCard.style.display = "none";
+      startPanel.style.display = "none";
+      resultCard.style.display = "block";
+
+      const bars = DIMENSIONS.map(d=>{
+        const pct = percent(state.scores, d.key);
+        return `
+          <div class="row">
+            <div class="lbl">${escapeHtml(d.label)}</div>
+            <div class="mbar"><i style="width:${pct}%; background:${d.grad}"></i></div>
+            <div class="val">${pct}%</div>
+          </div>
+        `;
+      }).join("");
+
+      resultBody.innerHTML = `
+        <div class="results">
+          <div class="profile">
+            <div class="pTop">
+              <div class="avatar" aria-hidden="true"><div style="font-size:30px">${escapeHtml(p.emoji)}</div></div>
+              <div>
+                <h3 class="pTitle">${escapeHtml(p.id)}</h3>
+                <p class="pTag">${escapeHtml(p.tag)}</p>
+              </div>
+            </div>
+
+            <div class="pBody">${escapeHtml(p.desc)}</div>
+
+            <div class="chips" aria-label="Strengths">
+              ${p.strengths.map(s=>`<span class="cchip">⭐ ${escapeHtml(s)}</span>`).join("")}
+            </div>
+
+            <div class="chips" aria-label="Next steps">
+              ${p.next.map(s=>`<span class="cchip">➡️ ${escapeHtml(s)}</span>`).join("")}
+            </div>
+
+            <div class="printRow">
+              <button class="btn primary" id="again">${resetIcon()} Take again</button>
+              <button class="btn" id="print">${printIcon()} Print / Save PDF</button>
+              <button class="btn" id="copy">${copyIcon()} Copy profile</button>
+              <button class="btn" id="home">Home</button>
+            </div>
+
+            <div class="small">This is a snapshot, not a permanent label.</div>
+          </div>
+
+          <div class="meters">
+            <h4>Your skill mix</h4>
+            <div class="rows">${bars}</div>
+            <div class="small">Class prompt: Which skill would you like to strengthen this month?</div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("again").onclick = ()=> startSurvey();
+      document.getElementById("print").onclick = ()=> window.print();
+      document.getElementById("copy").onclick = ()=> copyProfile(p);
+      document.getElementById("home").onclick = ()=> showStart();
+
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function previewProfiles(){
+      // show results page with neutral scores (no calculation)
+      const fake = {
+        id: "Profile Preview",
+        emoji: "🧩",
+        tag: "These are the possible profiles students can get.",
+        desc: "Use this preview to explain the activity before students answer.",
+        strengths: PROFILES.map(p=>p.id),
+        next: ["Click Home → Start the survey when ready."],
+      };
+
+      startPanel.style.display = "none";
+      surveyCard.style.display = "none";
+      resultCard.style.display = "block";
+
+      const bars = DIMENSIONS.map(d=>{
+        const pct = 60;
+        return `
+          <div class="row">
+            <div class="lbl">${escapeHtml(d.label)}</div>
+            <div class="mbar"><i style="width:${pct}%; background:${d.grad}"></i></div>
+            <div class="val">${pct}%</div>
+          </div>
+        `;
+      }).join("");
+
+      resultBody.innerHTML = `
+        <div class="results">
+          <div class="profile">
+            <div class="pTop">
+              <div class="avatar" aria-hidden="true"><div style="font-size:30px">${fake.emoji}</div></div>
+              <div>
+                <h3 class="pTitle">${escapeHtml(fake.id)}</h3>
+                <p class="pTag">${escapeHtml(fake.tag)}</p>
+              </div>
+            </div>
+
+            <div class="pBody">${escapeHtml(fake.desc)}</div>
+
+            <div class="chips">
+              ${PROFILES.map(p=>`<span class="cchip">✨ ${escapeHtml(p.id)}</span>`).join("")}
+            </div>
+
+            <div class="printRow">
+              <button class="btn primary" id="home2">Home</button>
+            </div>
+          </div>
+
+          <div class="meters">
+            <h4>Skill mix (example)</h4>
+            <div class="rows">${bars}</div>
+            <div class="small">Real bars will match each student’s answers.</div>
+          </div>
+        </div>
+      `;
+      document.getElementById("home2").onclick = ()=> showStart();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    async function copyProfile(p){
+      const text = [
+        `My profile: ${p.id}`,
+        p.tag,
+        "",
+        p.desc,
+        "",
+        "Strengths: " + p.strengths.join(", "),
+        "Next steps: " + p.next.join(" | ")
+      ].join("\n");
+
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Copied! Paste it into a document or classroom post.");
+      }catch(e){
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        alert("Copied! Paste it into a document or classroom post.");
+      }
+    }
+
+    // SVG button icons
+    function arrowLeft(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; }
+    function arrowRight(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; }
+    function checkIcon(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; }
+    function resetIcon(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 0 3-6.7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 4v6h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`; }
+    function printIcon(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9V3h12v6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M6 14h12v7H6v-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>`; }
+    function copyIcon(){ return `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`; }
+
+    /******************** WIRE BUTTONS ********************/
+    document.getElementById("startBtn").addEventListener("click", startSurvey);
+    document.getElementById("previewBtn").addEventListener("click", previewProfiles);
+
+    // Start on the home screen
+    showStart();
+  </script>
+</body>
+</html>
+
 
