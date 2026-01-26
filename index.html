@@ -1,720 +1,298 @@
-<script>
-/* =========================================================
-   Youth Voice & Social Involvement — Survey Script (FULL)
-   - 20 questions
-   - Bright UI friendly logic
-   - FIX: results modal closes reliably (native <dialog> + fallback)
-   - Includes: progress, demo fill, reset, print, copy results,
-              outside-click close, ESC close, scroll-lock
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3rd Grade Student Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .submit-btn, .reset-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .reset-btn {
+            background-color: #f44336;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: green;
+            display: none;
+        }
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        .profile-section input[type="text"], .profile-section input[type="number"] {
+            padding: 8px;
+            width: 100%;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
 
-(() => {
-  "use strict";
+    <div class="container">
+        <h2>3rd Grade Student Survey</h2>
 
-  // ---------- Inline SVG avatars (no external files) ----------
-  const icons = {
-    Voice: `
-      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M18 28c0-8 6-14 14-14s14 6 14 14v8c0 8-6 14-14 14s-14-6-14-14v-8z" stroke="currentColor" stroke-width="2"/>
-        <path d="M18 34H10c-4 0-6 3-6 6v4h10" stroke="currentColor" stroke-width="2" opacity=".9"/>
-        <path d="M46 34h8c4 0 6 3 6 6v4H50" stroke="currentColor" stroke-width="2" opacity=".9"/>
-        <path d="M24 52c2 3 5 5 8 5s6-2 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        <path d="M26 28h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-        <path d="M22 22l-8-6M42 22l8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".7"/>
-      </svg>
-    `,
-    Supporter: `
-      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M32 56s-18-10-18-28c0-7 6-12 13-12 3 0 6 1 8 4 2-3 5-4 8-4 7 0 13 5 13 12 0 18-18 28-18 28z" stroke="currentColor" stroke-width="2"/>
-        <path d="M22 30c3 1 6 1 10-3M42 30c-3 1-6 1-10-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
-        <path d="M24 40c2 3 5 5 8 5s6-2 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    `,
-    Doer: `
-      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M22 50h20l6-22H16l6 22z" stroke="currentColor" stroke-width="2"/>
-        <path d="M20 28l-4-8h32l-4 8" stroke="currentColor" stroke-width="2" opacity=".9"/>
-        <path d="M26 34h12M26 40h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".85"/>
-        <path d="M10 50h44" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".7"/>
-      </svg>
-    `,
-    Thinker: `
-      <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-        <path d="M24 50h16v-6c5-3 8-8 8-14 0-9-7-16-16-16S16 21 16 30c0 6 3 11 8 14v6z" stroke="currentColor" stroke-width="2"/>
-        <path d="M26 56h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".8"/>
-        <path d="M26 30h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".9"/>
-        <path d="M28 24h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".65"/>
-      </svg>
-    `
-  };
-
-  // ---------- Profile definitions ----------
-  const profiles = {
-    Voice: {
-      name: "The Voice",
-      tag: "You start conversations and help people speak up in a respectful way.",
-      strengths: ["Brave communicator", "Confident sharing ideas", "Raises awareness", "Persuasive speaker"],
-      helpsBy: ["Presenting ideas", "Leading discussions", "Encouraging others to speak", "Building a message"],
-      classroom: "Best in roles like spokesperson, presenter, discussion leader."
-    },
-    Supporter: {
-      name: "The Supporter",
-      tag: "You notice feelings and help make the group safe, fair, and included.",
-      strengths: ["Empathy", "Team builder", "Cares about fairness", "Good listener"],
-      helpsBy: ["Including others", "Helping classmates", "Building a respectful culture", "Coaching conflict resolution"],
-      classroom: "Best in roles like peer helper, inclusion monitor, community builder."
-    },
-    Doer: {
-      name: "The Doer",
-      tag: "You turn ideas into action and keep projects moving forward.",
-      strengths: ["Action-focused", "Reliable", "Problem solver", "Gets things done"],
-      helpsBy: ["Organizing tasks", "Following through", "Building/creating solutions", "Making plans real"],
-      classroom: "Best in roles like organizer, project manager, builder."
-    },
-    Thinker: {
-      name: "The Thinker",
-      tag: "You ask smart questions and help the group understand the real problem.",
-      strengths: ["Curious", "Critical thinker", "Sees patterns", "Evidence-minded"],
-      helpsBy: ["Researching", "Asking why", "Finding strong evidence/solutions", "Improving decisions"],
-      classroom: "Best in roles like researcher, strategist, fact-checker."
-    }
-  };
-
-  // ---------- 20 Questions ----------
-  const Q = [
-    {
-      t: "When you notice something unfair at school, you usually…",
-      h: "Pick what feels most like you, even if you sometimes do more than one.",
-      o: [
-        { k: "Voice", title: "Speak up", desc: "I say something or start a conversation." },
-        { k: "Supporter", title: "Support someone", desc: "I check in with the person affected." },
-        { k: "Doer", title: "Fix what I can", desc: "I look for a practical way to improve it." },
-        { k: "Thinker", title: "Ask why", desc: "I try to understand what caused it first." }
-      ]
-    },
-    {
-      t: "In a group project to improve the school, you would most likely…",
-      h: "Think about what you naturally do in groups.",
-      o: [
-        { k: "Voice", title: "Share ideas out loud", desc: "I help the group express its message." },
-        { k: "Supporter", title: "Keep everyone included", desc: "I make sure no one is left out." },
-        { k: "Doer", title: "Organize the work", desc: "I plan tasks and follow through." },
-        { k: "Thinker", title: "Research the issue", desc: "I gather info so choices make sense." }
-      ]
-    },
-    {
-      t: "Which sentence sounds most like you?",
-      h: "Choose the one that fits best today.",
-      o: [
-        { k: "Voice", title: "“People need to hear this.”", desc: "I want others to notice the issue." },
-        { k: "Supporter", title: "“People need to feel safe.”", desc: "I focus on respect and kindness." },
-        { k: "Doer", title: "“Let’s do something.”", desc: "I want real action and progress." },
-        { k: "Thinker", title: "“Let’s understand it first.”", desc: "I want the full picture before acting." }
-      ]
-    },
-    {
-      t: "If your class planned a community project, you’d prefer to…",
-      h: "Imagine a real class activity (posters, cleanup, fundraiser, etc.).",
-      o: [
-        { k: "Voice", title: "Present or persuade", desc: "I’d explain the project to others." },
-        { k: "Supporter", title: "Welcome and encourage", desc: "I’d help people feel comfortable joining." },
-        { k: "Doer", title: "Build / set up / run it", desc: "I’d handle tasks and logistics." },
-        { k: "Thinker", title: "Plan the best approach", desc: "I’d help design a smart plan." }
-      ]
-    },
-    {
-      t: "When someone disagrees with you, you usually…",
-      h: "Pick your most common response.",
-      o: [
-        { k: "Voice", title: "Explain my point", desc: "I share my reasons clearly." },
-        { k: "Supporter", title: "Try to understand them", desc: "I listen for feelings and reasons." },
-        { k: "Doer", title: "Look for a solution", desc: "I ask: what can we do now?" },
-        { k: "Thinker", title: "Ask questions", desc: "I ask for evidence and details." }
-      ]
-    },
-    {
-      t: "What makes the biggest difference in a community?",
-      h: "There isn’t one right answer—this reveals your style.",
-      o: [
-        { k: "Voice", title: "Speaking up", desc: "Ideas spread when people talk about them." },
-        { k: "Supporter", title: "Caring for others", desc: "People thrive when they feel respected." },
-        { k: "Doer", title: "Taking action", desc: "Results come from doing the work." },
-        { k: "Thinker", title: "Understanding the issue", desc: "Good solutions need good thinking." }
-      ]
-    },
-    {
-      t: "If a classmate is being treated unfairly, you’re more likely to…",
-      h: "Choose what you would probably do first.",
-      o: [
-        { k: "Voice", title: "Call it out", desc: "I say something respectfully." },
-        { k: "Supporter", title: "Check on them", desc: "I offer support and kindness." },
-        { k: "Doer", title: "Get help / change the situation", desc: "I take steps to stop it." },
-        { k: "Thinker", title: "Figure out what’s happening", desc: "I try to understand the situation." }
-      ]
-    },
-    {
-      t: "Which task would you enjoy most?",
-      h: "Think about what feels energizing.",
-      o: [
-        { k: "Voice", title: "Debate or present", desc: "I like sharing ideas and persuading." },
-        { k: "Supporter", title: "Mentor or welcome", desc: "I like helping people feel included." },
-        { k: "Doer", title: "Build or organize", desc: "I like hands-on action." },
-        { k: "Thinker", title: "Investigate or analyze", desc: "I like research and problem-solving." }
-      ]
-    },
-    {
-      t: "When a plan isn’t working, you usually…",
-      h: "Pick your most common move.",
-      o: [
-        { k: "Voice", title: "Suggest a new direction", desc: "I propose a change and explain it." },
-        { k: "Supporter", title: "Support the team", desc: "I help people cooperate." },
-        { k: "Doer", title: "Try another method", desc: "I test a different way to get it done." },
-        { k: "Thinker", title: "Diagnose the problem", desc: "I look for the root cause." }
-      ]
-    },
-    {
-      t: "If you could improve ONE thing at school, you’d choose…",
-      h: "Pick what matters most to you.",
-      o: [
-        { k: "Voice", title: "Students having more say", desc: "More student voice in decisions." },
-        { k: "Supporter", title: "A more respectful culture", desc: "Less bullying; more belonging." },
-        { k: "Doer", title: "A better system", desc: "Clearer routines, spaces, or resources." },
-        { k: "Thinker", title: "Better understanding", desc: "More learning about real problems and solutions." }
-      ]
-    },
-    {
-      t: "If your group is quiet, you usually…",
-      h: "Think of the last time you worked in a team.",
-      o: [
-        { k: "Voice", title: "Start the conversation", desc: "I break the silence and get people talking." },
-        { k: "Supporter", title: "Invite quieter people in", desc: "I ask others what they think." },
-        { k: "Doer", title: "Start doing a task", desc: "I begin something practical to get momentum." },
-        { k: "Thinker", title: "Ask a guiding question", desc: "I ask: what’s our goal and why?" }
-      ]
-    },
-    {
-      t: "Your teacher gives a big challenge. Your first move is…",
-      h: "Pick the most natural reaction.",
-      o: [
-        { k: "Voice", title: "Share an idea", desc: "I say what could work and get feedback." },
-        { k: "Supporter", title: "Check how people feel", desc: "I help the group stay calm and positive." },
-        { k: "Doer", title: "Make a quick plan", desc: "I list steps and start the first one." },
-        { k: "Thinker", title: "Understand the requirements", desc: "I read carefully and clarify the problem." }
-      ]
-    },
-    {
-      t: "If there’s a conflict between two classmates, you tend to…",
-      h: "Choose what you would do first.",
-      o: [
-        { k: "Voice", title: "Speak up for fairness", desc: "I say what I think is right and respectful." },
-        { k: "Supporter", title: "Help them feel heard", desc: "I listen and help them calm down." },
-        { k: "Doer", title: "Get an adult or set a plan", desc: "I take action to stop it and move forward." },
-        { k: "Thinker", title: "Ask what happened", desc: "I gather facts before judging." }
-      ]
-    },
-    {
-      t: "You’re planning an event (club, class activity, etc.). You are best at…",
-      h: "Think: what would people thank you for?",
-      o: [
-        { k: "Voice", title: "Promoting it", desc: "I create the message and convince people to join." },
-        { k: "Supporter", title: "Making it welcoming", desc: "I make sure everyone feels included." },
-        { k: "Doer", title: "Running logistics", desc: "I handle materials, timing, and setup." },
-        { k: "Thinker", title: "Designing the structure", desc: "I plan the smartest format and rules." }
-      ]
-    },
-    {
-      t: "If someone says “That will never work,” you…",
-      h: "Pick your most likely response.",
-      o: [
-        { k: "Voice", title: "Explain why it could work", desc: "I defend the idea clearly." },
-        { k: "Supporter", title: "Keep the tone respectful", desc: "I help the group stay kind." },
-        { k: "Doer", title: "Test a small version", desc: "I try a quick experiment." },
-        { k: "Thinker", title: "Ask what evidence they have", desc: "I look for reasons and data." }
-      ]
-    },
-    {
-      t: "When you learn about a problem, you want to…",
-      h: "What helps you feel confident?",
-      o: [
-        { k: "Voice", title: "Talk about it", desc: "Discussing helps me understand and influence." },
-        { k: "Supporter", title: "Connect it to people", desc: "I focus on how it affects others." },
-        { k: "Doer", title: "Find an action step", desc: "I want something doable right away." },
-        { k: "Thinker", title: "Study it deeper", desc: "I want reliable information and patterns." }
-      ]
-    },
-    {
-      t: "A new student joins your class. You’re most likely to…",
-      h: "Choose what you’d naturally do.",
-      o: [
-        { k: "Voice", title: "Introduce them to others", desc: "I help them feel seen and included publicly." },
-        { k: "Supporter", title: "Check in privately", desc: "I ask if they’re okay and need anything." },
-        { k: "Doer", title: "Show them how things work", desc: "I explain routines and help them get set." },
-        { k: "Thinker", title: "Help them understand expectations", desc: "I clarify rules and school systems." }
-      ]
-    },
-    {
-      t: "If you had to choose a superpower for school projects, you’d pick…",
-      h: "Choose the one you’d actually use.",
-      o: [
-        { k: "Voice", title: "A megaphone of confidence", desc: "Speak clearly in any situation." },
-        { k: "Supporter", title: "A kindness shield", desc: "Help everyone feel safe and respected." },
-        { k: "Doer", title: "A fast-build toolkit", desc: "Turn ideas into real things quickly." },
-        { k: "Thinker", title: "A truth scanner", desc: "Spot what’s accurate and what’s not." }
-      ]
-    },
-    {
-      t: "When you’re proud of a project, it’s usually because…",
-      h: "What feels like success to you?",
-      o: [
-        { k: "Voice", title: "People understood the message", desc: "It changed how people think." },
-        { k: "Supporter", title: "People felt included", desc: "The group felt safe and connected." },
-        { k: "Doer", title: "It actually happened", desc: "We delivered something real." },
-        { k: "Thinker", title: "It was well-reasoned", desc: "The choices were smart and evidence-based." }
-      ]
-    },
-    {
-      t: "If you could lead a club at school, you’d choose…",
-      h: "Pick the one that fits your vibe.",
-      o: [
-        { k: "Voice", title: "Debate / Media / Student voice", desc: "Share ideas and communicate." },
-        { k: "Supporter", title: "Welcome / Peer support", desc: "Help people feel connected." },
-        { k: "Doer", title: "Service / Makers / Sports support", desc: "Build, organize, and do." },
-        { k: "Thinker", title: "Science / Research / Strategy", desc: "Investigate and improve decisions." }
-      ]
-    }
-  ];
-
-  // ---------- Helpers ----------
-  const $ = (id) => document.getElementById(id);
-
-  // Required DOM elements (must exist in your HTML)
-  const questionsEl = $("questions");
-  const progressText = $("progressText");
-  const progressBar = $("progressBar");
-
-  const dlg = $("resultDialog");
-  const primaryCard = $("primaryCard");
-  const teamTips = $("teamTips");
-  const nextStep = $("nextStep");
-  const scoreLine = $("scoreLine");
-
-  const vScore = $("vScore");
-  const sScore = $("sScore");
-  const dScore = $("dScore");
-  const tScore = $("tScore");
-
-  const vBar = $("vBar");
-  const sBar = $("sBar");
-  const dBar = $("dBar");
-  const tBar = $("tBar");
-
-  const tieNote = $("tieNote");
-  const blendIcon = $("blendIcon");
-
-  // Buttons
-  const btnResults = $("btnResults");
-  const btnResults2 = $("btnResults2");
-  const btnClose = $("btnClose");
-  const btnPrint = $("btnPrint");
-  const btnPrintResult = $("btnPrintResult");
-  const btnReset = $("btnReset");
-  const btnAutofill = $("btnAutofill");
-  const btnCopy = $("btnCopy");
-
-  function uid() {
-    return Math.random().toString(16).slice(2);
-  }
-
-  function safeSetText(el, text) {
-    if (!el) return;
-    el.textContent = text;
-  }
-
-  function pct(n, total) {
-    if (!total) return 0;
-    return Math.round((n / total) * 100);
-  }
-
-  // ---------- Render survey ----------
-  const surveyId = uid();
-
-  function renderSurvey() {
-    if (!questionsEl) return;
-
-    questionsEl.innerHTML = "";
-
-    // Set correct progress label based on question count
-    safeSetText(progressText, `0 / ${Q.length}`);
-    if (progressBar) progressBar.style.width = "0%";
-
-    Q.forEach((q, i) => {
-      const qEl = document.createElement("section");
-      qEl.className = "q";
-      qEl.dataset.index = String(i);
-
-      const head = document.createElement("div");
-      head.className = "qhead";
-
-      const left = document.createElement("div");
-      left.style.minWidth = "0";
-
-      const title = document.createElement("p");
-      title.className = "qtext";
-      title.textContent = q.t;
-
-      const hint = document.createElement("p");
-      hint.className = "qhint";
-      hint.textContent = q.h;
-
-      left.appendChild(title);
-      left.appendChild(hint);
-
-      const num = document.createElement("div");
-      num.className = "qnum";
-      num.textContent = `Q${i + 1}`;
-
-      head.appendChild(left);
-      head.appendChild(num);
-
-      const opts = document.createElement("div");
-      opts.className = "options";
-
-      q.o.forEach((opt, j) => {
-        const label = document.createElement("label");
-        label.className = "opt";
-
-        const name = `q_${surveyId}_${i}`;
-        const id = `${name}_${j}`;
-
-        label.innerHTML = `
-          <input type="radio" name="${name}" id="${id}" value="${opt.k}">
-          <div class="olabel">
-            <div class="otitle">${opt.title}</div>
-            <div class="odesc">${opt.desc}</div>
-          </div>
-        `;
-
-        const input = label.querySelector("input");
-        if (input) input.addEventListener("change", updateProgress);
-
-        opts.appendChild(label);
-      });
-
-      qEl.appendChild(head);
-      qEl.appendChild(opts);
-      questionsEl.appendChild(qEl);
-    });
-
-    updateProgress();
-  }
-
-  // ---------- Answers + Progress ----------
-  function getAnswers() {
-    const counts = { Voice: 0, Supporter: 0, Doer: 0, Thinker: 0 };
-    let answered = 0;
-
-    Q.forEach((_, i) => {
-      const name = `q_${surveyId}_${i}`;
-      const chosen = document.querySelector(`input[name="${name}"]:checked`);
-      if (chosen) {
-        answered++;
-        const key = chosen.value;
-        if (counts[key] !== undefined) counts[key]++;
-      }
-    });
-
-    return { counts, answered, total: Q.length };
-  }
-
-  function updateProgress() {
-    const { answered, total } = getAnswers();
-    safeSetText(progressText, `${answered} / ${total}`);
-    const percent = pct(answered, total);
-    if (progressBar) progressBar.style.width = `${percent}%`;
-  }
-
-  // ---------- Ranking ----------
-  function rankProfiles(counts) {
-    const entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-    const top = entries[0]?.[1] ?? 0;
-    const winners = entries.filter((e) => e[1] === top).map((e) => e[0]);
-    return { entries, winners, top };
-  }
-
-  // ---------- Modal open/close (FIXED) ----------
-  function openResultsDialog() {
-    if (!dlg) return;
-
-    // Prefer native dialog
-    if (typeof dlg.showModal === "function") {
-      if (!dlg.open) dlg.showModal();
-    } else {
-      // Fallback: attribute open
-      dlg.setAttribute("open", "open");
-    }
-
-    // prevent background scroll
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeResultsDialog() {
-    if (!dlg) return;
-
-    // Close native dialog if possible
-    if (typeof dlg.close === "function") {
-      try { dlg.close(); } catch (e) {}
-    }
-
-    // ALWAYS remove open attribute (fixes "stays on top" cases)
-    dlg.removeAttribute("open");
-
-    // restore scroll
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-  }
-
-  // Close on ESC
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeResultsDialog();
-  });
-
-  // Close on outside click (clicking backdrop area)
-  if (dlg) {
-    dlg.addEventListener("click", (e) => {
-      const rect = dlg.getBoundingClientRect();
-      const inDialog =
-        rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
-        rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
-      if (!inDialog) closeResultsDialog();
-    });
-  }
-
-  // ---------- Render results ----------
-  function renderPrimary(profileKey, winners) {
-    if (!primaryCard) return;
-
-    const p = profiles[profileKey];
-    const blend = winners.length > 1;
-
-    const title = blend
-      ? `Blend: ${winners.map((w) => profiles[w].name.replace("The ", "")).join(" + ")}`
-      : p.name;
-
-    const subtitle = blend
-      ? "You showed strengths across more than one role. That is a leadership advantage."
-      : p.tag;
-
-    const strengths = (blend ? winners.flatMap((w) => profiles[w].strengths.slice(0, 2)) : p.strengths).slice(0, 6);
-    const helpsBy = (blend ? winners.flatMap((w) => profiles[w].helpsBy.slice(0, 2)) : p.helpsBy).slice(0, 6);
-
-    const iconBlock = blend
-      ? `
-        <div style="display:flex; gap:8px; align-items:center">
-          ${winners.slice(0, 2).map((w) => `<div class="avatar" style="width:54px;height:54px;border-radius:18px">${icons[w]}</div>`).join("")}
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <p><strong>Profile Information</strong></p>
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <label for="age">Your Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
         </div>
-      `
-      : `<div class="avatar">${icons[profileKey]}</div>`;
 
-    primaryCard.innerHTML = `
-      <div class="profileRow">
-        ${iconBlock}
-        <div>
-          <p class="pname">${title}</p>
-          <p class="ptag">${subtitle}</p>
+        <!-- Survey Questions -->
+        <div class="question">
+            <p>1. What is your favorite color?</p>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="Red"> Red</li>
+                <li><input type="radio" name="q1" value="Blue"> Blue</li>
+                <li><input type="radio" name="q1" value="Green"> Green</li>
+                <li><input type="radio" name="q1" value="Yellow"> Yellow</li>
+            </ul>
         </div>
-      </div>
 
-      <div class="barWrap">
-        <div class="barLine">
-          <span>What you bring</span>
-          <span style="color:rgba(74,90,120,.95)">${blend ? "Multiple strengths" : "Your top strengths"}</span>
+        <div class="question">
+            <p>2. What is your favorite animal?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="Dog"> Dog</li>
+                <li><input type="radio" name="q2" value="Cat"> Cat</li>
+                <li><input type="radio" name="q2" value="Elephant"> Elephant</li>
+                <li><input type="radio" name="q2" value="Lion"> Lion</li>
+            </ul>
         </div>
-        <ul class="list">${strengths.map((s) => `<li>${s}</li>`).join("")}</ul>
 
-        <div style="height:10px"></div>
-
-        <div class="barLine">
-          <span>How you help</span>
-          <span style="color:rgba(74,90,120,.95)">${blend ? "Different ways" : "Your style"}</span>
+        <div class="question">
+            <p>3. What is your favorite subject in school?</p>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="Math"> Math</li>
+                <li><input type="radio" name="q3" value="Science"> Science</li>
+                <li><input type="radio" name="q3" value="History"> History</li>
+                <li><input type="radio" name="q3" value="Art"> Art</li>
+            </ul>
         </div>
-        <ul class="list">${helpsBy.map((h) => `<li>${h}</li>`).join("")}</ul>
 
-        <div class="callout" style="margin-top:12px">
-          <strong>Classroom fit:</strong> ${blend ? "You can flex roles depending on the task." : p.classroom}
+        <div class="question">
+            <p>4. What is your favorite food?</p>
+            <ul class="options">
+                <li><input type="radio" name="q4" value="Pizza"> Pizza</li>
+                <li><input type="radio" name="q4" value="Burger"> Burger</li>
+                <li><input type="radio" name="q4" value="Pasta"> Pasta</li>
+                <li><input type="radio" name="q4" value="Ice cream"> Ice cream</li>
+            </ul>
         </div>
-      </div>
-    `;
-  }
 
-  function renderTeamTips(winners) {
-    if (!teamTips) return;
-
-    const suggestions = {
-      Voice: ["Pair with a Thinker to strengthen evidence.", "Pair with a Supporter to keep tone respectful."],
-      Supporter: ["Pair with a Voice to share your ideas out loud.", "Pair with a Doer to turn care into action."],
-      Doer: ["Pair with a Thinker to plan the best solution.", "Pair with a Supporter to keep the group connected."],
-      Thinker: ["Pair with a Voice to communicate your findings.", "Pair with a Doer to test solutions quickly."]
-    };
-
-    const unique = [...new Set(winners.flatMap((w) => suggestions[w] || []))];
-
-    teamTips.innerHTML = `
-      <div class="profileRow">
-        <div class="avatar" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
-            <path d="M20 44c8 10 16 10 24 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M12 22c6-8 14-12 20-12s14 4 20 12" stroke="currentColor" stroke-width="2" opacity=".85"/>
-            <path d="M10 48c10-6 34-6 44 0" stroke="currentColor" stroke-width="2" opacity=".7"/>
-          </svg>
+        <div class="question">
+            <p>5. What is your favorite sport?</p>
+            <ul class="options">
+                <li><input type="radio" name="q5" value="Soccer"> Soccer</li>
+                <li><input type="radio" name="q5" value="Basketball"> Basketball</li>
+                <li><input type="radio" name="q5" value="Swimming"> Swimming</li>
+                <li><input type="radio" name="q5" value="Tennis"> Tennis</li>
+            </ul>
         </div>
-        <div>
-          <p class="pname" style="margin:0">Best teammates for you</p>
-          <p class="ptag">Strong teams mix roles on purpose.</p>
+
+        <div class="question">
+            <p>6. Do you have a favorite hobby?</p>
+            <ul class="options">
+                <li><input type="radio" name="q6" value="Drawing"> Drawing</li>
+                <li><input type="radio" name="q6" value="Reading"> Reading</li>
+                <li><input type="radio" name="q6" value="Sports"> Sports</li>
+                <li><input type="radio" name="q6" value="Video Games"> Video Games</li>
+            </ul>
         </div>
-      </div>
-      <ul class="list">
-        ${unique.slice(0, 6).map((x) => `<li>${x}</li>`).join("")}
-      </ul>
-    `;
-  }
 
-  function renderNextStep(answered, total) {
-    if (!nextStep) return;
-
-    const missing = total - answered;
-    const isComplete = missing === 0;
-
-    const prompt = isComplete
-      ? "Pick one small action you could take this week at school."
-      : "Answer all questions to get your most accurate profile.";
-
-    const steps = [
-      "Notice one thing that could be more fair or more kind in our classroom.",
-      "Write one sentence: “A small improvement I’d like to see is…”",
-      "Choose one role you want to practice this unit (Voice, Supporter, Doer, Thinker).",
-      "Team up with someone who has a different role than you."
-    ];
-
-    nextStep.innerHTML = `
-      <div class="profileRow">
-        <div class="avatar" aria-hidden="true">
-          <svg width="34" height="34" viewBox="0 0 64 64" fill="none">
-            <path d="M18 46l8-12 8 8 12-18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 52h40" stroke="currentColor" stroke-width="2" opacity=".7" stroke-linecap="round"/>
-            <path d="M12 12h40v40H12z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-          </svg>
+        <div class="question">
+            <p>7. What is your favorite season?</p>
+            <ul class="options">
+                <li><input type="radio" name="q7" value="Summer"> Summer</li>
+                <li><input type="radio" name="q7" value="Fall"> Fall</li>
+                <li><input type="radio" name="q7" value="Winter"> Winter</li>
+                <li><input type="radio" name="q7" value="Spring"> Spring</li>
+            </ul>
         </div>
-        <div>
-          <p class="pname" style="margin:0">Next step</p>
-          <p class="ptag">${prompt}</p>
+
+        <div class="question">
+            <p>8. Do you like going to the park?</p>
+            <ul class="options">
+                <li><input type="radio" name="q8" value="Yes"> Yes</li>
+                <li><input type="radio" name="q8" value="No"> No</li>
+            </ul>
         </div>
-      </div>
-      <ul class="list">${steps.map((s) => `<li>${s}</li>`).join("")}</ul>
-    `;
-  }
 
-  function updateBars(counts) {
-    const total = Q.length;
+        <div class="question">
+            <p>9. What is your favorite type of movie?</p>
+            <ul class="options">
+                <li><input type="radio" name="q9" value="Adventure"> Adventure</li>
+                <li><input type="radio" name="q9" value="Comedy"> Comedy</li>
+                <li><input type="radio" name="q9" value="Action"> Action</li>
+                <li><input type="radio" name="q9" value="Cartoon"> Cartoon</li>
+            </ul>
+        </div>
 
-    if (vScore) vScore.textContent = counts.Voice;
-    if (sScore) sScore.textContent = counts.Supporter;
-    if (dScore) dScore.textContent = counts.Doer;
-    if (tScore) tScore.textContent = counts.Thinker;
+        <div class="question">
+            <p>10. Do you like reading books?</p>
+            <ul class="options">
+                <li><input type="radio" name="q10" value="Yes"> Yes</li>
+                <li><input type="radio" name="q10" value="No"> No</li>
+            </ul>
+        </div>
 
-    if (vBar) vBar.style.width = pct(counts.Voice, total) + "%";
-    if (sBar) sBar.style.width = pct(counts.Supporter, total) + "%";
-    if (dBar) dBar.style.width = pct(counts.Doer, total) + "%";
-    if (tBar) tBar.style.width = pct(counts.Thinker, total) + "%";
-  }
+        <div class="question">
+            <p>11. What is your favorite holiday?</p>
+            <ul class="options">
+                <li><input type="radio" name="q11" value="Christmas"> Christmas</li>
+                <li><input type="radio" name="q11" value="Halloween"> Halloween</li>
+                <li><input type="radio" name="q11" value="Easter"> Easter</li>
+                <li><input type="radio" name="q11" value="Birthday"> Birthday</li>
+            </ul>
+        </div>
 
-  function showResults() {
-    const { counts, answered, total } = getAnswers();
-    const { winners, top } = rankProfiles(counts);
-    const primary = winners[0] || "Voice";
+        <div class="question">
+            <p>12. Do you prefer playing outside or inside?</p>
+            <ul class="options">
+                <li><input type="radio" name="q12" value="Outside"> Outside</li>
+                <li><input type="radio" name="q12" value="Inside"> Inside</li>
+            </ul>
+        </div>
 
-    if (scoreLine) scoreLine.textContent = `Answered ${answered}/${total}. Highest: ${winners.join(" + ")} (${top})`;
-    if (tieNote) tieNote.style.display = winners.length > 1 ? "block" : "none";
+        <div class="question">
+            <p>13. What is your favorite animal at the zoo?</p>
+            <ul class="options">
+                <li><input type="radio" name="q13" value="Elephant"> Elephant</li>
+                <li><input type="radio" name="q13" value="Lion"> Lion</li>
+                <li><input type="radio" name="q13" value="Giraffe"> Giraffe</li>
+                <li><input type="radio" name="q13" value="Monkey"> Monkey</li>
+            </ul>
+        </div>
 
-    if (blendIcon) {
-      blendIcon.innerHTML = winners.length > 1
-        ? `<div style="display:flex; gap:6px">${
-            winners.slice(0,2).map(w => `
-              <div style="width:36px;height:36px;border-radius:14px;border:1px solid rgba(20,33,61,.12);display:grid;place-items:center;background:rgba(255,255,255,.78)">
-                ${icons[w]}
-              </div>`).join("")
-          }</div>`
-        : icons[primary];
-    }
+        <div class="question">
+            <p>14. What is your favorite subject in school?</p>
+            <ul class="options">
+                <li><input type="radio" name="q14" value="Math"> Math</li>
+                <li><input type="radio" name="q14" value="Reading"> Reading</li>
+                <li><input type="radio" name="q14" value="Science"> Science</li>
+                <li><input type="radio" name="q14" value="Art"> Art</li>
+            </ul>
+        </div>
 
-    renderPrimary(primary, winners);
-    updateBars(counts);
-    renderTeamTips(winners);
-    renderNextStep(answered, total);
+        <div class="question">
+            <p>15. What is your favorite toy?</p>
+            <ul class="options">
+                <li><input type="radio" name="q15" value="Lego"> Lego</li>
+                <li><input type="radio" name="q15" value="Doll"> Doll</li>
+                <li><input type="radio" name="q15" value="Action Figure"> Action Figure</li>
+                <li><input type="radio" name="q15" value="Cars"> Cars</li>
+            </ul>
+        </div>
 
-    openResultsDialog();
-  }
+        <div class="question">
+            <p>16. What kind of music do you like?</p>
+            <ul class="options">
+                <li><input type="radio" name="q16" value="Pop"> Pop</li>
+                <li><input type="radio" name="q16" value="Rock"> Rock</li>
+                <li><input type="radio" name="q16" value="Classical"> Classical</li>
+                <li><input type="radio" name="q16" value="Hip-Hop"> Hip-Hop</li>
+            </ul>
+        </div>
 
-  // ---------- Buttons wiring ----------
-  if (btnResults) btnResults.addEventListener("click", showResults);
-  if (btnResults2) btnResults2.addEventListener("click", showResults);
+        <div class="question">
+            <p>17. Do you like going on field trips?</p>
+            <ul class="options">
+                <li><input type="radio" name="q17" value="Yes"> Yes</li>
+                <li><input type="radio" name="q17" value="No"> No</li>
+            </ul>
+        </div>
 
-  if (btnClose) btnClose.addEventListener("click", (e) => {
-    e.preventDefault();
-    closeResultsDialog();
-  });
+        <div class="question">
+            <p>18. Do you like having pets?</p>
+            <ul class="options">
+                <li><input type="radio" name="q18" value="Yes"> Yes</li>
+                <li><input type="radio" name="q18" value="No"> No</li>
+            </ul>
+        </div>
 
-  if (btnPrint) btnPrint.addEventListener("click", () => window.print());
-  if (btnPrintResult) btnPrintResult.addEventListener("click", () => window.print());
+        <div class="question">
+            <p>19. What is your favorite sport to play?</p>
+            <ul class="options">
+                <li><input type="radio" name="q19" value="Soccer"> Soccer</li>
+                <li><input type="radio" name="q19" value="Basketball"> Basketball</li>
+                <li><input type="radio" name="q19" value="Swimming"> Swimming</li>
+                <li><input type="radio" name="q19" value="Tennis"> Tennis</li>
+            </ul>
+        </div>
 
-  if (btnReset) btnReset.addEventListener("click", () => {
-    Q.forEach((_, i) => {
-      const name = `q_${surveyId}_${i}`;
-      document.querySelectorAll(`input[name="${name}"]`).forEach((r) => (r.checked = false));
-    });
-    updateProgress();
-    // If modal is open, close it
-    closeResultsDialog();
-  });
+        <div class="question">
+            <p>20. Who is your favorite superhero?</p>
+            <ul class="options">
+                <li><input type="radio" name="q20" value="Superman"> Superman</li>
+                <li><input type="radio" name="q20" value="Spider-Man"> Spider-Man</li>
+                <li><input type="radio" name="q20" value="Wonder Woman"> Wonder Woman</li>
+                <li><input type="radio" name="q20" value="Iron Man"> Iron Man</li>
+            </ul>
+        </div>
 
-  if (btnAutofill) btnAutofill.addEventListener("click", () => {
-    Q.forEach((_, i) => {
-      const name = `q_${surveyId}_${i}`;
-      const opts = Array.from(document.querySelectorAll(`input[name="${name}"]`));
-      const pick = opts[Math.floor(Math.random() * opts.length)];
-      if (pick) pick.checked = true;
-    });
-    updateProgress();
-  });
+        <!-- Buttons -->
+        <button class="submit-btn" onclick="showResults()">Submit Survey</button>
+        <div class="result" id="result">
+            <p>Thank you for completing the survey!</p>
+        </div>
+        <button class="reset-btn" onclick="resetSurvey()">Reset Survey</button>
+    </div>
 
-  if (btnCopy) btnCopy.addEventListener("click", async () => {
-    const { counts, answered, total } = getAnswers();
-    const { winners, top } = rankProfiles(counts);
+    <script>
+        function showResults() {
+            let resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+        }
 
-    const lines = [
-      "Social Involvement Profile Results",
-      `Answered: ${answered}/${total}`,
-      `Top profile: ${winners.join(" + ")} (score ${top})`,
-      `Voice: ${counts.Voice}`,
-      `Supporter: ${counts.Supporter}`,
-      `Doer: ${counts.Doer}`,
-      `Thinker: ${counts.Thinker}`,
-      "",
-      "Note: Profiles are strengths-based. Teams work best when roles mix."
-    ].join("\n");
+        function resetSurvey() {
+            let allRadios = document.querySelectorAll('input[type="radio"]');
+            allRadios.forEach(radio => {
+                radio.checked = false;
+            });
+            let resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'none';
+        }
+    </script>
 
-    try {
-      await navigator.clipboard.writeText(lines);
-      const old = btnCopy.textContent;
-      btnCopy.textContent = "Copied!";
-      setTimeout(() => (btnCopy.textContent = old), 1200);
-    } catch (e) {
-      alert("Copy not available in this browser. You can select text manually from the results screen.");
-    }
-  });
-
-  // ---------- Init ----------
-  renderSurvey();
-
-})();
-</script>
+</body>
+</html>
