@@ -3,92 +3,84 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Youth Activism — Encuesta interactiva (mejorada)</title>
+<title>Youth Activism — Encuesta interactiva mejorada</title>
 <meta name="description" content="Encuesta interactiva para jóvenes: Voice, Info, Action, Leadership, Care" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#071022;
-    --card:#071827;
-    --mut:#9fb0c6;
-    --accent1:#ff6b6b;   /* coral */
-    --accent2:#7c3aed;   /* purple */
-    --accent3:#06b6d4;   /* cyan */
-    --accent4:#ffd166;   /* yellow */
-    --accent5:#4ade80;   /* green */
+    --card:rgba(255,255,255,0.03);
+    --mut:#b9d0e6;
+    --accent1:#ff6b6b;
+    --accent2:#7c3aed;
+    --accent3:#06b6d4;
+    --accent4:#ffd166;
+    --accent5:#4ade80;
     --glass: rgba(255,255,255,0.03);
     --radius:18px;
     --shadow: 0 18px 50px rgba(2,6,23,0.7);
+    --base-font:18px; /* tamaño base aumentado */
   }
   *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:
-    radial-gradient(900px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 20%),
-    radial-gradient(900px 400px at 90% 30%, rgba(6,182,212,0.08), transparent 20%),
-    var(--bg); color:#eaf6ff;-webkit-font-smoothing:antialiased}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:#eaf6ff;-webkit-font-smoothing:antialiased;font-size:var(--base-font)}
   .wrap{max-width:980px;margin:28px auto;padding:22px}
   header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
   .brand{display:flex;gap:14px;align-items:center}
   .logo{
-    width:72px;height:72px;border-radius:14px;
+    width:84px;height:84px;border-radius:16px;
     background:linear-gradient(135deg,var(--accent2),var(--accent3));
-    display:grid;place-items:center;font-weight:900;color:white;font-size:22px;
+    display:grid;place-items:center;font-weight:900;color:white;font-size:28px;
     box-shadow:0 12px 40px rgba(124,58,237,0.18)
   }
-  h1{font-size:22px;margin:0}
-  .tagline{color:var(--mut);font-size:14px}
+  h1{font-size:26px;margin:0}
+  .tagline{color:var(--mut);font-size:16px}
   .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);overflow:hidden}
-  .intro{display:grid;grid-template-columns:1fr 340px;gap:20px;padding:20px}
+  .intro{display:grid;grid-template-columns:1fr 360px;gap:20px;padding:22px}
   @media (max-width:920px){.intro{grid-template-columns:1fr}}
   .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
-  .pill{
-    background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    padding:8px 12px;border-radius:999px;font-size:14px;color:var(--mut);display:inline-flex;align-items:center;gap:10px
-  }
-  .controls{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .pill{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 14px;border-radius:999px;font-size:15px;color:var(--mut);display:inline-flex;align-items:center;gap:10px}
+  .controls{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
   .btn{
-    padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);
-    background:transparent;color:#eaf6ff;cursor:pointer;font-weight:800;font-size:15px;
+    padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);
+    background:transparent;color:#eaf6ff;cursor:pointer;font-weight:800;font-size:16px;
     transition:transform .12s ease,box-shadow .12s ease
   }
   .btn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
-  .btn.primary{
-    background:linear-gradient(90deg,var(--accent1),var(--accent3));
-    border:none;color:white;box-shadow:0 12px 30px rgba(6,182,212,0.12)
-  }
-  .mini{padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
-  .cardHead{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.02)}
-  .cardBody{padding:20px}
+  .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent3));border:none;color:white;box-shadow:0 12px 30px rgba(6,182,212,0.12)}
+  .mini{padding:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+  .cardHead{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .cardBody{padding:22px}
   .prog{display:flex;align-items:center;gap:14px}
-  .bar{width:300px;height:14px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+  .bar{width:340px;height:16px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
   .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent3),var(--accent2));transition:width .45s cubic-bezier(.2,.9,.2,1)}
-  .ptxt{font-size:15px;color:var(--mut);font-weight:700}
-  .questionTitle{margin:0 0 14px;font-size:22px;line-height:1.15}
-  .options{display:grid;gap:14px}
+  .ptxt{font-size:16px;color:var(--mut);font-weight:800}
+  .questionTitle{margin:0 0 16px;font-size:24px;line-height:1.12}
+  .options{display:grid;gap:16px}
   .optBtn{
-    display:flex;align-items:center;gap:16px;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
+    display:flex;align-items:center;gap:18px;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
     background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;
-    font-size:16px;font-weight:700;color:#eaf6ff
+    font-size:18px;font-weight:800;color:#eaf6ff
   }
   .optBtn:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(2,6,23,0.7)}
   .optEmoji{
-    width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    display:grid;place-items:center;font-size:30px;font-weight:800;color:#071022
+    width:84px;height:84px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:grid;place-items:center;font-size:40px;font-weight:900;color:#071022
   }
   .optText{flex:1}
-  .optSub{font-size:14px;color:var(--mut);font-weight:600;margin-top:6px}
-  .small{font-size:14px;color:var(--mut);margin-top:12px}
-  .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .optSub{font-size:15px;color:var(--mut);font-weight:700;margin-top:8px}
+  .small{font-size:15px;color:var(--mut);margin-top:14px}
+  .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
   .resultItem{
-    padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    padding:16px;border-radius:14px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
     border:1px solid rgba(255,255,255,0.02)
   }
-  .barInner{height:16px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:10px}
+  .barInner{height:18px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:12px}
   .barFill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent5));transition:width .9s cubic-bezier(.2,.9,.2,1)}
-  .actionsRow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-  .copyBtn{background:#071022;color:#fff;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
-  .avatarRow{display:flex;gap:12px;align-items:center;margin-top:14px}
-  .avatar{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent3),var(--accent2));display:grid;place-items:center;font-weight:900;color:#071022;font-size:22px}
+  .actionsRow{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .copyBtn{background:#071022;color:#fff;padding:12px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
+  .avatarRow{display:flex;gap:14px;align-items:center;margin-top:16px}
+  .avatar{width:84px;height:84px;border-radius:14px;background:linear-gradient(135deg,var(--accent3),var(--accent2));display:grid;place-items:center;font-weight:900;color:#071022;font-size:28px}
   .confetti{pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%;z-index:9999;display:none}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
@@ -100,7 +92,7 @@
         <div class="logo" aria-hidden="true">YA</div>
         <div>
           <h1>Youth Activism</h1>
-          <div class="tagline">Encuesta rápida — descubre tu perfil</div>
+          <div class="tagline">Encuesta visual y rápida para estudiantes</div>
         </div>
       </div>
       <div class="tagline">15 preguntas • 6–10 minutos</div>
@@ -110,8 +102,8 @@
     <section class="card" aria-labelledby="introTitle">
       <div class="intro">
         <div>
-          <h2 id="introTitle" style="margin:0 0 8px;font-size:24px">¿Cómo actúas cuando algo importa?</h2>
-          <p style="margin:0;color:var(--mut);font-size:16px">Responde situaciones reales de escuela y redes. Al final verás tus puntos fuertes en <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong> y <strong>Care</strong>.</p>
+          <h2 id="introTitle" style="margin:0 0 8px;font-size:26px">¿Cómo actúas cuando algo importa?</h2>
+          <p style="margin:0;color:var(--mut);font-size:17px">Responde situaciones reales de escuela y redes. Al final verás un perfil claro con tus fortalezas y pasos prácticos para mejorar.</p>
 
           <div class="pillRow" aria-hidden="true">
             <span class="pill">🎨 Visual</span>
@@ -126,7 +118,7 @@
             <button id="restartBtn" class="btn" style="display:none">Reiniciar</button>
           </div>
 
-          <div class="small">Consejo: usa Tab + Enter para navegar y responder. Los iconos son grandes para facilitar la lectura.</div>
+          <div class="small">Consejo: usa Tab + Enter para navegar. Cada pregunta cambia el color de fondo para mantener la energía.</div>
         </div>
 
         <aside class="mini" aria-hidden="false">
@@ -263,11 +255,35 @@
     ]},
   ];
 
+  // colores de fondo por pregunta (gradientes)
+  const BG_COLORS = [
+    'radial-gradient(900px 400px at 10% 10%, rgba(255,107,107,0.12), transparent), linear-gradient(180deg,#071022,#071827)',
+    'radial-gradient(900px 400px at 90% 20%, rgba(124,58,237,0.12), transparent), linear-gradient(180deg,#041226,#071022)',
+    'radial-gradient(900px 400px at 50% 10%, rgba(6,182,212,0.12), transparent), linear-gradient(180deg,#071022,#04202a)',
+    'radial-gradient(900px 400px at 20% 80%, rgba(255,209,102,0.12), transparent), linear-gradient(180deg,#071022,#2b1f00)',
+    'radial-gradient(900px 400px at 80% 70%, rgba(74,222,128,0.12), transparent), linear-gradient(180deg,#071022,#0b2b12)',
+    'radial-gradient(900px 400px at 30% 30%, rgba(255,107,107,0.10), transparent), linear-gradient(180deg,#071022,#2b0b0b)',
+    'radial-gradient(900px 400px at 70% 20%, rgba(124,58,237,0.10), transparent), linear-gradient(180deg,#071022,#1a0b2b)',
+    'radial-gradient(900px 400px at 50% 80%, rgba(6,182,212,0.10), transparent), linear-gradient(180deg,#071022,#00202b)',
+    'radial-gradient(900px 400px at 10% 50%, rgba(255,209,102,0.10), transparent), linear-gradient(180deg,#071022,#2b1f00)',
+    'radial-gradient(900px 400px at 90% 40%, rgba(74,222,128,0.10), transparent), linear-gradient(180deg,#071022,#0b2b12)',
+    'radial-gradient(900px 400px at 40% 20%, rgba(255,107,107,0.08), transparent), linear-gradient(180deg,#071022,#2b0b0b)',
+    'radial-gradient(900px 400px at 60% 30%, rgba(124,58,237,0.08), transparent), linear-gradient(180deg,#071022,#1a0b2b)',
+    'radial-gradient(900px 400px at 20% 20%, rgba(6,182,212,0.08), transparent), linear-gradient(180deg,#071022,#00202b)',
+    'radial-gradient(900px 400px at 80% 20%, rgba(255,209,102,0.08), transparent), linear-gradient(180deg,#071022,#2b1f00)',
+    'radial-gradient(900px 400px at 50% 50%, rgba(74,222,128,0.08), transparent), linear-gradient(180deg,#071022,#0b2b12)',
+  ];
+
   let currentQuestionIndex = 0;
   let scores = { voice:0, info:0, action:0, leadership:0, care:0 };
 
   function $(id){ return document.getElementById(id); }
   function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function setBackgroundForQuestion(index){
+    const bg = BG_COLORS[index % BG_COLORS.length];
+    document.body.style.background = bg;
+  }
 
   function initBadges(){
     const intro = document.querySelector('.intro');
@@ -284,6 +300,7 @@
   }
 
   function renderQuestion(){
+    setBackgroundForQuestion(currentQuestionIndex);
     const q = QUESTIONS[currentQuestionIndex];
     $('qLabel').textContent = `Pregunta ${currentQuestionIndex + 1}`;
     $('topicTag').textContent = q.topic;
@@ -324,6 +341,40 @@
     }
   }
 
+  // perfiles explicativos y atractivos
+  const PROFILE_DESCRIPTIONS = {
+    voice: {
+      title: "Voz",
+      short: "Te expresas con claridad y convicción.",
+      long: "Eres bueno/a comunicando ideas y defendiendo lo que importa. Puedes liderar conversaciones, moderar debates y ayudar a que otros se escuchen.",
+      tips: ["Practica mensajes breves y claros", "Usa ejemplos personales para conectar", "Ensaya respuestas respetuosas para situaciones difíciles"]
+    },
+    info: {
+      title: "Investigador/a",
+      short: "Buscas datos y verificas antes de compartir.",
+      long: "Te importa la precisión. Investigas fuentes, contrastas información y ayudas a que las decisiones se basen en hechos.",
+      tips: ["Aprende a evaluar fuentes", "Resume datos en 1–2 frases", "Comparte enlaces fiables cuando publiques"]
+    },
+    action: {
+      title: "Hacedor/a",
+      short: "Prefieres hacer cosas concretas que generan cambio.",
+      long: "Te enfocas en resultados: organizar, ejecutar y resolver. Eres quien hace que las ideas se conviertan en acciones reales.",
+      tips: ["Divide tareas en pasos pequeños", "Busca aliados para compartir trabajo", "Celebra los pequeños logros"]
+    },
+    leadership: {
+      title: "Líder",
+      short: "Organizas y motivas a otros para lograr objetivos.",
+      long: "Tienes facilidad para coordinar equipos, delegar y mantener el rumbo. Inspiras a otros a participar y sostener proyectos.",
+      tips: ["Practica delegar con claridad", "Define roles y plazos", "Pide feedback al equipo"]
+    },
+    care: {
+      title: "Cuidador/a",
+      short: "Prioriza el bienestar y la inclusión de las personas.",
+      long: "Eres quien escucha, apoya y crea espacios seguros. Tu empatía ayuda a que los proyectos sean sostenibles y humanos.",
+      tips: ["Haz seguimiento personal a compañeros", "Crea espacios de bienvenida", "Combina cuidado con límites saludables"]
+    }
+  };
+
   function showResults(preview=false){
     $('surveyCard').style.display = 'none';
     $('resultCard').style.display = 'block';
@@ -333,35 +384,58 @@
     if(preview){
       body.innerHTML = `<h3 style="margin-top:0;font-size:20px">Perfiles (vista previa)</h3>
         <div class="resultGrid">
-          <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Hablar con claridad y respeto.</div></div>
-          <div class="resultItem"><strong>Info</strong><div style="margin-top:8px;color:var(--mut)">Investigar y verificar antes de compartir.</div></div>
-          <div class="resultItem"><strong>Action</strong><div style="margin-top:8px;color:var(--mut)">Tomar pasos prácticos para cambiar cosas.</div></div>
-          <div class="resultItem"><strong>Leadership</strong><div style="margin-top:8px;color:var(--mut)">Organizar y motivar a otros.</div></div>
-          <div class="resultItem"><strong>Care</strong><div style="margin-top:8px;color:var(--mut)">Apoyar a las personas y crear pertenencia.</div></div>
+          <div class="resultItem"><strong>Voz</strong><div style="margin-top:8px;color:var(--mut)">Hablar con claridad y respeto.</div></div>
+          <div class="resultItem"><strong>Investigador/a</strong><div style="margin-top:8px;color:var(--mut)">Verificar antes de compartir.</div></div>
+          <div class="resultItem"><strong>Hacedor/a</strong><div style="margin-top:8px;color:var(--mut)">Tomar pasos prácticos.</div></div>
+          <div class="resultItem"><strong>Líder</strong><div style="margin-top:8px;color:var(--mut)">Organizar y motivar.</div></div>
+          <div class="resultItem"><strong>Cuidador/a</strong><div style="margin-top:8px;color:var(--mut)">Apoyar y crear pertenencia.</div></div>
         </div>`;
       addResultActions();
       return;
     }
 
+    // ordenar y mostrar barras con explicación
     const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
     const grid = document.createElement('div'); grid.className='resultGrid';
     entries.forEach(([k,v])=>{
+      const key = k;
+      const desc = PROFILE_DESCRIPTIONS[key];
       const item = document.createElement('div'); item.className='resultItem';
-      item.innerHTML = `<strong style="text-transform:capitalize">${escapeHtml(k)}</strong>
-        <div style="margin-top:8px;color:var(--mut);font-weight:700">${v} pts</div>
-        <div class="barInner"><div class="barFill" style="width:${Math.min(100, v*10)}%"></div></div>`;
+      item.innerHTML = `<div style="display:flex;align-items:center;gap:12px">
+          <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,var(--accent2),var(--accent3));display:grid;place-items:center;font-weight:900;color:#071022;font-size:22px">${desc.title.charAt(0)}</div>
+          <div>
+            <strong style="font-size:18px">${escapeHtml(desc.title)}</strong>
+            <div style="color:var(--mut);margin-top:6px;font-weight:700">${escapeHtml(desc.short)}</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;color:var(--mut)">${escapeHtml(desc.long)}</div>
+        <div class="barInner"><div class="barFill" style="width:${Math.min(100, v*10)}%"></div></div>
+        <div style="margin-top:10px;font-weight:800">Puntaje: ${v} pts</div>
+        <div style="margin-top:10px"><strong>Sugerencias prácticas</strong>
+          <ul style="margin:8px 0 0 18px;color:var(--mut)">
+            ${desc.tips.map(t => `<li>${escapeHtml(t)}</li>`).join('')}
+          </ul>
+        </div>`;
       grid.appendChild(item);
     });
     body.appendChild(grid);
 
-    const top = entries[0];
-    if(top){
-      const tip = document.createElement('div');
-      tip.style.marginTop='14px'; tip.style.padding='14px'; tip.style.borderRadius='12px';
-      tip.style.background='linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))';
-      tip.innerHTML = `<strong style="font-size:16px">Próximo paso</strong>: prueba una acción pequeña que use tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong>.`;
-      body.appendChild(tip);
+    // recomendación personalizada basada en top 2
+    const top1 = entries[0];
+    const top2 = entries[1];
+    if(top1){
+      const rec = document.createElement('div');
+      rec.style.marginTop='18px'; rec.style.padding='16px'; rec.style.borderRadius='12px';
+      rec.style.background='linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))';
+      rec.innerHTML = `<strong style="font-size:18px">Plan corto de 3 pasos</strong>
+        <div style="margin-top:10px;color:var(--mut)">
+          1. Usa tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top1[0])}</strong> para liderar una pequeña acción (ej. 1 reunión o post informativo).<br>
+          2. Complementa con <strong style="text-transform:capitalize">${escapeHtml(top2 ? top2[0] : 'info')}</strong> para mejorar el enfoque (ej. datos o apoyo).<br>
+          3. Comparte lo aprendido con tu grupo en 5 minutos.
+        </div>`;
+      body.appendChild(rec);
     }
+
     addResultActions();
   }
 
@@ -424,6 +498,7 @@
     setTimeout(()=> { conf.style.display='none'; conf.innerHTML=''; }, 2600);
   }
 
+  // eventos
   $('startBtn').addEventListener('click', ()=>{
     currentQuestionIndex = 0;
     scores = { voice:0, info:0, action:0, leadership:0, care:0 };
@@ -436,6 +511,7 @@
   $('previewBtn').addEventListener('click', previewProfiles);
   $('restartBtn').addEventListener('click', resetSurvey);
 
+  // inicialización
   (function init(){ initBadges(); $('ptxt').textContent = `0 / ${QUESTIONS.length}`; })();
 </script>
 </body>
