@@ -3,86 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youth Activism and Global Change Survey</title>
+    <title>Social Involvement Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
             color: #333;
+            margin: 0;
             padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
             text-align: center;
+        }
+
+        h1 {
             font-size: 36px;
             color: #4CAF50;
-        }
-        .instructions {
-            font-size: 16px;
             margin-bottom: 20px;
-            color: #333;
+        }
+
+        .instructions {
             background-color: #ffeb3b;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .question {
-            margin: 20px 0;
             padding: 15px;
-            background-color: #ffffff;
             border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-        .question span {
-            font-weight: bold;
             font-size: 18px;
-            color: #333;
+            margin-bottom: 30px;
         }
+
+        .question-container {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-container span {
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
         .options {
             margin-left: 20px;
             margin-top: 10px;
         }
+
         .options label {
+            font-size: 18px;
             display: block;
-            margin-bottom: 10px;
-            font-size: 16px;
+            margin: 10px 0;
             color: #555;
         }
+
         .options input[type="radio"] {
-            margin-right: 10px;
+            margin-right: 15px;
         }
-        .footer {
-            text-align: center;
-            font-size: 14px;
-            margin-top: 40px;
-            color: #777;
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
         }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
         .profile {
             display: none;
-            margin-top: 20px;
-            padding: 20px;
             background-color: #e7f4e7;
+            padding: 25px;
             border: 2px solid #4CAF50;
-            border-radius: 10px;
+            border-radius: 12px;
+            margin-top: 30px;
         }
-        .profile h3 {
+
+        .profile h2 {
+            font-size: 30px;
             color: #00796b;
-            text-align: center;
         }
+
         .profile p {
-            margin: 10px 0;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #777;
+            margin-top: 40px;
+        }
+
+        .profile i {
+            font-size: 40px;
+            margin-top: 10px;
+        }
+
+        /* Flexbox layout for responsive design */
+        .question-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
 
-    <h1>Youth Activism and Global Change Survey</h1>
-    <p class="instructions">Answer the questions based on your thoughts about global issues and how you can make a difference in the world. At the end, you’ll get a profile with strengths and suggestions for your next steps.</p>
+    <h1>Social Involvement Profile</h1>
+    <p class="instructions">Answer these questions to see which kind of social change maker you are. At the end, you'll get a profile with strengths and suggestions for actions to take!</p>
 
-    <!-- 1 -->
-    <div class="question">
+    <!-- Question 1 -->
+    <div class="question-container">
         <span>1. What change would you like to see in the world?</span>
         <div class="options">
             <label><input type="radio" name="q1" value="A"> A. Environmental protection</label>
@@ -92,8 +131,8 @@
         </div>
     </div>
 
-    <!-- 2 -->
-    <div class="question">
+    <!-- Question 2 -->
+    <div class="question-container">
         <span>2. Which action do you think has the most impact in making a difference?</span>
         <div class="options">
             <label><input type="radio" name="q2" value="A"> A. Speaking up for what’s right</label>
@@ -103,8 +142,8 @@
         </div>
     </div>
 
-    <!-- 3 -->
-    <div class="question">
+    <!-- Question 3 -->
+    <div class="question-container">
         <span>3. What is the most important issue affecting youth today?</span>
         <div class="options">
             <label><input type="radio" name="q3" value="A"> A. Climate change</label>
@@ -114,8 +153,8 @@
         </div>
     </div>
 
-    <!-- 4 -->
-    <div class="question">
+    <!-- Question 4 -->
+    <div class="question-container">
         <span>4. How would you most like to contribute to social change?</span>
         <div class="options">
             <label><input type="radio" name="q4" value="A"> A. Organizing protests</label>
@@ -125,8 +164,8 @@
         </div>
     </div>
 
-    <!-- 5 -->
-    <div class="question">
+    <!-- Question 5 -->
+    <div class="question-container">
         <span>5. Which global issue do you feel most passionate about?</span>
         <div class="options">
             <label><input type="radio" name="q5" value="A"> A. Environmental sustainability</label>
@@ -136,8 +175,8 @@
         </div>
     </div>
 
-    <!-- 6 -->
-    <div class="question">
+    <!-- Question 6 -->
+    <div class="question-container">
         <span>6. How do you think social media influences activism?</span>
         <div class="options">
             <label><input type="radio" name="q6" value="A"> A. It helps spread awareness</label>
@@ -147,8 +186,8 @@
         </div>
     </div>
 
-    <!-- 7 -->
-    <div class="question">
+    <!-- Question 7 -->
+    <div class="question-container">
         <span>7. Which issue should be prioritized to improve the future of the planet?</span>
         <div class="options">
             <label><input type="radio" name="q7" value="A"> A. Reducing carbon emissions</label>
@@ -158,8 +197,8 @@
         </div>
     </div>
 
-    <!-- 8 -->
-    <div class="question">
+    <!-- Question 8 -->
+    <div class="question-container">
         <span>8. How can youth best get involved in climate activism?</span>
         <div class="options">
             <label><input type="radio" name="q8" value="A"> A. Participating in school environmental clubs</label>
@@ -169,8 +208,8 @@
         </div>
     </div>
 
-    <!-- 9 -->
-    <div class="question">
+    <!-- Question 9 -->
+    <div class="question-container">
         <span>9. What motivates you to get involved in social causes?</span>
         <div class="options">
             <label><input type="radio" name="q9" value="A"> A. Seeing others take action</label>
@@ -180,8 +219,8 @@
         </div>
     </div>
 
-    <!-- 10 -->
-    <div class="question">
+    <!-- Question 10 -->
+    <div class="question-container">
         <span>10. How important is education in solving global issues?</span>
         <div class="options">
             <label><input type="radio" name="q10" value="A"> A. Extremely important</label>
@@ -191,8 +230,8 @@
         </div>
     </div>
 
-    <!-- 11 -->
-    <div class="question">
+    <!-- Question 11 -->
+    <div class="question-container">
         <span>11. How can youth influence policy changes regarding global issues?</span>
         <div class="options">
             <label><input type="radio" name="q11" value="A"> A. Petitioning and lobbying</label>
@@ -202,8 +241,8 @@
         </div>
     </div>
 
-    <!-- 12 -->
-    <div class="question">
+    <!-- Question 12 -->
+    <div class="question-container">
         <span>12. Which of these do you believe is the most pressing issue to address in your community?</span>
         <div class="options">
             <label><input type="radio" name="q12" value="A"> A. Clean water access</label>
@@ -213,8 +252,8 @@
         </div>
     </div>
 
-    <!-- 13 -->
-    <div class="question">
+    <!-- Question 13 -->
+    <div class="question-container">
         <span>13. How would you encourage others to join a cause you're passionate about?</span>
         <div class="options">
             <label><input type="radio" name="q13" value="A"> A. Share educational content on social media</label>
@@ -224,8 +263,8 @@
         </div>
     </div>
 
-    <!-- 14 -->
-    <div class="question">
+    <!-- Question 14 -->
+    <div class="question-container">
         <span>14. What is the most effective way for youth to advocate for gender equality?</span>
         <div class="options">
             <label><input type="radio" name="q14" value="A"> A. Organizing gender equality workshops</label>
@@ -235,8 +274,8 @@
         </div>
     </div>
 
-    <!-- 15 -->
-    <div class="question">
+    <!-- Question 15 -->
+    <div class="question-container">
         <span>15. In your opinion, what is the biggest obstacle to achieving global peace?</span>
         <div class="options">
             <label><input type="radio" name="q15" value="A"> A. Political conflict</label>
@@ -246,35 +285,66 @@
         </div>
     </div>
 
-    <button id="submitBtn" onclick="generateProfile()">Submit</button>
+    <button class="submit-btn" id="submitBtn" onclick="generateProfile()">Submit</button>
 
     <div class="profile" id="profile">
-        <h3>Your Global Change Profile</h3>
-        <p id="profileText"></p>
+        <h2>Your Profile: <span id="profileTitle"></span></h2>
+        <p id="profileDescription"></p>
+        <i id="profileIcon" class="fa fa-5x"></i>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for taking the survey! Remember: Every action counts in making the world a better place.</p>
     </div>
 
     <script>
         function generateProfile() {
-            var profileText = "";
-            var q1 = document.querySelector('input[name="q1"]:checked');
-            var q2 = document.querySelector('input[name="q2"]:checked');
-            var q3 = document.querySelector('input[name="q3"]:checked');
-            var q4 = document.querySelector('input[name="q4"]:checked');
-            var q5 = document.querySelector('input[name="q5"]:checked');
-            // Continue for all 15 questions
-            
-            if (q1 && q2 && q3 && q4 && q5) {
-                // Customize profile based on answers
-                // Example profile generation logic
-                if (q1.value === "A") profileText += "You care deeply about the environment.\n";
-                if (q2.value === "B") profileText += "You believe in using social media to raise awareness.\n";
-                if (q3.value === "C") profileText += "You understand the importance of mental health.\n";
-                // Continue for all questions
+            let profileTitle = "";
+            let profileDescription = "";
+            let profileIcon = "";
+            let score = 0;
 
-                // Display profile
-                document.getElementById("profileText").innerText = profileText;
+            // Get values from answers
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+            const q5 = document.querySelector('input[name="q5"]:checked');
+            // Continue for all 15 questions...
+
+            // Calculate scores and assign profile
+            if (q1 && q2) {
+                if (q1.value === "A" || q2.value === "A") {
+                    score += 1;
+                    profileTitle = "The Voice";
+                    profileDescription = "You are passionate about speaking up and driving change!";
+                    profileIcon = "fa-comment";
+                }
+                if (q1.value === "B" || q2.value === "B") {
+                    score += 1;
+                    profileTitle = "The Caregiver";
+                    profileDescription = "You care deeply about others and seek to create inclusive environments.";
+                    profileIcon = "fa-heart";
+                }
+                if (q1.value === "C" || q2.value === "C") {
+                    score += 1;
+                    profileTitle = "The Action Taker";
+                    profileDescription = "You believe in taking practical steps and getting things done!";
+                    profileIcon = "fa-thumbs-up";
+                }
+                if (q1.value === "D" || q2.value === "D") {
+                    score += 1;
+                    profileTitle = "The Thinker";
+                    profileDescription = "You think critically and like to understand the full scope of issues before acting.";
+                    profileIcon = "fa-brain";
+                }
+
+                // Display results
+                document.getElementById("profileTitle").innerText = profileTitle;
+                document.getElementById("profileDescription").innerText = profileDescription;
+                document.getElementById("profileIcon").className = "fa " + profileIcon;
                 document.getElementById("profile").style.display = "block";
-                document.getElementById("submitBtn").disabled = true;
+                document.getElementById("submitBtn").disabled = true; // Disable submit after submission
             } else {
                 alert("Please answer all questions.");
             }
