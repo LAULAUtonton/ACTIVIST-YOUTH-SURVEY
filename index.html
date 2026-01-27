@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Student Engagement Survey</title>
-  <meta name="description" content="A colorful, classroom-ready survey with 15 questions, and a profile at the end." />
+  <title>Youth Activism — Social Involvement Profile Survey</title>
+  <meta name="description" content="A colorful, classroom-ready survey that gives students a profile at the end." />
 
   <style>
-    :root{
-      /* Light + colorful */
-      --bgA:#F7FAFF;
-      --bgB:#F1FFFB;
-      --card: rgba(255,255,255,.82);
-      --card2: rgba(255,255,255,.66);
-      --stroke: rgba(15,20,40,.12);
-      --txt: rgba(8,10,20,.92);
-      --mut: rgba(8,10,20,.68);
-      --mut2: rgba(8,10,20,.50);
-      --shadow: 0 20px 60px rgba(10,20,40,.12);
+    :root {
+      --bgA: #F7FAFF;
+      --bgB: #F1FFFB;
+
+      --card: rgba(255, 255, 255, .82);
+      --card2: rgba(255, 255, 255, .66);
+      --stroke: rgba(15, 20, 40, .12);
+
+      --txt: rgba(8, 10, 20, .92);
+      --mut: rgba(8, 10, 20, .68);
+      --mut2: rgba(8, 10, 20, .50);
+
+      --shadow: 0 20px 60px rgba(10, 20, 40, .12);
       --r1: 18px;
       --r2: 26px;
-      --p:#7C3AED;   /* purple */
-      --c:#06B6D4;   /* cyan */
-      --g:#10B981;   /* green */
-      --y:#F59E0B;   /* amber */
-      --pk:#F43F5E;  /* rose */
-      --b:#2563EB;   /* blue */
-      --o:#FB923C;   /* orange */
-      --focus: 0 0 0 4px rgba(6,182,212,.22);
+
+      /* Accent palette */
+      --p: #7C3AED;
+      --c: #06B6D4;
+      --g: #10B981;
+      --y: #F59E0B;
+      --pk: #F43F5E;
+      --b: #2563EB;
+      --o: #FB923C;
+
+      --focus: 0 0 0 4px rgba(6, 182, 212, .22);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: var(--txt);
-      background:
-        radial-gradient(900px 520px at 10% 10%, rgba(124,58,237,.16), transparent 60%),
-        radial-gradient(900px 560px at 90% 20%, rgba(6,182,212,.16), transparent 60%),
-        radial-gradient(900px 650px at 55% 110%, rgba(244,63,94,.12), transparent 55%),
+      background: radial-gradient(900px 520px at 10% 10%, rgba(124, 58, 237, .16), transparent 60%),
+        radial-gradient(900px 560px at 90% 20%, rgba(6, 182, 212, .16), transparent 60%),
+        radial-gradient(900px 650px at 55% 110%, rgba(244, 63, 94, .12), transparent 55%),
         linear-gradient(180deg, var(--bgA), var(--bgB));
-      overflow-x:hidden;
+      overflow-x: hidden;
     }
 
-    .wrap{
+    .wrap {
       max-width: 1080px;
       margin: 0 auto;
       padding: 26px 18px 90px;
@@ -52,169 +64,183 @@
       z-index: 1;
     }
 
-    .top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 14px;
       flex-wrap: wrap;
       margin-bottom: 14px;
     }
 
-    .brand{
-      display:flex;
-      align-items:center;
+    .brand {
+      display: flex;
+      align-items: center;
       gap: 12px;
       padding: 10px 12px;
       border: 1px solid var(--stroke);
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.60));
-      box-shadow: 0 14px 40px rgba(10,20,40,.10);
+      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .60));
+      box-shadow: 0 14px 40px rgba(10, 20, 40, .10);
       backdrop-filter: blur(10px);
     }
 
-    .logo{
-      width: 46px; height: 46px;
+    .logo {
+      width: 46px;
+      height: 46px;
       border-radius: 16px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(15,20,40,.10);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(6,182,212,.22), rgba(124,58,237,.18)),
-        linear-gradient(135deg, rgba(244,63,94,.12), rgba(16,185,129,.10));
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(15, 20, 40, .10);
+      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .22), rgba(124, 58, 237, .18)),
+        linear-gradient(135deg, rgba(244, 63, 94, .12), rgba(16, 185, 129, .10));
     }
-    .brand h1{margin:0;font-size:14px;letter-spacing:.2px}
-    .brand p{margin:0;font-size:12px;color:var(--mut2)}
 
-    .chip{
-      display:inline-flex;
-      align-items:center;
+    .brand h1 {
+      margin: 0;
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    .brand p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--mut2);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
       padding: 10px 12px;
       border-radius: 999px;
       border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.70);
+      background: rgba(255, 255, 255, .70);
       color: var(--mut);
       font-size: 12px;
-      box-shadow: 0 10px 26px rgba(10,20,40,.07);
-      white-space:nowrap;
-    }
-    .spark{
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(16,185,129,1), rgba(6,182,212,.7));
-      box-shadow: 0 0 0 5px rgba(16,185,129,.14);
+      box-shadow: 0 10px 26px rgba(10, 20, 40, .07);
+      white-space: nowrap;
     }
 
-    .panel{
+    .spark {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 1), rgba(6, 182, 212, .7));
+      box-shadow: 0 0 0 5px rgba(16, 185, 129, .14);
+    }
+
+    /* sections */
+    .panel {
       border: 1px solid var(--stroke);
       border-radius: var(--r2);
-      background: linear-gradient(180deg, rgba(255,255,255,.90), rgba(255,255,255,.62));
+      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .62));
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
-      overflow:hidden;
+      overflow: hidden;
     }
 
-    .hero{
-      position:relative;
+    .hero {
+      position: relative;
     }
 
-    .heroInner{
+    .heroInner {
       padding: 18px;
-      display:grid;
+      display: grid;
       grid-template-columns: 1.15fr .85fr;
       gap: 14px;
-      align-items:stretch;
-    }
-    @media (max-width: 920px){
-      .heroInner{grid-template-columns:1fr;}
+      align-items: stretch;
     }
 
-    .hero h2{
-      margin:0 0 8px;
+    @media (max-width: 920px) {
+      .heroInner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero h2 {
+      margin: 0 0 8px;
       font-size: 30px;
       letter-spacing: .2px;
       line-height: 1.10;
     }
 
-    .hero .sub{
-      margin:0 0 12px;
+    .hero .sub {
+      margin: 0 0 12px;
       color: var(--mut);
       line-height: 1.55;
       font-size: 14.5px;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    @media (max-width: 760px){ .grid{grid-template-columns: 1fr;} }
-
-    .opt{
-      display:flex;
-      gap: 12px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(15,20,40,.12);
-      background: rgba(255,255,255,.74);
-      cursor: pointer;
-      user-select: none;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      min-height: 84px;
-      outline:none;
-      position:relative;
-      overflow:hidden;
-    }
-    .opt:hover{
-      transform: translateY(-1px);
-      border-color: rgba(6,182,212,.35);
-      box-shadow: 0 14px 24px rgba(10,20,40,.10);
-    }
-    .opt:focus-visible{ box-shadow: var(--focus); }
-
-    .iconBox{
-      width: 54px; height: 54px;
-      border-radius: 18px;
-      display:grid; place-items:center;
-      border: 1px solid rgba(15,20,40,.10);
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.98), rgba(255,255,255,.70));
-      flex: 0 0 auto;
+    .pillRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
     }
 
-    .txt{min-width:0}
-    .txt strong{display:block; font-size: 14.4px}
-    .txt span{display:block; margin-top:3px; color: var(--mut); font-size: 13px; line-height: 1.35}
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(255, 255, 255, .68);
+      color: var(--mut);
+      font-size: 12px;
+    }
 
-    .btnRow{
+    .btnRow {
       margin-top: 14px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .btn{
-      appearance:none;
-      border: 1px solid rgba(15,20,40,.12);
-      background: rgba(255,255,255,.78);
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(15, 20, 40, .12);
+      background: rgba(255, 255, 255, .78);
       color: var(--txt);
       padding: 10px 12px;
       border-radius: 14px;
-      cursor:pointer;
+      cursor: pointer;
       font-weight: 900;
       font-size: 13px;
       transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      display:inline-flex; align-items:center; gap:10px;
-      user-select:none;
-      box-shadow: 0 10px 18px rgba(10,20,40,.06);
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(6,182,212,.35);
-      box-shadow: 0 14px 24px rgba(10,20,40,.10);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      box-shadow: 0 10px 18px rgba(10, 20, 40, .06);
     }
 
-    .small{
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(6, 182, 212, .35);
+      box-shadow: 0 14px 24px rgba(10, 20, 40, .10);
+    }
+
+    .btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .primary {
+      border-color: rgba(124, 58, 237, .35);
+      background: linear-gradient(90deg, rgba(124, 58, 237, .20), rgba(6, 182, 212, .14));
+    }
+
+    .danger {
+      border-color: rgba(244, 63, 94, .30);
+      background: rgba(244, 63, 94, .10);
+    }
+
+    .small {
       margin-top: 10px;
       color: var(--mut2);
       font-size: 12.3px;
@@ -222,100 +248,201 @@
     }
 
     /* RESULTS */
-    .results{
-      display:grid;
+    .results {
+      display: grid;
       grid-template-columns: 1.1fr .9fr;
       gap: 14px;
     }
-    @media (max-width: 920px){ .results{grid-template-columns:1fr;} }
 
-    .profile{
-      border: 1px solid rgba(15,20,40,.12);
+    @media (max-width: 920px) {
+      .results {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile {
+      border: 1px solid rgba(15, 20, 40, .12);
       border-radius: var(--r2);
-      background: rgba(255,255,255,.78);
+      background: rgba(255, 255, 255, .78);
       padding: 16px;
       position: relative;
-      overflow:hidden;
+      overflow: hidden;
     }
-    .profile::before{
-      content:"";
-      position:absolute; inset:-70px -70px auto auto;
-      width: 320px; height: 320px;
+
+    .profile::before {
+      content: "";
+      position: absolute;
+      inset: -70px -70px auto auto;
+      width: 320px;
+      height: 320px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(6,182,212,.18), rgba(124,58,237,.14), transparent 70%);
-      pointer-events:none;
+      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .18), rgba(124, 58, 237, .14), transparent 70%);
+      pointer-events: none;
     }
 
-    .pTop{display:flex; align-items:center; gap: 12px; position:relative; z-index:1;}
-    .avatar{
-      width: 70px; height: 70px;
+    .pTop {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar {
+      width: 70px;
+      height: 70px;
       border-radius: 22px;
-      border: 1px solid rgba(15,20,40,.10);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(245,158,11,.22), rgba(244,63,94,.14)),
-        linear-gradient(135deg, rgba(6,182,212,.18), rgba(124,58,237,.14));
-      box-shadow: 0 16px 36px rgba(10,20,40,.12);
-      display:grid; place-items:center;
-      overflow:hidden;
+      border: 1px solid rgba(15, 20, 40, .10);
+      background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, .22), rgba(244, 63, 94, .14)),
+        linear-gradient(135deg, rgba(6, 182, 212, .18), rgba(124, 58, 237, .14));
+      box-shadow: 0 16px 36px rgba(10, 20, 40, .12);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
     }
-    .pTitle{margin:0; font-size: 18.4px;}
-    .pTag{margin:4px 0 0; color: var(--mut); font-size: 13px;}
-    .pBody{margin-top: 12px; color: var(--mut); line-height: 1.65; font-size: 13.8px; position:relative; z-index:1;}
 
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top: 12px; position:relative; z-index:1;}
-    .cchip{
+    .pTitle {
+      margin: 0;
+      font-size: 18.4px;
+    }
+
+    .pTag {
+      margin: 4px 0 0;
+      color: var(--mut);
+      font-size: 13px;
+    }
+
+    .pBody {
+      margin-top: 12px;
+      color: var(--mut);
+      line-height: 1.65;
+      font-size: 13.8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cchip {
       padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(15,20,40,.12);
-      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(15, 20, 40, .12);
+      background: rgba(255, 255, 255, .84);
       font-size: 12.3px;
       color: var(--mut);
     }
 
-    .meters{
-      border: 1px solid rgba(15,20,40,.12);
+    .meters {
+      border: 1px solid rgba(15, 20, 40, .12);
       border-radius: var(--r2);
-      background: rgba(255,255,255,.76);
+      background: rgba(255, 255, 255, .76);
       padding: 14px;
     }
-    .meters h4{margin:0 0 10px; font-size: 14px;}
-    .rows{display:grid; gap: 10px;}
-    .row{display:grid; grid-template-columns: 140px 1fr 44px; gap: 10px; align-items:center;}
-    .lbl{font-size: 12px; color: var(--mut);}
-    .mbar{
+
+    .meters h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+    }
+
+    .rows {
+      display: grid;
+      gap: 10px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr 44px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .lbl {
+      font-size: 12px;
+      color: var(--mut);
+    }
+
+    .mbar {
       height: 10px;
       border-radius: 999px;
-      border: 1px solid rgba(15,20,40,.12);
-      background: rgba(255,255,255,.70);
-      overflow:hidden;
+      border: 1px solid rgba(15, 20, 40, .12);
+      background: rgba(255, 255, 255, .70);
+      overflow: hidden;
     }
-    .mbar i{
-      display:block;
-      height:100%;
-      width:0%;
-      border-radius:999px;
+
+    .mbar i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
       transition: width .45s ease;
     }
-    .val{font-size: 12px; color: var(--mut); text-align:right;}
-    .printRow{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+
+    .val {
+      font-size: 12px;
+      color: var(--mut);
+      text-align: right;
+    }
+
+    .printRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
 
     /* START SCREEN BUTTONS */
-    .startRow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;}
-    .btnBig{
+    .startRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btnBig {
       padding: 12px 14px;
       border-radius: 16px;
       font-size: 14px;
     }
 
     /* print */
-    @media print{
-      body{ background:white; color:black; }
-      .blob,.top,.panel.hero,.btnRow,.small,.printRow,.startRow{ display:none !important; }
-      .panel{ box-shadow:none; border:1px solid #ccc; background:white; }
-      .profile, .meters{ border:1px solid #ccc; background:white; }
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .blob,
+      .top,
+      .panel.hero,
+      .btnRow,
+      .small,
+      .printRow,
+      .startRow {
+        display: none !important;
+      }
+
+      .panel {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        background: white;
+      }
+
+      .profile,
+      .meters {
+        border: 1px solid #ccc;
+        background: white;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="blob b1"></div>
   <div class="blob b2"></div>
@@ -333,314 +460,65 @@
           </svg>
         </div>
         <div>
-          <h1>Student Engagement Survey</h1>
-          <p>Assessing your school involvement</p>
+          <h1>Youth Activism Survey</h1>
+          <p>Social involvement profile</p>
         </div>
       </div>
 
       <div class="chip">
         <span class="spark"></span>
-        8–12 minutes • No “right/wrong” answers
+        6–8 minutes • No “right/wrong” answers
       </div>
     </div>
 
+    <!-- START / INTRO PANEL -->
     <section class="panel hero" id="startPanel" aria-label="Start">
       <div class="heroInner">
         <div>
           <h2>How do you show up when something matters?</h2>
-          <p class="sub">Answer questions about your school and community involvement. At the end, you’ll get a personalized profile and a practical action step.</p>
+          <p class="sub">
+            Answer real situations from school and social media. At the end you’ll get a <strong>profile</strong> with strengths
+            and one practical “next step” to try.
+          </p>
+
           <div class="pillRow">
-            <span class="pill">🎨 Visual + Interactive</span>
-            <span class="pill">⚡ Quick</span>
+            <span class="pill">🎨 Colorful + visual</span>
+            <span class="pill">⚡ Fast</span>
             <span class="pill">🧠 Reflective</span>
-            <span class="pill">🗣️ Optional classroom discussion</span>
+            <span class="pill">🗣️ Optional class discussion</span>
           </div>
+
+          <div class="illusRow" aria-label="Illustrations">
+            <span class="illus">${badge("VOICE","--c")}</span>
+            <span class="illus">${badge("INFO","--y")}</span>
+            <span class="illus">${badge("ACTION","--g")}</span>
+            <span class="illus">${badge("LEADERSHIP","--p")}</span>
+            <span class="illus">${badge("CARE","--pk")}</span>
+          </div>
+
           <div class="startRow">
-            <button class="btn btnBig primary" id="startBtn">Start Survey</button>
+            <button class="btn btnBig primary" id="startBtn">Start the survey</button>
+            <button class="btn btnBig" id="previewBtn" title="Shows the profiles (no answers saved)">Preview profiles</button>
           </div>
+
+          <div class="small">
+            Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>Teacher quick-use</h3>
+          <ul>
+            <li>Students can take it individually or on the projector.</li>
+            <li>At the end: screenshot the profile or copy text.</li>
+            <li>1-minute reflection: “One strength I have… One step I can try…”</li>
+          </ul>
+          <div class="note">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
         </div>
       </div>
     </section>
 
+    <!-- SURVEY PANEL -->
     <section class="panel card" id="surveyCard" style="display:none" role="region" aria-label="Survey">
-      <div class="head">
-        <div class="leftHead">
-          <span class="tag"><strong id="qLabel">Question</strong></span>
-          <span class="tag" id="topicTag">Topic</span>
-        </div>
-
-        <div class="prog" aria-label="Progress">
-          <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
-          <div class="ptxt" id="ptxt">0 / 0</div>
-        </div>
-      </div>
-
-      <div class="body" id="body"></div>
-    </section>
-
-    <section class="panel card" id="resultCard" style="display:none" role="region" aria-label="Results">
-      <div class="head">
-        <div class="leftHead">
-          <span class="tag"><strong>Your profile</strong></span>
-          <span class="tag">Results</span>
-        </div>
-        <div class="prog"><div class="ptxt">Done</div></div>
-      </div>
-
-      <div class="body" id="resultBody"></div>
-    </section>
-
-    <div class="small">
-      If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong> (or open in an Incognito window).
-    </div>
-  </div>
-
-  <script>
-    /******************** UTIL ********************/
-    function escapeHtml(s){
-      return String(s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    function badge(text, cssVar){
-      const col = getComputedStyle(document.documentElement).getPropertyValue(cssVar).trim() || "#06B6D4";
-      return `
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2l2.7 6.2L21 9l-5 4.2L17.4 20 12 16.8 6.6 20 8 13.2 3 9l6.3-.8L12 2z"
-            stroke="${col}" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        ${escapeHtml(text)}
-      `;
-    }
-
-    function svgIcon(...paths){
-      const p = paths.map(d => `<path d="${d}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>`).join("");
-      return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">${p}</svg>`;
-    }
-
-    /******************** CONFIG (ENGLISH) ********************/
-    const DIMENSIONS = [
-      { key:"voice",     label:"Voice",      grad:"linear-gradient(90deg, rgba(6,182,212,.95), rgba(124,58,237,.55))" },
-      { key:"action",    label:"Action",     grad:"linear-gradient(90deg, rgba(16,185,129,.95), rgba(6,182,212,.45))" },
-      { key:"care",      label:"Care",       grad:"linear-gradient(90deg, rgba(244,63,94,.95), rgba(245,158,11,.35))" },
-      { key:"leadership",label:"Leadership", grad:"linear-gradient(90deg, rgba(124,58,237,.95), rgba(244,63,94,.45))" },
-      { key:"info",      label:"Info",       grad:"linear-gradient(90deg, rgba(245,158,11,.95), rgba(6,182,212,.35))" },
-    ];
-
-    const ICONS = {
-      mic:  svgIcon("M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z","M19 11a7 7 0 0 1-14 0","M12 18v4","M8 22h8"),
-      bolt: svgIcon("M13 2L3 14h7l-1 8 12-14h-7l-1-6Z"),
-      heart:svgIcon("M12 21s-7-4.6-9.2-9C1.2 8.7 3.2 6 6.2 6c1.7 0 3 .8 3.8 2 0 0 .9-2 3.9-2 3 0 5 2.7 3.4 6-2.2 4.4-9.2 9-9.2 9Z"),
-      search:svgIcon("M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z","M16.2 16.2 21 21"),
-      flag: svgIcon("M5 3v18","M5 4h11l-1.5 3L16 10H5"),
-      tools:svgIcon("M14 7l3 3-7.5 7.5H6.5V14.5L14 7Z","M13 6l2-2 5 5-2 2"),
-      chat: svgIcon("M7 8h10","M7 12h7","M21 12a8 8 0 0 1-8 8H8l-5 3 1.4-4.2A8 8 0 1 1 21 12Z"),
-    };
-
-    const QUESTIONS = [
-      {
-        topic: "School",
-        title: "You hear an offensive comment about someone in class. What do you do first?",
-        hint: "Your first move (no overthinking).",
-        options: [
-          { icon:"mic",  title:"Stop it respectfully", desc:"I say something like, “Not cool,” without making a scene.", pts:{ voice:2, leadership:1 } },
-          { icon:"heart",title:"Check on the person", desc:"I ask if they’re okay and support them.", pts:{ care:2, voice:1 } },
-          { icon:"chat", title:"Talk later calmly", desc:"I find a better moment to talk it through.", pts:{ voice:2, info:1 } },
-          { icon:"bolt", title:"Get help right away", desc:"If it’s serious, I tell an adult.", pts:{ action:2, leadership:1 } },
-        ]
-      },
-      {
-        topic: "Social media",
-        title: "A viral video about a social issue shows up in your feed. What do you do?",
-        hint: "Think TikTok / IG / YouTube.",
-        options: [
-          { icon:"search",title:"Verify it", desc:"I check sources before sharing.", pts:{ info:2, voice:1 } },
-          { icon:"mic",  title:"Comment thoughtfully", desc:"I try to add something useful and respectful.", pts:{ voice:2, care:1 } },
-          { icon:"flag", title:"Report if harmful", desc:"I use tools if there’s hate, harassment, or misinformation.", pts:{ action:1, info:1 } },
-          { icon:"bolt", title:"Create a response post", desc:"I make a reel/post with a better take.", pts:{ leadership:2, voice:1 } },
-        ]
-      },
-      // 13 more questions go here...
-    ];
-
-    /******************** APP STATE ********************/
-    const startPanel = document.getElementById("startPanel");
-    const surveyCard = document.getElementById("surveyCard");
-    const body = document.getElementById("body");
-    const resultCard = document.getElementById("resultCard");
-    const resultBody = document.getElementById("resultBody");
-
-    const qLabel = document.getElementById("qLabel");
-    const topicTag = document.getElementById("topicTag");
-    const fill = document.getElementById("fill");
-    const ptxt = document.getElementById("ptxt");
-
-    const state = {
-      idx: 0,
-      answers: Array(QUESTIONS.length).fill(null),
-      scores: Object.fromEntries(DIMENSIONS.map(d=>[d.key,0])),
-    };
-
-    function renderQuestion(){
-      const q = QUESTIONS[state.idx];
-      const total = QUESTIONS.length;
-      const cur = state.idx + 1;
-
-      qLabel.textContent = `Question ${cur}`;
-      topicTag.textContent = q.topic;
-
-      ptxt.textContent = `${cur} / ${total}`;
-      const w = total === 1 ? 100 : Math.round((state.idx/(total-1))*100);
-      fill.style.width = `${w}%`;
-
-      const selected = state.answers[state.idx];
-
-      body.innerHTML = `
-        <h3 class="qTitle">${escapeHtml(q.title)}</h3>
-        <p class="qHint">${escapeHtml(q.hint || "")}</p>
-
-        <div class="grid" role="list">
-          ${q.options.map((o,i)=>`
-            <div class="opt" role="listitem" tabindex="0"
-                 data-i="${i}" data-selected="${selected===i}">
-              <div class="iconBox" style="color:${optColor(i)}">
-                ${iconSvg(o.icon)}
-              </div>
-              <div class="txt">
-                <strong>${escapeHtml(o.title)}</strong>
-                <span>${escapeHtml(o.desc)}</span>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-
-        <div class="btnRow">
-          <button class="btn" id="back" ${state.idx===0 ? "disabled":""}>${arrowLeft()} Back</button>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <button class="btn danger" id="reset">${resetIcon()} Restart</button>
-            <button class="btn primary" id="next" ${selected===null ? "disabled":""}>
-              ${state.idx===total-1 ? "Get profile " + checkIcon() : "Next " + arrowRight()}
-            </button>
-          </div>
-        </div>
-
-        <div class="small">Pick what fits you best <strong>today</strong>. People grow and change.</div>
-      `;
-
-      body.querySelectorAll(".opt").forEach(el=>{
-        el.addEventListener("click", ()=> choose(+el.dataset.i));
-        el.addEventListener("keydown", (e)=>{
-          if(e.key==="Enter" || e.key===" "){ e.preventDefault(); choose(+el.dataset.i); }
-        });
-      });
-
-      document.getElementById("back").onclick = ()=> { if(state.idx>0){ state.idx--; renderQuestion(); } };
-      document.getElementById("reset").onclick = ()=> startSurvey();
-      document.getElementById("next").onclick = ()=> next();
-    }
-
-    function choose(i){
-      state.answers[state.idx] = i;
-      renderQuestion();
-    }
-
-    function next(){
-      if(state.answers[state.idx] === null) return;
-      if(state.idx < QUESTIONS.length-1){
-        state.idx++;
-        renderQuestion();
-      }else{
-        computeScores();
-        showResults();
-      }
-    }
-
-    function computeScores(){
-      state.scores = Object.fromEntries(DIMENSIONS.map(d=>[d.key,0]));
-      state.answers.forEach((a,qi)=>{
-        const opt = QUESTIONS[qi].options[a];
-        if(!opt || !opt.pts) return;
-        for(const [k,v] of Object.entries(opt.pts)){
-          state.scores[k] = (state.scores[k] || 0) + v;
-        }
-      });
-    }
-
-    function showResults(){
-      const p = pickProfile();
-
-      surveyCard.style.display = "none";
-      startPanel.style.display = "none";
-      resultCard.style.display = "block";
-
-      const bars = DIMENSIONS.map(d=>{
-        const pct = percent(state.scores, d.key);
-        return `
-          <div class="row">
-            <div class="lbl">${escapeHtml(d.label)}</div>
-            <div class="mbar"><i style="width:${pct}%; background:${d.grad}"></i></div>
-            <div class="val">${pct}%</div>
-          </div>
-        `;
-      }).join("");
-
-      resultBody.innerHTML = `
-        <div class="results">
-          <div class="profile">
-            <div class="pTop">
-              <div class="avatar" aria-hidden="true"><div style="font-size:30px">${escapeHtml(p.emoji)}</div></div>
-              <div>
-                <h3 class="pTitle">${escapeHtml(p.id)}</h3>
-                <p class="pTag">${escapeHtml(p.tag)}</p>
-              </div>
-            </div>
-
-            <div class="pBody">${escapeHtml(p.desc)}</div>
-
-            <div class="chips" aria-label="Strengths">
-              ${p.strengths.map(s=>`<span class="cchip">⭐ ${escapeHtml(s)}</span>`).join("")}
-            </div>
-
-            <div class="chips" aria-label="Next steps">
-              ${p.next.map(s=>`<span class="cchip">➡️ ${escapeHtml(s)}</span>`).join("")}
-            </div>
-
-            <div class="printRow">
-              <button class="btn primary" id="again">${resetIcon()} Take again</button>
-              <button class="btn" id="print">${printIcon()} Print / Save PDF</button>
-              <button class="btn" id="copy">${copyIcon()} Copy profile</button>
-              <button class="btn" id="home">Home</button>
-            </div>
-
-            <div class="small">This is a snapshot, not a permanent label.</div>
-          </div>
-
-          <div class="meters">
-            <h4>Your skill mix</h4>
-            <div class="rows">${bars}</div>
-            <div class="small">Class prompt: Which skill would you like to strengthen this month?</div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("again").onclick = ()=> startSurvey();
-      document.getElementById("print").onclick = ()=> window.print();
-      document.getElementById("copy").onclick = ()=> copyProfile(p);
-      document.getElementById("home").onclick = ()=> showStart();
-
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    /******************** WIRE BUTTONS ********************/
-    document.getElementById("startBtn").addEventListener("click", startSurvey);
-
-    // Start on the home screen
-    showStart();
-  </script>
-</body>
-</html>
+      <div class="
 
