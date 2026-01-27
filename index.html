@@ -1,557 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Youth Activism – Social Involvement Profile Survey</title>
-  <meta name="description" content="A colorful, classroom-ready survey that gives students a profile at the end." />
-
+  <meta name="description" content="Encuesta de perfil de participación social" />
   <style>
-    :root {
-      --bgA: #f7faff;
-      --bgB: #f1fffb;
-
-      --card: rgba(255, 255, 255, .82);
-      --card2: rgba(255, 255, 255, .66);
-      --stroke: rgba(15, 20, 40, .12);
-
-      --txt: rgba(8, 10, 20, .92);
-      --mut: rgba(8, 10, 20, .68);
-      --mut2: rgba(8, 10, 20, .50);
-
-      --shadow: 0 20px 60px rgba(10, 20, 40, .12);
-      --r1: 18px;
-      --r2: 26px;
-
-      /* Accent palette */
-      --p: #7c3aed;
-      --c: #06b6d4;
-      --g: #10b981;
-      --y: #f59e0b;
-      --pk: #f43f5e;
-      --b: #2563eb;
-      --o: #fb923c;
-
-      --focus: 0 0 0 4px rgba(6, 182, 212, .22);
+    :root{
+      --bgA:#f8fafc; --bgB:#ffffff; --txt:#08101a; --mut:rgba(8,10,20,.55);
+      --stroke:rgba(15,20,40,.06); --accent1:#7c3aed; --accent2:#06b6d4;
+      --card-radius:18px; --shadow:0 18px 40px rgba(10,20,40,.08);
+      --focus:0 0 0 4px rgba(6,182,212,.18);
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--txt);
-      background: radial-gradient(900px 520px at 10% 10%, rgba(124, 58, 237, .16), transparent 60%),
-        radial-gradient(900px 560px at 90% 20%, rgba(6, 182, 212, .16), transparent 60%),
-        radial-gradient(900px 650px at 55% 110%, rgba(244, 63, 94, .12), transparent 55%),
-        linear-gradient(180deg, var(--bgA), var(--bgB));
-      overflow-x: hidden;
-    }
-
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 26px 18px 90px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .60));
-      box-shadow: 0 14px 40px rgba(10, 20, 40, .10);
-      backdrop-filter: blur(10px);
-    }
-
-    .logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(15, 20, 40, .10);
-      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .22), rgba(124, 58, 237, .18)),
-        linear-gradient(135deg, rgba(244, 63, 94, .12), rgba(16, 185, 129, .10));
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: .2px;
-    }
-
-    .brand p {
-      margin: 0;
-      font-size: 12px;
-      color: var(--mut2);
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255, 255, 255, .70);
-      color: var(--mut);
-      font-size: 12px;
-      box-shadow: 0 10px 26px rgba(10, 20, 40, .07);
-      white-space: nowrap;
-    }
-
-    .spark {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 1), rgba(6, 182, 212, .7));
-      box-shadow: 0 0 0 5px rgba(16, 185, 129, .14);
-    }
-
-    /* sections */
-    .panel {
-      border: 1px solid var(--stroke);
-      border-radius: var(--r2);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .62));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-
-    .hero {
-      position: relative;
-    }
-
-    .heroInner {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 920px) {
-      .heroInner {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .hero h2 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      letter-spacing: .2px;
-      line-height: 1.10;
-    }
-
-    .hero .sub {
-      margin: 0 0 12px;
-      color: var(--mut);
-      line-height: 1.55;
-      font-size: 14.5px;
-    }
-
-    .pillRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255, 255, 255, .68);
-      color: var(--mut);
-      font-size: 12px;
-    }
-
-    .btnRow {
-      margin-top: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      appearance: none;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .78);
-      color: var(--txt);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 13px;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      user-select: none;
-      box-shadow: 0 10px 18px rgba(10, 20, 40, .06);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      border-color: rgba(6, 182, 212, .35);
-      box-shadow: 0 14px 24px rgba(10, 20, 40, .10);
-    }
-
-    .btn:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .primary {
-      border-color: rgba(124, 58, 237, .35);
-      background: linear-gradient(90deg, rgba(124, 58, 237, .20), rgba(6, 182, 212, .14));
-    }
-
-    .danger {
-      border-color: rgba(244, 63, 94, .30);
-      background: rgba(244, 63, 94, .10);
-    }
-
-    .small {
-      margin-top: 10px;
-      color: var(--mut2);
-      font-size: 12.3px;
-      line-height: 1.55;
-    }
-
-    /* RESULTS */
-    .results {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 14px;
-    }
-
-    @media (max-width: 920px) {
-      .results {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .profile {
-      border: 1px solid rgba(15, 20, 40, .12);
-      border-radius: var(--r2);
-      background: rgba(255, 255, 255, .78);
-      padding: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .profile::before {
-      content: "";
-      position: absolute;
-      inset: -70px -70px auto auto;
-      width: 320px;
-      height: 320px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .18), rgba(124, 58, 237, .14), transparent 70%);
-      pointer-events: none;
-    }
-
-    .pTop {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .avatar {
-      width: 70px;
-      height: 70px;
-      border-radius: 22px;
-      border: 1px solid rgba(15, 20, 40, .10);
-      background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, .22), rgba(244, 63, 94, .14)),
-        linear-gradient(135deg, rgba(6, 182, 212, .18), rgba(124, 58, 237, .14));
-      box-shadow: 0 16px 36px rgba(10, 20, 40, .12);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-    }
-
-    .pTitle {
-      margin: 0;
-      font-size: 18.4px;
-    }
-
-    .pTag {
-      margin: 4px 0 0;
-      color: var(--mut);
-      font-size: 13px;
-    }
-
-    .pBody {
-      margin-top: 12px;
-      color: var(--mut);
-      line-height: 1.65;
-      font-size: 13.8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cchip {
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .84);
-      font-size: 12.3px;
-      color: var(--mut);
-    }
-
-    .meters {
-      border: 1px solid rgba(15, 20, 40, .12);
-      border-radius: var(--r2);
-      background: rgba(255, 255, 255, .76);
-      padding: 14px;
-    }
-
-    .meters h4 {
-      margin: 0 0 10px;
-      font-size: 14px;
-    }
-
-    .rows {
-      display: grid;
-      gap: 10px;
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 140px 1fr 44px;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .lbl {
-      font-size: 12px;
-      color: var(--mut);
-    }
-
-    .mbar {
-      height: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .70);
-      overflow: hidden;
-    }
-
-    .mbar i {
-      display: block;
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      transition: width .45s ease;
-    }
-
-    .val {
-      font-size: 12px;
-      color: var(--mut);
-      text-align: right;
-    }
-
-    .printRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    /* START SCREEN BUTTONS */
-    .startRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .btnBig {
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-size: 14px;
-    }
-
-    /* print */
-    @media print {
-      body {
-        background: white;
-        color: black;
-      }
-
-      .blob,
-      .top,
-      .panel.hero,
-      .btnRow,
-      .small,
-      .printRow,
-      .startRow {
-        display: none !important;
-      }
-
-      .panel {
-        box-shadow: none;
-        border: 1px solid #ccc;
-        background: white;
-      }
-
-      .profile,
-      .meters {
-        border: 1px solid #ccc;
-        background: white;
-      }
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--txt);background:linear-gradient(180deg,var(--bgA),var(--bgB));-webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:28px auto;padding:20px}
+    .panel{background:#fff;border-radius:var(--card-radius);box-shadow:var(--shadow);border:1px solid var(--stroke);overflow:hidden}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:700}
+    h1{font-size:16px;margin:0}
+    .chip{padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.04);font-size:13px}
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:18px;padding:18px}
+    @media (max-width:880px){.hero{grid-template-columns:1fr}}
+    .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .pill{background:rgba(0,0,0,.03);padding:6px 10px;border-radius:999px;font-size:13px}
+    .startRow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .btn{border:1px solid rgba(0,0,0,.08);background:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}
+    .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:none}
+    .mini{padding:12px;background:rgba(0,0,0,.02);border-radius:12px;font-size:14px}
+    .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--stroke)}
+    .cardBody{padding:16px}
+    .prog{display:flex;align-items:center;gap:12px}
+    .bar{width:220px;height:10px;border-radius:999px;background:rgba(0,0,0,.05);overflow:hidden;border:1px solid rgba(0,0,0,.04)}
+    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width .35s ease}
+    .ptxt{font-size:13px;color:var(--mut)}
+    .questionTitle{margin:0 0 12px;font-size:18px}
+    .options{display:flex;flex-direction:column;gap:10px}
+    .optBtn{display:block;text-align:left;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.06);background:#fff;cursor:pointer;font-weight:600}
+    .optBtn:focus{outline:none;box-shadow:var(--focus)}
+    .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
+    .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(124,58,237,.04),rgba(6,182,212,.02));border:1px solid rgba(0,0,0,.04)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .small{font-size:13px;color:var(--mut);margin-top:12px}
+    .actionsRow{display:flex;gap:8px;margin-top:12px}
+    .copyBtn{background:#111;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
+    footer{margin-top:18px;text-align:center;color:var(--mut);font-size:13px}
   </style>
 </head>
-
 <body>
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-
   <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M4 11v2a3 3 0 0 0 3 3h2l2 4h2l-1.2-4.8L20 16V8l-6.2 1.8L14 5h-2l-2 4H7a3 3 0 0 0-3 3Z" stroke="rgba(8,10,20,.85)" stroke-width="1.7" stroke-linejoin="round" />
-            <path d="M20 8v8" stroke="rgba(6,182,212,.95)" stroke-width="2" stroke-linecap="round" />
-          </svg>
+    <div class="panel">
+      <div class="top">
+        <div class="brand" aria-hidden="false">
+          <div class="logo" aria-hidden="true">YA</div>
+          <div>
+            <h1>Youth Activism Survey</h1>
+            <div style="font-size:13px;color:var(--mut)">Social involvement profile</div>
+          </div>
         </div>
-        <div>
-          <h1>Youth Activism Survey</h1>
-          <p>Social involvement profile</p>
-        </div>
+        <div class="chip" aria-hidden="true">6–8 minutes • No “right/wrong” answers</div>
       </div>
 
-      <div class="chip">
-        <span class="spark"></span>
-        6–8 minutes • No “right/wrong” answers
-      </div>
-    </div>
-
-    <!-- START / INTRO PANEL -->
-    <section class="panel hero" id="startPanel" aria-label="Start">
-      <div class="heroInner">
+      <div class="hero" role="region" aria-label="Introducción">
         <div>
-          <h2>How do you show up when something matters?</h2>
-          <p class="sub">
-            Answer real situations from school and social media. At the end you’ll get a <strong>profile</strong> with strengths
-            and one practical “next step” to try.
-          </p>
+          <h2 style="margin:0 0 8px">How do you show up when something matters?</h2>
+          <p style="margin:0;color:var(--mut)">Answer real situations from school and social media. At the end you’ll get a <strong>profile</strong> with strengths and one practical “next step” to try.</p>
 
-          <div class="pillRow">
+          <div class="pillRow" aria-hidden="true">
             <span class="pill">🎨 Colorful + visual</span>
             <span class="pill">⚡ Fast</span>
             <span class="pill">🧠 Reflective</span>
             <span class="pill">🗣️ Optional class discussion</span>
           </div>
 
-          <div class="illusRow" aria-label="Illustrations">
-            <span class="illus">${badge("VOICE","--c")}</span>
-            <span class="illus">${badge("INFO","--y")}</span>
-            <span class="illus">${badge("ACTION","--g")}</span>
-            <span class="illus">${badge("LEADERSHIP","--p")}</span>
-            <span class="illus">${badge("CARE","--pk")}</span>
+          <div id="badges" style="margin-top:12px" aria-hidden="true"></div>
+
+          <div class="startRow" role="group" aria-label="Acciones">
+            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Start the survey</button>
+            <button id="previewBtn" class="btn" aria-controls="resultCard">Preview profiles</button>
+            <button id="restartBtn" class="btn" style="display:none">Restart</button>
           </div>
 
-          <div class="startRow">
-            <button class="btn btnBig primary" id="startBtn">Start the survey</button>
-            <button class="btn btnBig" id="previewBtn" title="Shows the profiles (no answers saved)">Preview profiles</button>
-          </div>
-
-          <div class="small">
-            Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.
-          </div>
+          <div class="small">Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.</div>
         </div>
 
-        <div class="mini">
-          <h3>Teacher quick-use</h3>
-          <ul>
+        <aside class="mini" aria-hidden="false">
+          <h3 style="margin:0 0 8px">Teacher quick-use</h3>
+          <ul style="margin:0 0 8px 18px;padding:0">
             <li>Students can take it individually or on the projector.</li>
             <li>At the end: screenshot the profile or copy text.</li>
             <li>1-minute reflection: “One strength I have… One step I can try…”</li>
           </ul>
-          <div class="note">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
-        </div>
+          <div style="font-size:13px;color:var(--mut)">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
+        </aside>
       </div>
-    </section>
+    </div>
 
-    <!-- SURVEY PANEL -->
-    <section class="panel card" id="surveyCard" style="display:none" role="region" aria-label="Survey">
-      <div class="head">
-        <div class="leftHead">
-          <span class="tag"><strong id="qLabel">Question</strong></span>
-          <span class="tag" id="topicTag">Topic</span>
+    <!-- Survey card -->
+    <section id="surveyCard" class="panel" style="margin-top:16px;display:none" role="region" aria-label="Survey">
+      <div class="cardHead">
+        <div>
+          <div style="font-size:13px;color:var(--mut)"><strong id="qLabel">Question</strong> <span id="topicTag" style="margin-left:8px"></span></div>
         </div>
-
-        <div class="prog" aria-label="Progress">
-          <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+        <div class="prog" aria-hidden="false">
+          <div class="bar" aria-hidden="true"><div id="fill" class="fill" style="width:0%"></div></div>
           <div class="ptxt" id="ptxt">0 / 0</div>
         </div>
       </div>
-
-      <div class="body" id="body"></div>
+      <div class="cardBody" id="body" tabindex="0"></div>
     </section>
 
-    <!-- RESULTS PANEL -->
-    <section class="panel card" id="resultCard" style="display:none" role="region" aria-label="Results">
-      <div class="head">
-        <div class="leftHead">
-          <span class="tag"><strong>Your profile</strong></span>
-          <span class="tag">Results</span>
-        </div>
-        <div class="prog"><div class="ptxt">Done</div></div>
+    <!-- Results card -->
+    <section id="resultCard" class="panel" style="margin-top:16px;display:none" role="region" aria-label="Results">
+      <div class="cardHead">
+        <div><strong>Your profile</strong></div>
+        <div class="ptxt">Done</div>
       </div>
-
-      <div class="body" id="resultBody"></div>
+      <div class="cardBody" id="resultBody"></div>
     </section>
 
-    <div class="small">
-      If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong> (or open in an Incognito window).
-    </div>
+    <footer>If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong>.</footer>
   </div>
 
   <script>
+    /* Data unchanged: same questions and scoring */
     const QUESTIONS = [
       {
         topic: "School",
@@ -615,37 +189,76 @@
       },
     ];
 
+    /* State */
     let currentQuestionIndex = 0;
     let scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
 
-    function renderQuestion() {
-      const question = QUESTIONS[currentQuestionIndex];
-      document.getElementById('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
-      document.getElementById('topicTag').textContent = question.topic;
-      document.getElementById('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
-      document.getElementById('fill').style.width = `${(currentQuestionIndex / (QUESTIONS.length - 1)) * 100}%`;
+    /* Helpers */
+    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-      let optionsHtml = '';
-      question.options.forEach((option, index) => {
-        optionsHtml += `
-          <div class="opt" onclick="selectOption(${index})">
-            <div class="txt">
-              <strong>${option.title}</strong>
-            </div>
-          </div>
-        `;
-      });
-      document.getElementById('body').innerHTML = optionsHtml;
+    function createBadge(text){
+      const b = document.createElement('span');
+      b.textContent = text;
+      b.style.display = 'inline-block';
+      b.style.padding = '6px 8px';
+      b.style.marginRight = '6px';
+      b.style.borderRadius = '999px';
+      b.style.background = 'rgba(0,0,0,.03)';
+      b.style.fontSize = '13px';
+      return b;
     }
 
-    function selectOption(index) {
-      const question = QUESTIONS[currentQuestionIndex];
-      const selectedOption = question.options[index];
-      Object.keys(selectedOption.pts).forEach(key => {
-        scores[key] += selectedOption.pts[key];
+    function initBadges(){
+      const container = document.getElementById('badges');
+      container.innerHTML = '';
+      ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t => container.appendChild(createBadge(t)));
+    }
+
+    /* Render question */
+    function renderQuestion(){
+      const q = QUESTIONS[currentQuestionIndex];
+      document.getElementById('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
+      document.getElementById('topicTag').textContent = q.topic;
+      document.getElementById('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
+
+      const denom = Math.max(1, QUESTIONS.length - 1);
+      const percent = Math.round((currentQuestionIndex / denom) * 100);
+      document.getElementById('fill').style.width = percent + '%';
+
+      const body = document.getElementById('body');
+      body.innerHTML = `<h3 class="questionTitle">${escapeHtml(q.title)}</h3>`;
+      const opts = document.createElement('div');
+      opts.className = 'options';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'optBtn';
+        btn.type = 'button';
+        btn.innerHTML = `<span>${escapeHtml(opt.title)}</span>`;
+        btn.setAttribute('aria-label', opt.title);
+        btn.addEventListener('click', () => selectOption(idx));
+        btn.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(idx); }
+        });
+        opts.appendChild(btn);
       });
 
-      if (currentQuestionIndex < QUESTIONS.length - 1) {
+      body.appendChild(opts);
+      // focus first option for keyboard users
+      const first = opts.querySelector('.optBtn');
+      if(first) first.focus();
+    }
+
+    /* Handle selection */
+    function selectOption(index){
+      const q = QUESTIONS[currentQuestionIndex];
+      const opt = q.options[index];
+      Object.keys(opt.pts).forEach(k => {
+        if(scores.hasOwnProperty(k)) scores[k] += opt.pts[k];
+        else scores[k] = opt.pts[k];
+      });
+
+      if(currentQuestionIndex < QUESTIONS.length - 1){
         currentQuestionIndex++;
         renderQuestion();
       } else {
@@ -653,29 +266,126 @@
       }
     }
 
-    function showResults() {
+    /* Show results */
+    function showResults(preview=false){
       document.getElementById('surveyCard').style.display = 'none';
       document.getElementById('resultCard').style.display = 'block';
+      document.getElementById('restartBtn').style.display = 'inline-block';
 
-      const resultHtml = `
-        <h3>Your Profile</h3>
-        <div>Voice: ${scores.voice}</div>
-        <div>Action: ${scores.action}</div>
-        <div>Leadership: ${scores.leadership}</div>
-        <div>Info: ${scores.info}</div>
-        <div>Care: ${scores.care}</div>
-      `;
-      document.getElementById('resultBody').innerHTML = resultHtml;
+      const body = document.getElementById('resultBody');
+      body.innerHTML = '';
+
+      if(preview){
+        body.innerHTML = `<h3 style="margin-top:0">Profiles Preview</h3>
+          <div class="resultGrid">
+            <div class="resultItem"><strong>Voice</strong><div style="margin-top:6px;color:var(--mut)">Speak up with clarity and empathy.</div></div>
+            <div class="resultItem"><strong>Action</strong><div style="margin-top:6px;color:var(--mut)">Take practical steps to make change happen.</div></div>
+            <div class="resultItem"><strong>Leadership</strong><div style="margin-top:6px;color:var(--mut)">Organize and motivate others.</div></div>
+            <div class="resultItem"><strong>Info</strong><div style="margin-top:6px;color:var(--mut)">Research and verify before sharing.</div></div>
+            <div class="resultItem"><strong>Care</strong><div style="margin-top:6px;color:var(--mut)">Support people and build belonging.</div></div>
+          </div>`;
+        addResultActions();
+        return;
+      }
+
+      // ordenar por puntaje
+      const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      const grid = document.createElement('div');
+      grid.className = 'resultGrid';
+
+      entries.forEach(([k,v]) => {
+        const item = document.createElement('div');
+        item.className = 'resultItem';
+        item.innerHTML = `<strong style="text-transform:capitalize">${escapeHtml(k)}</strong>
+                          <div style="margin-top:8px;color:var(--mut)">${v} points</div>`;
+        grid.appendChild(item);
+      });
+
+      body.appendChild(grid);
+
+      // next step basado en la fortaleza principal
+      const top = entries[0];
+      if(top){
+        const tip = document.createElement('div');
+        tip.style.marginTop = '12px';
+        tip.style.padding = '12px';
+        tip.style.borderRadius = '10px';
+        tip.style.background = 'linear-gradient(90deg, rgba(124,58,237,.06), rgba(6,182,212,.04))';
+        tip.innerHTML = `<strong>Next step</strong>: Try one small action that uses your <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong> strength.`;
+        body.appendChild(tip);
+      }
+
+      addResultActions();
     }
 
-    document.getElementById('startBtn').addEventListener('click', () => {
-      document.getElementById('startPanel').style.display = 'none';
+    /* Add copy and restart controls under results */
+    function addResultActions(){
+      const body = document.getElementById('resultBody');
+      const actions = document.createElement('div');
+      actions.className = 'actionsRow';
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copyBtn';
+      copyBtn.textContent = 'Copy results';
+      copyBtn.addEventListener('click', copyResults);
+
+      const restart = document.getElementById('restartBtn');
+      restart.addEventListener('click', resetSurvey);
+
+      actions.appendChild(copyBtn);
+      body.appendChild(actions);
+    }
+
+    /* Copy results to clipboard */
+    function copyResults(){
+      const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      let text = 'Youth Activism Survey Results\n';
+      entries.forEach(([k,v]) => text += `${k}: ${v}\n`);
+      const top = entries[0];
+      if(top) text += `Next step: Try one small action that uses your ${top[0]} strength.\n`;
+      navigator.clipboard?.writeText(text).then(() => {
+        alert('Results copied to clipboard');
+      }).catch(() => {
+        alert('Unable to copy automatically. Select and copy the results manually.');
+      });
+    }
+
+    /* Reset survey to start */
+    function resetSurvey(){
+      currentQuestionIndex = 0;
+      scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+      document.getElementById('resultCard').style.display = 'none';
       document.getElementById('surveyCard').style.display = 'block';
+      document.getElementById('startPanel')?.scrollIntoView({behavior:'smooth'});
       renderQuestion();
+    }
+
+    /* Preview handler */
+    function previewProfiles(){
+      document.getElementById('startPanel')?.scrollIntoView({behavior:'smooth'});
+      showResults(true);
+    }
+
+    /* Init and event wiring */
+    document.getElementById('startBtn').addEventListener('click', () => {
+      currentQuestionIndex = 0;
+      scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+      document.getElementById('surveyCard').style.display = 'block';
+      document.getElementById('resultCard').style.display = 'none';
+      document.getElementById('restartBtn').style.display = 'none';
+      renderQuestion();
+      document.getElementById('surveyCard').scrollIntoView({behavior:'smooth'});
     });
+
+    document.getElementById('previewBtn').addEventListener('click', () => {
+      previewProfiles();
+      document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
+    });
+
+    document.getElementById('restartBtn').addEventListener('click', resetSurvey);
+
+    // initialize UI
+    initBadges();
   </script>
-
 </body>
-
 </html>
-
