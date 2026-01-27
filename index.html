@@ -1,573 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Youth Activism — Social Involvement Profile Survey</title>
-  <meta name="description" content="A colorful, classroom-ready survey that gives students a profile at the end." />
-
-  <style>
-    :root {
-      --bgA: #F7FAFF;
-      --bgB: #F1FFFB;
-      --card: rgba(255, 255, 255, .82);
-      --card2: rgba(255, 255, 255, .66);
-      --stroke: rgba(15, 20, 40, .12);
-      --txt: rgba(8, 10, 20, .92);
-      --mut: rgba(8, 10, 20, .68);
-      --mut2: rgba(8, 10, 20, .50);
-      --shadow: 0 20px 60px rgba(10, 20, 40, .12);
-      --r1: 18px;
-      --r2: 26px;
-      --p: #7C3AED; /* purple */
-      --c: #06B6D4; /* cyan */
-      --g: #10B981; /* green */
-      --y: #F59E0B; /* amber */
-      --pk: #F43F5E; /* rose */
-      --b: #2563EB; /* blue */
-      --o: #FB923C; /* orange */
-      --focus: 0 0 0 4px rgba(6, 182, 212, .22);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--txt);
-      background: radial-gradient(900px 520px at 10% 10%, rgba(124, 58, 237, .16), transparent 60%),
-                  radial-gradient(900px 560px at 90% 20%, rgba(6, 182, 212, .16), transparent 60%),
-                  radial-gradient(900px 650px at 55% 110%, rgba(244, 63, 94, .12), transparent 55%),
-                  linear-gradient(180deg, var(--bgA), var(--bgB));
-      overflow-x: hidden;
-    }
-
-    .blob {
-      position: fixed;
-      width: 520px;
-      height: 520px;
-      border-radius: 999px;
-      filter: blur(18px);
-      opacity: .55;
-      pointer-events: none;
-      animation: floaty 14s ease-in-out infinite;
-      mix-blend-mode: multiply;
-    }
-
-    .b1 {
-      left: -240px;
-      top: -260px;
-      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .35), rgba(124, 58, 237, .18), transparent 60%);
-    }
-
-    .b2 {
-      right: -260px;
-      top: 30px;
-      background: radial-gradient(circle at 30% 30%, rgba(244, 63, 94, .22), rgba(245, 158, 11, .20), transparent 62%);
-      animation-duration: 18s;
-    }
-
-    .b3 {
-      left: 32%;
-      bottom: -330px;
-      background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, .22), rgba(37, 99, 235, .18), transparent 62%);
-      animation-duration: 20s;
-    }
-
-    @keyframes floaty {
-      0%, 100% {
-        transform: translate3d(0, 0, 0) scale(1);
-      }
-
-      50% {
-        transform: translate3d(18px, -16px, 0) scale(1.05);
-      }
-    }
-
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 26px 18px 90px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .60));
-      box-shadow: 0 14px 40px rgba(10, 20, 40, .10);
-      backdrop-filter: blur(10px);
-    }
-
-    .logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(15, 20, 40, .10);
-      background: radial-gradient(circle at 30% 30%, rgba(6, 182, 212, .22), rgba(124, 58, 237, .18)),
-                  linear-gradient(135deg, rgba(244, 63, 94, .12), rgba(16, 185, 129, .10));
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 14px;
-      letter-spacing: .2px;
-    }
-
-    .brand p {
-      margin: 0;
-      font-size: 12px;
-      color: var(--mut2);
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255, 255, 255, .70);
-      color: var(--mut);
-      font-size: 12px;
-      box-shadow: 0 10px 26px rgba(10, 20, 40, .07);
-      white-space: nowrap;
-    }
-
-    .spark {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 1), rgba(6, 182, 212, .7));
-      box-shadow: 0 0 0 5px rgba(16, 185, 129, .14);
-    }
-
-    .panel {
-      border: 1px solid var(--stroke);
-      border-radius: var(--r2);
-      background: linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .62));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-    }
-
-    .hero {
-      position: relative;
-    }
-
-    .heroInner {
-      padding: 18px;
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-
-    @media (max-width: 920px) {
-      .heroInner {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .hero h2 {
-      margin: 0 0 8px;
-      font-size: 30px;
-      letter-spacing: .2px;
-      line-height: 1.10;
-    }
-
-    .hero .sub {
-      margin: 0 0 12px;
-      color: var(--mut);
-      line-height: 1.55;
-      font-size: 14.5px;
-    }
-
-    .pillRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255, 255, 255, .68);
-      color: var(--mut);
-      font-size: 12px;
-    }
-
-    .mini {
-      border: 1px solid var(--stroke);
-      border-radius: var(--r1);
-      background: rgba(255, 255, 255, .72);
-      padding: 14px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .mini h3 {
-      margin: 0 0 8px;
-      font-size: 14px;
-    }
-
-    .mini ul {
-      margin: 0;
-      padding-left: 18px;
-      color: var(--mut);
-      font-size: 12.8px;
-      line-height: 1.55;
-    }
-
-    .mini li {
-      margin: 6px 0;
-    }
-
-    .mini .note {
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px dashed rgba(15, 20, 40, .18);
-      color: var(--mut2);
-      font-size: 12px;
-      background: rgba(255, 255, 255, .60);
-    }
-
-    .illusRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .illus {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      padding: 8px 10px;
-      background: rgba(255, 255, 255, .68);
-      color: var(--mut);
-      font-size: 12px;
-    }
-
-    .illus svg {
-      display: block;
-    }
-
-    .card {
-      margin-top: 14px;
-    }
-
-    .head {
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border-bottom: 1px solid rgba(15, 20, 40, .08);
-      background: linear-gradient(90deg, rgba(124, 58, 237, .08), rgba(6, 182, 212, .07), rgba(16, 185, 129, .06), rgba(245, 158, 11, .06), rgba(244, 63, 94, .05));
-      flex-wrap: wrap;
-    }
-
-    .leftHead {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .74);
-      color: var(--mut);
-      font-size: 12px;
-    }
-
-    .tag strong {
-      color: rgba(8, 10, 20, .92);
-      font-weight: 900;
-    }
-
-    .prog {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 280px;
-    }
-
-    .bar {
-      flex: 1;
-      height: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .65);
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 100%;
-      width: 0%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(124, 58, 237, .90), rgba(6, 182, 212, .85), rgba(16, 185, 129, .85), rgba(245, 158, 11, .82), rgba(244, 63, 94, .78));
-      transition: width .35s ease;
-    }
-
-    .ptxt {
-      font-size: 12px;
-      color: var(--mut);
-      white-space: nowrap;
-    }
-
-    .body {
-      padding: 16px;
-    }
-
-    .qTitle {
-      margin: 0 0 10px;
-      font-size: 19px;
-      letter-spacing: .2px;
-    }
-
-    .qHint {
-      margin: 0 0 14px;
-      color: var(--mut);
-      font-size: 13.6px;
-      line-height: 1.55;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 760px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .opt {
-      display: flex;
-      gap: 12px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .74);
-      cursor: pointer;
-      user-select: none;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      min-height: 84px;
-      outline: none;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .opt:hover {
-      transform: translateY(-1px);
-      border-color: rgba(6, 182, 212, .35);
-      box-shadow: 0 14px 24px rgba(10, 20, 40, .10);
-    }
-
-    .opt:focus-visible {
-      box-shadow: var(--focus);
-    }
-
-    .opt[data-selected="true"] {
-      border-color: rgba(124, 58, 237, .45);
-      background: linear-gradient(180deg, rgba(124, 58, 237, .10), rgba(6, 182, 212, .08));
-      box-shadow: 0 0 0 3px rgba(124, 58, 237, .10) inset, 0 14px 28px rgba(10, 20, 40, .10);
-    }
-
-    .iconBox {
-      width: 54px;
-      height: 54px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(15, 20, 40, .10);
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .98), rgba(255, 255, 255, .70));
-      flex: 0 0 auto;
-    }
-
-    .txt {
-      min-width: 0;
-    }
-
-    .txt strong {
-      display: block;
-      font-size: 14.4px;
-    }
-
-    .txt span {
-      display: block;
-      margin-top: 3px;
-      color: var(--mut);
-      font-size: 13px;
-      line-height: 1.35;
-    }
-
-    .btnRow {
-      margin-top: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      appearance: none;
-      border: 1px solid rgba(15, 20, 40, .12);
-      background: rgba(255, 255, 255, .78);
-      color: var(--txt);
-      padding: 10px 12px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: 900;
-      font-size: 13px;
-      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      user-select: none;
-      box-shadow: 0 10px 18px rgba(10, 20, 40, .06);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      border-color: rgba(6, 182, 212, .35);
-      box-shadow: 0 14px 24px rgba(10, 20, 40, .10);
-    }
-
-    .btn:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .primary {
-      border-color: rgba(124, 58, 237, .35);
-      background: linear-gradient(90deg, rgba(124, 58, 237, .20), rgba(6, 182, 212, .14));
-    }
-
-    .danger {
-      border-color: rgba(244, 63, 94, .30);
-      background: rgba(244, 63, 94, .10);
-    }
-
-    .small {
-      margin-top: 10px;
-      color: var(--mut2);
-      font-size: 12.3px;
-      line-height: 1.55;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Involvement Profile Survey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            font-size: 36px;
+        }
+        h2 {
+            color: #ff5722;
+            font-size: 28px;
+        }
+        .instructions {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #333;
+            background-color: #ffeb3b;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .question {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .question span {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+        }
+        .options {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 40px;
+            color: #777;
+        }
+    </style>
 </head>
-
 <body>
-  <!-- Your body content goes here -->
-  <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="logo">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M4 11v2a3 3 0 0 0 3 3h2l2 4h2l-1.2-4.8L20 16V8l-6.2 1.8L14 5h-2l-2 4H7a3 3 0 0 0-3 3Z" stroke="rgba(8,10,20,.85)" stroke-width="1.7" stroke-linejoin="round"/>
-            <path d="M20 8v8" stroke="rgba(6,182,212,.95)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
+
+    <h1>Social Involvement Profile Survey</h1>
+    <p class="instructions">Read each question and choose the answer that sounds most like you. There are no right or wrong answers.</p>
+
+    <h2>Questions</h2>
+
+    <div class="question">
+        <span>1. When you see a problem at school, you usually…</span>
+        <div class="options">
+            <label><input type="radio" name="q1" value="A"> A. Talk about it with friends and share ideas</label>
+            <label><input type="radio" name="q1" value="B"> B. Feel upset and think about how it affects people</label>
+            <label><input type="radio" name="q1" value="C"> C. Look for a practical way to fix it</label>
+            <label><input type="radio" name="q1" value="D"> D. Wonder why it is happening and ask questions</label>
         </div>
-        <div>
-          <h1>Youth Activism Survey</h1>
-          <p>Social involvement profile</p>
-        </div>
-      </div>
-      <div class="chip">
-        <span class="spark"></span>
-        6–8 minutes • No “right/wrong” answers
-      </div>
     </div>
 
-    <!-- START / INTRO PANEL -->
-    <section class="panel hero" id="startPanel" aria-label="Start">
-      <div class="heroInner">
-        <div>
-          <h2>How do you show up when something matters?</h2>
-          <p class="sub">Answer real situations from school and social media. At the end, you’ll get a <strong>profile</strong> with strengths and one practical “next step” to try.</p>
-
-          <div class="pillRow">
-            <span class="pill">🎨 Colorful + visual</span>
-            <span class="pill">⚡ Fast</span>
-            <span class="pill">🧠 Reflective</span>
-            <span class="pill">🗣️ Optional class discussion</span>
-          </div>
-
-          <div class="illusRow" aria-label="Illustrations">
-            <span class="illus">${badge("VOICE","--c")}</span>
-            <span class="illus">${badge("INFO","--y")}</span>
-            <span class="illus">${badge("ACTION","--g")}</span>
-            <span class="illus">${badge("LEADERSHIP","--p")}</span>
-            <span class="illus">${badge("CARE","--pk")}</span>
-          </div>
-
-          <div class="startRow">
-            <button class="btn btnBig primary" id="startBtn">Start the survey</button>
-            <button class="btn btnBig" id="previewBtn" title="Shows the profiles (no answers saved)">Preview profiles</button>
-          </div>
-
-          <div class="small">
-            Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.
-          </div>
+    <div class="question">
+        <span>2. If you were part of a group trying to improve the school, you would most likely…</span>
+        <div class="options">
+            <label><input type="radio" name="q2" value="A"> A. Speak up and share opinions</label>
+            <label><input type="radio" name="q2" value="B"> B. Make sure everyone feels included</label>
+            <label><input type="radio" name="q2" value="C"> C. Help organize or do the work</label>
+            <label><input type="radio" name="q2" value="D"> D. Research the problem and think of solutions</label>
         </div>
+    </div>
 
-        <div class="mini">
-          <h3>Teacher quick-use</h3>
-          <ul>
-            <li>Students can take it individually or on the projector.</li>
-            <li>At the end: screenshot the profile or copy text.</li>
-            <li>1-minute reflection: “One strength I have… One step I can try…”</li>
-          </ul>
-          <div class="note">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
+    <div class="question">
+        <span>3. Which sentence sounds most like you?</span>
+        <div class="options">
+            <label><input type="radio" name="q3" value="A"> A. 'People need to hear what I think.'</label>
+            <label><input type="radio" name="q3" value="B"> B. 'People need to feel understood.'</label>
+            <label><input type="radio" name="q3" value="C"> C. 'Someone needs to actually do something.'</label>
+            <label><input type="radio" name="q3" value="D"> D. 'We need to understand the problem first.'</label>
         </div>
-      </div>
-    </section>
-  </div>
+    </div>
+
+    <div class="question">
+        <span>4. Your teacher asks for volunteers for a community project. You…</span>
+        <div class="options">
+            <label><input type="radio" name="q4" value="A"> A. Volunteer to explain the idea to others</label>
+            <label><input type="radio" name="q4" value="B"> B. Volunteer to support classmates</label>
+            <label><input type="radio" name="q4" value="C"> C. Volunteer to help plan or build something</label>
+            <label><input type="radio" name="q4" value="D"> D. Volunteer to learn more about the issue</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <span>5. When working in a group, you usually…</span>
+        <div class="options">
+            <label><input type="radio" name="q5" value="A"> A. Lead discussions</label>
+            <label><input type="radio" name="q5" value="B"> B. Help keep peace and cooperation</label>
+            <label><input type="radio" name="q5" value="C"> C. Stay focused on tasks</label>
+            <label><input type="radio" name="q5" value="D"> D. Ask questions and give ideas</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <span>6. What do you think makes the biggest difference?</span>
+        <div class="options">
+            <label><input type="radio" name="q6" value="A"> A. Speaking up</label>
+            <label><input type="radio" name="q6" value="B"> B. Caring about others</label>
+            <label><input type="radio" name="q6" value="C"> C. Taking action</label>
+            <label><input type="radio" name="q6" value="D"> D. Understanding the issue</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <span>7. If something feels unfair, you are more likely to…</span>
+        <div class="options">
+            <label><input type="radio" name="q7" value="A"> A. Say something</label>
+            <label><input type="radio" name="q7" value="B"> B. Support the person affected</label>
+            <label><input type="radio" name="q7" value="C"> C. Try to change the situation</label>
+            <label><input type="radio" name="q7" value="D"> D. Think about why it is unfair</label>
+        </div>
+    </div>
+
+    <div class="question">
+        <span>8. Which activity would you enjoy the most?</span>
+        <div class="options">
+            <label><input type="radio" name="q8" value="A"> A. Debating or presenting ideas</label>
+            <label><input type="radio" name="q8" value="B"> B. Helping people feel safe and respected</label>
+            <label><input type="radio" name="q8" value="C"> C. Creating or fixing something</label>
+            <label><input type="radio" name="q8" value="D"> D. Learning about real-world problems</label>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Thank you for completing the survey!</p>
+    </div>
+
 </body>
 </html>
-
 
