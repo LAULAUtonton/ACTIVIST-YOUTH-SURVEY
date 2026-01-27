@@ -1,119 +1,114 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Youth Activism – Social Involvement Profile Survey</title>
-  <meta name="description" content="Encuesta de perfil de participación social" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Youth Activism — 15‑Question Interactive Survey</title>
+  <meta name="description" content="Interactive youth activism survey measuring Voice, Info, Action, Leadership, Care" />
   <style>
     :root{
-      --bgA:#f8fafc; --bgB:#ffffff; --txt:#08101a; --mut:rgba(8,10,20,.55);
-      --stroke:rgba(15,20,40,.06); --accent1:#7c3aed; --accent2:#06b6d4;
-      --card-radius:18px; --shadow:0 18px 40px rgba(10,20,40,.08);
-      --focus:0 0 0 4px rgba(6,182,212,.18);
+      --bg:#f6f8fb; --card:#ffffff; --mut:#55606a; --accent1:#7c3aed; --accent2:#06b6d4;
+      --radius:14px; --shadow:0 12px 30px rgba(10,20,40,.08);
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--txt);background:linear-gradient(180deg,var(--bgA),var(--bgB));-webkit-font-smoothing:antialiased}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:#0b1720;background:linear-gradient(180deg,var(--bg),#fff)}
     .wrap{max-width:980px;margin:28px auto;padding:20px}
-    .panel{background:#fff;border-radius:var(--card-radius);box-shadow:var(--shadow);border:1px solid var(--stroke);overflow:hidden}
-    .top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;gap:12px}
+    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
     .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:700}
-    h1{font-size:16px;margin:0}
-    .chip{padding:8px 12px;border-radius:999px;background:rgba(0,0,0,.04);font-size:13px}
-    .hero{display:grid;grid-template-columns:1fr 320px;gap:18px;padding:18px}
-    @media (max-width:880px){.hero{grid-template-columns:1fr}}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:700}
+    h1{font-size:18px;margin:0}
+    .chip{font-size:13px;color:var(--mut)}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(10,20,30,.04);overflow:hidden}
+    .intro{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:18px}
+    @media (max-width:880px){.intro{grid-template-columns:1fr}}
     .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .pill{background:rgba(0,0,0,.03);padding:6px 10px;border-radius:999px;font-size:13px}
-    .startRow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-    .btn{border:1px solid rgba(0,0,0,.08);background:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}
+    .pill{background:rgba(10,20,30,.04);padding:6px 10px;border-radius:999px;font-size:13px}
+    .controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(10,20,30,.06);background:#fff;cursor:pointer;font-weight:700}
     .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:none}
-    .mini{padding:12px;background:rgba(0,0,0,.02);border-radius:12px;font-size:14px}
-    .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--stroke)}
+    .survey{display:block}
+    .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(10,20,30,.04)}
     .cardBody{padding:16px}
     .prog{display:flex;align-items:center;gap:12px}
-    .bar{width:220px;height:10px;border-radius:999px;background:rgba(0,0,0,.05);overflow:hidden;border:1px solid rgba(0,0,0,.04)}
+    .bar{width:220px;height:10px;border-radius:999px;background:rgba(10,20,30,.05);overflow:hidden;border:1px solid rgba(10,20,30,.03)}
     .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width .35s ease}
     .ptxt{font-size:13px;color:var(--mut)}
     .questionTitle{margin:0 0 12px;font-size:18px}
     .options{display:flex;flex-direction:column;gap:10px}
-    .optBtn{display:block;text-align:left;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.06);background:#fff;cursor:pointer;font-weight:600}
-    .optBtn:focus{outline:none;box-shadow:var(--focus)}
+    .optBtn{display:block;text-align:left;padding:12px;border-radius:12px;border:1px solid rgba(10,20,30,.06);background:#fff;cursor:pointer;font-weight:600}
+    .optBtn:focus{outline:none;box-shadow:0 0 0 4px rgba(6,182,212,.12)}
     .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
-    .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(124,58,237,.04),rgba(6,182,212,.02));border:1px solid rgba(0,0,0,.04)}
-    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .small{font-size:13px;color:var(--mut);margin-top:12px}
-    .actionsRow{display:flex;gap:8px;margin-top:12px}
+    .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(124,58,237,.04),rgba(6,182,212,.02));border:1px solid rgba(10,20,30,.04)}
+    .actionsRow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
     .copyBtn{background:#111;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
     footer{margin-top:18px;text-align:center;color:var(--mut);font-size:13px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="panel">
-      <div class="top">
-        <div class="brand" aria-hidden="false">
-          <div class="logo" aria-hidden="true">YA</div>
-          <div>
-            <h1>Youth Activism Survey</h1>
-            <div style="font-size:13px;color:var(--mut)">Social involvement profile</div>
-          </div>
-        </div>
-        <div class="chip" aria-hidden="true">6–8 minutes • No “right/wrong” answers</div>
-      </div>
-
-      <div class="hero" role="region" aria-label="Introducción">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">YA</div>
         <div>
-          <h2 style="margin:0 0 8px">How do you show up when something matters?</h2>
-          <p style="margin:0;color:var(--mut)">Answer real situations from school and social media. At the end you’ll get a <strong>profile</strong> with strengths and one practical “next step” to try.</p>
+          <h1>Youth Activism Survey</h1>
+          <div class="chip">Social involvement profile — 15 questions</div>
+        </div>
+      </div>
+      <div class="chip">6–10 minutes • No right/wrong answers</div>
+    </header>
+
+    <!-- Intro card -->
+    <section class="card" aria-labelledby="introTitle">
+      <div class="intro">
+        <div>
+          <h2 id="introTitle" style="margin:0 0 8px">How do you show up when something matters?</h2>
+          <p style="margin:0;color:var(--mut)">Answer short scenarios about school and social media. At the end you'll get a profile showing your top strengths across five areas: <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong>, and <strong>Care</strong>.</p>
 
           <div class="pillRow" aria-hidden="true">
-            <span class="pill">🎨 Colorful + visual</span>
+            <span class="pill">🎨 Visual</span>
             <span class="pill">⚡ Fast</span>
             <span class="pill">🧠 Reflective</span>
-            <span class="pill">🗣️ Optional class discussion</span>
+            <span class="pill">🗣️ Classroom friendly</span>
           </div>
 
-          <div id="badges" style="margin-top:12px" aria-hidden="true"></div>
-
-          <div class="startRow" role="group" aria-label="Acciones">
-            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Start the survey</button>
+          <div class="controls">
+            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Start survey</button>
             <button id="previewBtn" class="btn" aria-controls="resultCard">Preview profiles</button>
-            <button id="restartBtn" class="btn" style="display:none">Restart</button>
+            <button id="resetBtn" class="btn" style="display:none">Restart</button>
           </div>
 
-          <div class="small">Privacy note: This survey does not collect names. Your results stay on this device unless you choose to copy/share them.</div>
+          <div style="margin-top:12px;color:var(--mut);font-size:13px">Tip: To change questions, edit the <code>QUESTIONS</code> array in the script.</div>
         </div>
 
-        <aside class="mini" aria-hidden="false">
+        <aside style="padding:12px;background:rgba(10,20,30,.02);border-radius:10px">
           <h3 style="margin:0 0 8px">Teacher quick-use</h3>
-          <ul style="margin:0 0 8px 18px;padding:0">
-            <li>Students can take it individually or on the projector.</li>
-            <li>At the end: screenshot the profile or copy text.</li>
-            <li>1-minute reflection: “One strength I have… One step I can try…”</li>
+          <ul style="margin:0 0 8px 18px;padding:0;color:var(--mut)">
+            <li>Use individually or on a projector.</li>
+            <li>At the end: copy results or screenshot the profile.</li>
+            <li>Reflection prompt: "One strength I have… One step I can try…"</li>
           </ul>
-          <div style="font-size:13px;color:var(--mut)">Tip: To edit questions, change the <code>QUESTIONS</code> array inside this file.</div>
         </aside>
       </div>
-    </div>
+    </section>
 
     <!-- Survey card -->
-    <section id="surveyCard" class="panel" style="margin-top:16px;display:none" role="region" aria-label="Survey">
+    <section id="surveyCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Survey">
       <div class="cardHead">
         <div>
           <div style="font-size:13px;color:var(--mut)"><strong id="qLabel">Question</strong> <span id="topicTag" style="margin-left:8px"></span></div>
         </div>
         <div class="prog" aria-hidden="false">
           <div class="bar" aria-hidden="true"><div id="fill" class="fill" style="width:0%"></div></div>
-          <div class="ptxt" id="ptxt">0 / 0</div>
+          <div class="ptxt" id="ptxt">0 / 15</div>
         </div>
       </div>
       <div class="cardBody" id="body" tabindex="0"></div>
     </section>
 
     <!-- Results card -->
-    <section id="resultCard" class="panel" style="margin-top:16px;display:none" role="region" aria-label="Results">
+    <section id="resultCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Results">
       <div class="cardHead">
         <div><strong>Your profile</strong></div>
         <div class="ptxt">Done</div>
@@ -121,106 +116,137 @@
       <div class="cardBody" id="resultBody"></div>
     </section>
 
-    <footer>If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong>.</footer>
+    <footer>If you still see an old version: refresh with <strong>Ctrl + F5</strong>.</footer>
   </div>
 
   <script>
-    /* Data unchanged: same questions and scoring */
+    // 15 questions across the same topics (Voice, Info, Action, Leadership, Care)
     const QUESTIONS = [
-      {
-        topic: "School",
-        title: "You hear an offensive comment about someone in class. What do you do first?",
-        options: [
-          { title: "Stop it respectfully", pts: { voice: 2, leadership: 1 } },
-          { title: "Check on the person", pts: { care: 2, voice: 1 } },
-          { title: "Talk later calmly", pts: { voice: 2, info: 1 } },
-          { title: "Get help right away", pts: { action: 2, leadership: 1 } },
-        ]
-      },
-      {
-        topic: "Social Media",
-        title: "A viral video about a social issue shows up in your feed. What do you do?",
-        options: [
-          { title: "Verify it", pts: { info: 2, voice: 1 } },
-          { title: "Comment thoughtfully", pts: { voice: 2, care: 1 } },
-          { title: "Report if harmful", pts: { action: 1, info: 1 } },
-          { title: "Create a response post", pts: { leadership: 2, voice: 1 } },
-        ]
-      },
-      {
-        topic: "Participation",
-        title: "If your school runs an event and asks for help, you usually…",
-        options: [
-          { title: "Handle practical tasks", pts: { action: 2, leadership: 1 } },
-          { title: "Do the promo", pts: { voice: 2, info: 1 } },
-          { title: "Make it welcoming", pts: { care: 2, voice: 1 } },
-          { title: "Research & propose", pts: { info: 2, action: 1 } },
-        ]
-      },
-      {
-        topic: "Conflict",
-        title: "Your group is arguing and nobody understands each other. What do you do?",
-        options: [
-          { title: "Create fair turn-taking", pts: { voice: 2, care: 1 } },
-          { title: "Divide clear roles", pts: { action: 2, leadership: 1 } },
-          { title: "Ask for evidence", pts: { info: 2 } },
-          { title: "Propose a plan fast", pts: { leadership: 2, action: 1 } },
-        ]
-      },
-      {
-        topic: "Impact",
-        title: "Which project sounds most exciting to you right now?",
-        options: [
-          { title: "Improve something at school", pts: { action: 2, leadership: 1 } },
-          { title: "Creative awareness campaign", pts: { voice: 2, info: 1 } },
-          { title: "Support & belonging", pts: { care: 2, voice: 1 } },
-          { title: "Survey & solutions", pts: { info: 2, action: 1 } },
-        ]
-      },
-      {
-        topic: "Your next step",
-        title: "When I feel nervous or unmotivated, what helps me most is…",
-        options: [
-          { title: "Doing it with someone", pts: { care: 1, leadership: 1 } },
-          { title: "A clear small step", pts: { info: 2 } },
-          { title: "Seeing quick results", pts: { action: 2 } },
-          { title: "Knowing it matters", pts: { leadership: 2, voice: 1 } },
-        ]
-      },
+      { topic: "School", title: "You hear an offensive comment in class. What do you do first?", options: [
+        { title: "Address it calmly in the moment", pts:{voice:2, leadership:1} },
+        { title: "Check on the person affected", pts:{care:2, voice:1} },
+        { title: "Make a private plan to respond later", pts:{info:1, voice:1} },
+        { title: "Get a teacher involved immediately", pts:{action:2, leadership:1} },
+      ]},
+      { topic: "Social Media", title: "A viral post seems misleading. What do you do?", options: [
+        { title: "Verify sources before sharing", pts:{info:2} },
+        { title: "Comment to correct misinformation", pts:{voice:2, info:1} },
+        { title: "Report if it violates rules", pts:{action:2} },
+        { title: "Create a clear response post", pts:{leadership:2, voice:1} },
+      ]},
+      { topic: "Participation", title: "School event needs volunteers. You usually:", options: [
+        { title: "Take on practical tasks", pts:{action:2, leadership:1} },
+        { title: "Help promote it online", pts:{voice:2, info:1} },
+        { title: "Make sure it's welcoming", pts:{care:2, voice:1} },
+        { title: "Research improvements and propose them", pts:{info:2, action:1} },
+      ]},
+      { topic: "Conflict", title: "Group project is stuck. You:", options: [
+        { title: "Facilitate fair turn-taking", pts:{voice:2, care:1} },
+        { title: "Assign clear roles and deadlines", pts:{action:2, leadership:1} },
+        { title: "Ask for evidence and sources", pts:{info:2} },
+        { title: "Propose a quick plan to move forward", pts:{leadership:2, action:1} },
+      ]},
+      { topic: "Impact", title: "Which project excites you most right now?", options: [
+        { title: "Fix something practical at school", pts:{action:2, leadership:1} },
+        { title: "Run a creative awareness campaign", pts:{voice:2, info:1} },
+        { title: "Build support and belonging", pts:{care:2, voice:1} },
+        { title: "Survey and propose solutions", pts:{info:2, action:1} },
+      ]},
+      { topic: "Motivation", title: "When you feel nervous about taking action, you:", options: [
+        { title: "Do it with a friend", pts:{care:1, leadership:1} },
+        { title: "Break it into a clear small step", pts:{info:2} },
+        { title: "Start with a quick visible win", pts:{action:2} },
+        { title: "Remind yourself why it matters", pts:{leadership:2, voice:1} },
+      ]},
+      { topic: "Listening", title: "Someone shares a personal concern. You:", options: [
+        { title: "Listen and reflect back", pts:{care:2, voice:1} },
+        { title: "Ask clarifying questions", pts:{info:2} },
+        { title: "Offer to help take action", pts:{action:2} },
+        { title: "Help organize support from others", pts:{leadership:2} },
+      ]},
+      { topic: "Online Safety", title: "You see harassment online. You:", options: [
+        { title: "Report and block the harasser", pts:{action:2} },
+        { title: "Call out the behavior respectfully", pts:{voice:2, care:1} },
+        { title: "Collect evidence and advise the target", pts:{info:2, care:1} },
+        { title: "Coordinate a group response", pts:{leadership:2} },
+      ]},
+      { topic: "Planning", title: "Planning a student event, you focus on:", options: [
+        { title: "Logistics and tasks", pts:{action:2} },
+        { title: "Messaging and outreach", pts:{voice:2, info:1} },
+        { title: "Making it inclusive", pts:{care:2} },
+        { title: "Recruiting and leading volunteers", pts:{leadership:2} },
+      ]},
+      { topic: "Research", title: "Before sharing a claim, you:", options: [
+        { title: "Check multiple reliable sources", pts:{info:2} },
+        { title: "Add your perspective and context", pts:{voice:2} },
+        { title: "Encourage others to verify", pts:{leadership:1, info:1} },
+        { title: "Report if it's harmful", pts:{action:1, info:1} },
+      ]},
+      { topic: "Support", title: "A peer is excluded. You:", options: [
+        { title: "Invite them in and listen", pts:{care:2} },
+        { title: "Speak up to the group", pts:{voice:2, care:1} },
+        { title: "Organize an inclusive activity", pts:{leadership:2, action:1} },
+        { title: "Research why exclusion happens", pts:{info:2} },
+      ]},
+      { topic: "Visibility", title: "To raise awareness you prefer to:", options: [
+        { title: "Create a bold public message", pts:{voice:2, leadership:1} },
+        { title: "Share verified facts and resources", pts:{info:2} },
+        { title: "Run a hands-on activity", pts:{action:2} },
+        { title: "Center affected people's voices", pts:{care:2} },
+      ]},
+      { topic: "Decision", title: "When decisions are unclear, you:", options: [
+        { title: "Gather facts and options", pts:{info:2} },
+        { title: "Call a quick vote and move", pts:{action:2} },
+        { title: "Make sure everyone's heard", pts:{voice:2, care:1} },
+        { title: "Lead a structured discussion", pts:{leadership:2} },
+      ]},
+      { topic: "Follow-through", title: "After a successful action, you:", options: [
+        { title: "Document what worked and share", pts:{info:2, voice:1} },
+        { title: "Celebrate and thank contributors", pts:{care:2} },
+        { title: "Plan the next practical step", pts:{action:2} },
+        { title: "Invite others to lead the next phase", pts:{leadership:2} },
+      ]},
+      { topic: "Personal Growth", title: "To get better at activism you:", options: [
+        { title: "Practice speaking and feedback", pts:{voice:2} },
+        { title: "Study examples and research", pts:{info:2} },
+        { title: "Volunteer for hands-on roles", pts:{action:2} },
+        { title: "Mentor or organize peers", pts:{leadership:2, care:1} },
+      ]},
     ];
 
-    /* State */
+    // state
     let currentQuestionIndex = 0;
-    let scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+    let scores = { voice:0, info:0, action:0, leadership:0, care:0 };
 
-    /* Helpers */
+    // utilities
     function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-    function createBadge(text){
-      const b = document.createElement('span');
-      b.textContent = text;
-      b.style.display = 'inline-block';
-      b.style.padding = '6px 8px';
-      b.style.marginRight = '6px';
-      b.style.borderRadius = '999px';
-      b.style.background = 'rgba(0,0,0,.03)';
-      b.style.fontSize = '13px';
-      return b;
-    }
-
+    // render badges on intro
     function initBadges(){
       const container = document.getElementById('badges');
+      if(!container) return;
       container.innerHTML = '';
-      ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t => container.appendChild(createBadge(t)));
+      ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t => {
+        const b = document.createElement('span');
+        b.textContent = t;
+        b.style.display = 'inline-block';
+        b.style.padding = '6px 8px';
+        b.style.marginRight = '6px';
+        b.style.borderRadius = '999px';
+        b.style.background = 'rgba(0,0,0,.03)';
+        b.style.fontSize = '13px';
+        container.appendChild(b);
+      });
     }
 
-    /* Render question */
+    // render a question
     function renderQuestion(){
       const q = QUESTIONS[currentQuestionIndex];
       document.getElementById('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
       document.getElementById('topicTag').textContent = q.topic;
       document.getElementById('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
 
+      // progress percent: index / (n-1) so last question shows 100%
       const denom = Math.max(1, QUESTIONS.length - 1);
       const percent = Math.round((currentQuestionIndex / denom) * 100);
       document.getElementById('fill').style.width = percent + '%';
@@ -232,10 +258,9 @@
 
       q.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'optBtn';
         btn.type = 'button';
+        btn.className = 'optBtn';
         btn.innerHTML = `<span>${escapeHtml(opt.title)}</span>`;
-        btn.setAttribute('aria-label', opt.title);
         btn.addEventListener('click', () => selectOption(idx));
         btn.addEventListener('keydown', (e) => {
           if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(idx); }
@@ -249,7 +274,7 @@
       if(first) first.focus();
     }
 
-    /* Handle selection */
+    // handle selection
     function selectOption(index){
       const q = QUESTIONS[currentQuestionIndex];
       const opt = q.options[index];
@@ -266,11 +291,11 @@
       }
     }
 
-    /* Show results */
+    // show results
     function showResults(preview=false){
       document.getElementById('surveyCard').style.display = 'none';
       document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('restartBtn').style.display = 'inline-block';
+      document.getElementById('resetBtn').style.display = 'inline-block';
 
       const body = document.getElementById('resultBody');
       body.innerHTML = '';
@@ -278,17 +303,17 @@
       if(preview){
         body.innerHTML = `<h3 style="margin-top:0">Profiles Preview</h3>
           <div class="resultGrid">
-            <div class="resultItem"><strong>Voice</strong><div style="margin-top:6px;color:var(--mut)">Speak up with clarity and empathy.</div></div>
-            <div class="resultItem"><strong>Action</strong><div style="margin-top:6px;color:var(--mut)">Take practical steps to make change happen.</div></div>
-            <div class="resultItem"><strong>Leadership</strong><div style="margin-top:6px;color:var(--mut)">Organize and motivate others.</div></div>
-            <div class="resultItem"><strong>Info</strong><div style="margin-top:6px;color:var(--mut)">Research and verify before sharing.</div></div>
-            <div class="resultItem"><strong>Care</strong><div style="margin-top:6px;color:var(--mut)">Support people and build belonging.</div></div>
+            <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Speak up clearly and respectfully.</div></div>
+            <div class="resultItem"><strong>Info</strong><div style="margin-top:8px;color:var(--mut)">Research and verify before sharing.</div></div>
+            <div class="resultItem"><strong>Action</strong><div style="margin-top:8px;color:var(--mut)">Take practical steps to make change happen.</div></div>
+            <div class="resultItem"><strong>Leadership</strong><div style="margin-top:8px;color:var(--mut)">Organize and motivate others.</div></div>
+            <div class="resultItem"><strong>Care</strong><div style="margin-top:8px;color:var(--mut)">Support people and build belonging.</div></div>
           </div>`;
         addResultActions();
         return;
       }
 
-      // ordenar por puntaje
+      // sort strengths
       const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
       const grid = document.createElement('div');
       grid.className = 'resultGrid';
@@ -303,7 +328,7 @@
 
       body.appendChild(grid);
 
-      // next step basado en la fortaleza principal
+      // next step suggestion based on top strength
       const top = entries[0];
       if(top){
         const tip = document.createElement('div');
@@ -318,7 +343,7 @@
       addResultActions();
     }
 
-    /* Add copy and restart controls under results */
+    // add copy and restart actions
     function addResultActions(){
       const body = document.getElementById('resultBody');
       const actions = document.createElement('div');
@@ -329,14 +354,11 @@
       copyBtn.textContent = 'Copy results';
       copyBtn.addEventListener('click', copyResults);
 
-      const restart = document.getElementById('restartBtn');
-      restart.addEventListener('click', resetSurvey);
-
       actions.appendChild(copyBtn);
       body.appendChild(actions);
     }
 
-    /* Copy results to clipboard */
+    // copy results to clipboard
     function copyResults(){
       const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
       let text = 'Youth Activism Survey Results\n';
@@ -350,42 +372,52 @@
       });
     }
 
-    /* Reset survey to start */
+    // reset survey
     function resetSurvey(){
       currentQuestionIndex = 0;
-      scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+      scores = { voice:0, info:0, action:0, leadership:0, care:0 };
       document.getElementById('resultCard').style.display = 'none';
       document.getElementById('surveyCard').style.display = 'block';
-      document.getElementById('startPanel')?.scrollIntoView({behavior:'smooth'});
+      document.getElementById('resetBtn').style.display = 'none';
       renderQuestion();
+      document.getElementById('surveyCard').scrollIntoView({behavior:'smooth'});
     }
 
-    /* Preview handler */
+    // preview
     function previewProfiles(){
-      document.getElementById('startPanel')?.scrollIntoView({behavior:'smooth'});
+      document.getElementById('surveyCard').style.display = 'none';
       showResults(true);
+      document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
     }
 
-    /* Init and event wiring */
+    // wire events
     document.getElementById('startBtn').addEventListener('click', () => {
       currentQuestionIndex = 0;
-      scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+      scores = { voice:0, info:0, action:0, leadership:0, care:0 };
       document.getElementById('surveyCard').style.display = 'block';
       document.getElementById('resultCard').style.display = 'none';
-      document.getElementById('restartBtn').style.display = 'none';
+      document.getElementById('resetBtn').style.display = 'none';
       renderQuestion();
       document.getElementById('surveyCard').scrollIntoView({behavior:'smooth'});
     });
 
-    document.getElementById('previewBtn').addEventListener('click', () => {
-      previewProfiles();
-      document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
-    });
+    document.getElementById('previewBtn').addEventListener('click', previewProfiles);
+    document.getElementById('resetBtn').addEventListener('click', resetSurvey);
 
-    document.getElementById('restartBtn').addEventListener('click', resetSurvey);
-
-    // initialize UI
-    initBadges();
+    // initialize
+    (function init(){
+      // create a small badges container for intro (if desired)
+      const intro = document.querySelector('.intro');
+      if(intro && !document.getElementById('badges')){
+        const div = document.createElement('div');
+        div.id = 'badges';
+        div.style.marginTop = '12px';
+        intro.firstElementChild.appendChild(div);
+      }
+      initBadges();
+      // set initial progress text
+      document.getElementById('ptxt').textContent = `0 / ${QUESTIONS.length}`;
+    })();
   </script>
 </body>
 </html>
