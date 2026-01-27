@@ -1,50 +1,70 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Youth Activism — 15‑Question Interactive Survey</title>
-  <meta name="description" content="Interactive youth activism survey measuring Voice, Info, Action, Leadership, Care" />
-  <style>
-    :root{
-      --bg:#f6f8fb; --card:#ffffff; --mut:#55606a; --accent1:#7c3aed; --accent2:#06b6d4;
-      --radius:14px; --shadow:0 12px 30px rgba(10,20,40,.08);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:#0b1720;background:linear-gradient(180deg,var(--bg),#fff)}
-    .wrap{max-width:980px;margin:28px auto;padding:20px}
-    header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;color:#fff;font-weight:700}
-    h1{font-size:18px;margin:0}
-    .chip{font-size:13px;color:var(--mut)}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(10,20,30,.04);overflow:hidden}
-    .intro{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:18px}
-    @media (max-width:880px){.intro{grid-template-columns:1fr}}
-    .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .pill{background:rgba(10,20,30,.04);padding:6px 10px;border-radius:999px;font-size:13px}
-    .controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-    .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(10,20,30,.06);background:#fff;cursor:pointer;font-weight:700}
-    .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#fff;border:none}
-    .survey{display:block}
-    .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(10,20,30,.04)}
-    .cardBody{padding:16px}
-    .prog{display:flex;align-items:center;gap:12px}
-    .bar{width:220px;height:10px;border-radius:999px;background:rgba(10,20,30,.05);overflow:hidden;border:1px solid rgba(10,20,30,.03)}
-    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));transition:width .35s ease}
-    .ptxt{font-size:13px;color:var(--mut)}
-    .questionTitle{margin:0 0 12px;font-size:18px}
-    .options{display:flex;flex-direction:column;gap:10px}
-    .optBtn{display:block;text-align:left;padding:12px;border-radius:12px;border:1px solid rgba(10,20,30,.06);background:#fff;cursor:pointer;font-weight:600}
-    .optBtn:focus{outline:none;box-shadow:0 0 0 4px rgba(6,182,212,.12)}
-    .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
-    .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg,rgba(124,58,237,.04),rgba(6,182,212,.02));border:1px solid rgba(10,20,30,.04)}
-    .actionsRow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-    .copyBtn{background:#111;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
-    footer{margin-top:18px;text-align:center;color:var(--mut);font-size:13px}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Youth Activism — Encuesta interactiva</title>
+<meta name="description" content="Encuesta interactiva para jóvenes: Voice, Info, Action, Leadership, Care" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --mut:#9aa6b2;
+    --accent1:#7c3aed;
+    --accent2:#06b6d4;
+    --accent3:#ff6b6b;
+    --glass: rgba(255,255,255,0.04);
+    --radius:16px;
+    --shadow: 0 12px 40px rgba(2,6,23,0.6);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:
+    radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 20%),
+    radial-gradient(800px 400px at 90% 30%, rgba(6,182,212,0.08), transparent 20%),
+    var(--bg); color:#e6eef6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:28px auto;padding:20px}
+  header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-weight:800;color:white;font-size:18px;box-shadow:0 8px 30px rgba(124,58,237,0.18)}
+  h1{font-size:20px;margin:0}
+  .tagline{color:var(--mut);font-size:13px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+  .intro{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:18px}
+  @media (max-width:880px){.intro{grid-template-columns:1fr}}
+  .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+  .pill{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:6px 10px;border-radius:999px;font-size:13px;color:var(--mut);display:inline-flex;align-items:center;gap:8px}
+  .controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#e6eef6;cursor:pointer;font-weight:700;transition:transform .12s ease,box-shadow .12s ease}
+  .btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.4)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:white}
+  .mini{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+  .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .cardBody{padding:18px}
+  .prog{display:flex;align-items:center;gap:12px}
+  .bar{width:260px;height:12px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent1));transition:width .45s cubic-bezier(.2,.9,.2,1)}
+  .ptxt{font-size:13px;color:var(--mut)}
+  .questionTitle{margin:0 0 12px;font-size:20px}
+  .options{display:grid;gap:12px}
+  .optBtn{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+  .optBtn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+  .optEmoji{width:44px;height:44px;border-radius:10px;background:var(--glass);display:grid;place-items:center;font-size:20px}
+  .optText{flex:1;font-weight:600}
+  .optSub{font-size:13px;color:var(--mut)}
+  .small{font-size:13px;color:var(--mut);margin-top:12px}
+  .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
+  .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02)}
+  .barInner{height:12px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:8px}
+  .barFill{height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent3));transition:width .8s cubic-bezier(.2,.9,.2,1)}
+  .actionsRow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .copyBtn{background:#111;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
+  .avatarRow{display:flex;gap:8px;align-items:center;margin-top:12px}
+  .avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:grid;place-items:center;font-weight:800;color:#071022}
+  .confetti{pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%;z-index:9999;display:none}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+</style>
 </head>
 <body>
   <div class="wrap">
@@ -52,52 +72,55 @@
       <div class="brand">
         <div class="logo" aria-hidden="true">YA</div>
         <div>
-          <h1>Youth Activism Survey</h1>
-          <div class="chip">Social involvement profile — 15 questions</div>
+          <h1>Youth Activism</h1>
+          <div class="tagline">Encuesta rápida — descubre tu perfil</div>
         </div>
       </div>
-      <div class="chip">6–10 minutes • No right/wrong answers</div>
+      <div class="tagline">15 preguntas • 6–10 minutos</div>
     </header>
 
-    <!-- Intro card -->
+    <!-- Intro -->
     <section class="card" aria-labelledby="introTitle">
       <div class="intro">
         <div>
-          <h2 id="introTitle" style="margin:0 0 8px">How do you show up when something matters?</h2>
-          <p style="margin:0;color:var(--mut)">Answer short scenarios about school and social media. At the end you'll get a profile showing your top strengths across five areas: <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong>, and <strong>Care</strong>.</p>
+          <h2 id="introTitle" style="margin:0 0 8px">¿Cómo actúas cuando algo importa?</h2>
+          <p style="margin:0;color:var(--mut)">Responde situaciones reales de escuela y redes. Al final verás tus puntos fuertes en <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong> y <strong>Care</strong>.</p>
 
           <div class="pillRow" aria-hidden="true">
             <span class="pill">🎨 Visual</span>
-            <span class="pill">⚡ Fast</span>
-            <span class="pill">🧠 Reflective</span>
-            <span class="pill">🗣️ Classroom friendly</span>
+            <span class="pill">⚡ Rápido</span>
+            <span class="pill">🧠 Reflexivo</span>
+            <span class="pill">🗣️ Ideal para clase</span>
           </div>
 
           <div class="controls">
-            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Start survey</button>
-            <button id="previewBtn" class="btn" aria-controls="resultCard">Preview profiles</button>
-            <button id="resetBtn" class="btn" style="display:none">Restart</button>
+            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Comenzar</button>
+            <button id="previewBtn" class="btn" aria-controls="resultCard">Ver perfiles</button>
+            <button id="restartBtn" class="btn" style="display:none">Reiniciar</button>
           </div>
 
-          <div style="margin-top:12px;color:var(--mut);font-size:13px">Tip: To change questions, edit the <code>QUESTIONS</code> array in the script.</div>
+          <div class="small">Consejo: puedes usar el teclado (Tab + Enter) para responder.</div>
         </div>
 
-        <aside style="padding:12px;background:rgba(10,20,30,.02);border-radius:10px">
-          <h3 style="margin:0 0 8px">Teacher quick-use</h3>
-          <ul style="margin:0 0 8px 18px;padding:0;color:var(--mut)">
-            <li>Use individually or on a projector.</li>
-            <li>At the end: copy results or screenshot the profile.</li>
-            <li>Reflection prompt: "One strength I have… One step I can try…"</li>
+        <aside class="mini" aria-hidden="false">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <strong>Uso rápido para profes</strong>
+            <div style="font-size:12px;color:var(--mut)">Editable</div>
+          </div>
+          <ul style="margin:8px 0 0 18px;padding:0;color:var(--mut)">
+            <li>Individual o en proyector</li>
+            <li>Al final: copiar resultados o hacer captura</li>
+            <li>Reflexión: "Una fortaleza… Un paso a intentar"</li>
           </ul>
         </aside>
       </div>
     </section>
 
-    <!-- Survey card -->
-    <section id="surveyCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Survey">
+    <!-- Survey -->
+    <section id="surveyCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Encuesta">
       <div class="cardHead">
         <div>
-          <div style="font-size:13px;color:var(--mut)"><strong id="qLabel">Question</strong> <span id="topicTag" style="margin-left:8px"></span></div>
+          <div style="font-size:13px;color:var(--mut)"><strong id="qLabel">Pregunta</strong> <span id="topicTag" style="margin-left:8px"></span></div>
         </div>
         <div class="prog" aria-hidden="false">
           <div class="bar" aria-hidden="true"><div id="fill" class="fill" style="width:0%"></div></div>
@@ -107,317 +130,315 @@
       <div class="cardBody" id="body" tabindex="0"></div>
     </section>
 
-    <!-- Results card -->
-    <section id="resultCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Results">
+    <!-- Results -->
+    <section id="resultCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Resultados">
       <div class="cardHead">
-        <div><strong>Your profile</strong></div>
-        <div class="ptxt">Done</div>
+        <div><strong>Tu perfil</strong></div>
+        <div class="ptxt">¡Listo!</div>
       </div>
       <div class="cardBody" id="resultBody"></div>
     </section>
 
-    <footer>If you still see an old version: refresh with <strong>Ctrl + F5</strong>.</footer>
+    <div class="confetti" id="confetti"></div>
   </div>
 
-  <script>
-    // 15 questions across the same topics (Voice, Info, Action, Leadership, Care)
-    const QUESTIONS = [
-      { topic: "School", title: "You hear an offensive comment in class. What do you do first?", options: [
-        { title: "Address it calmly in the moment", pts:{voice:2, leadership:1} },
-        { title: "Check on the person affected", pts:{care:2, voice:1} },
-        { title: "Make a private plan to respond later", pts:{info:1, voice:1} },
-        { title: "Get a teacher involved immediately", pts:{action:2, leadership:1} },
-      ]},
-      { topic: "Social Media", title: "A viral post seems misleading. What do you do?", options: [
-        { title: "Verify sources before sharing", pts:{info:2} },
-        { title: "Comment to correct misinformation", pts:{voice:2, info:1} },
-        { title: "Report if it violates rules", pts:{action:2} },
-        { title: "Create a clear response post", pts:{leadership:2, voice:1} },
-      ]},
-      { topic: "Participation", title: "School event needs volunteers. You usually:", options: [
-        { title: "Take on practical tasks", pts:{action:2, leadership:1} },
-        { title: "Help promote it online", pts:{voice:2, info:1} },
-        { title: "Make sure it's welcoming", pts:{care:2, voice:1} },
-        { title: "Research improvements and propose them", pts:{info:2, action:1} },
-      ]},
-      { topic: "Conflict", title: "Group project is stuck. You:", options: [
-        { title: "Facilitate fair turn-taking", pts:{voice:2, care:1} },
-        { title: "Assign clear roles and deadlines", pts:{action:2, leadership:1} },
-        { title: "Ask for evidence and sources", pts:{info:2} },
-        { title: "Propose a quick plan to move forward", pts:{leadership:2, action:1} },
-      ]},
-      { topic: "Impact", title: "Which project excites you most right now?", options: [
-        { title: "Fix something practical at school", pts:{action:2, leadership:1} },
-        { title: "Run a creative awareness campaign", pts:{voice:2, info:1} },
-        { title: "Build support and belonging", pts:{care:2, voice:1} },
-        { title: "Survey and propose solutions", pts:{info:2, action:1} },
-      ]},
-      { topic: "Motivation", title: "When you feel nervous about taking action, you:", options: [
-        { title: "Do it with a friend", pts:{care:1, leadership:1} },
-        { title: "Break it into a clear small step", pts:{info:2} },
-        { title: "Start with a quick visible win", pts:{action:2} },
-        { title: "Remind yourself why it matters", pts:{leadership:2, voice:1} },
-      ]},
-      { topic: "Listening", title: "Someone shares a personal concern. You:", options: [
-        { title: "Listen and reflect back", pts:{care:2, voice:1} },
-        { title: "Ask clarifying questions", pts:{info:2} },
-        { title: "Offer to help take action", pts:{action:2} },
-        { title: "Help organize support from others", pts:{leadership:2} },
-      ]},
-      { topic: "Online Safety", title: "You see harassment online. You:", options: [
-        { title: "Report and block the harasser", pts:{action:2} },
-        { title: "Call out the behavior respectfully", pts:{voice:2, care:1} },
-        { title: "Collect evidence and advise the target", pts:{info:2, care:1} },
-        { title: "Coordinate a group response", pts:{leadership:2} },
-      ]},
-      { topic: "Planning", title: "Planning a student event, you focus on:", options: [
-        { title: "Logistics and tasks", pts:{action:2} },
-        { title: "Messaging and outreach", pts:{voice:2, info:1} },
-        { title: "Making it inclusive", pts:{care:2} },
-        { title: "Recruiting and leading volunteers", pts:{leadership:2} },
-      ]},
-      { topic: "Research", title: "Before sharing a claim, you:", options: [
-        { title: "Check multiple reliable sources", pts:{info:2} },
-        { title: "Add your perspective and context", pts:{voice:2} },
-        { title: "Encourage others to verify", pts:{leadership:1, info:1} },
-        { title: "Report if it's harmful", pts:{action:1, info:1} },
-      ]},
-      { topic: "Support", title: "A peer is excluded. You:", options: [
-        { title: "Invite them in and listen", pts:{care:2} },
-        { title: "Speak up to the group", pts:{voice:2, care:1} },
-        { title: "Organize an inclusive activity", pts:{leadership:2, action:1} },
-        { title: "Research why exclusion happens", pts:{info:2} },
-      ]},
-      { topic: "Visibility", title: "To raise awareness you prefer to:", options: [
-        { title: "Create a bold public message", pts:{voice:2, leadership:1} },
-        { title: "Share verified facts and resources", pts:{info:2} },
-        { title: "Run a hands-on activity", pts:{action:2} },
-        { title: "Center affected people's voices", pts:{care:2} },
-      ]},
-      { topic: "Decision", title: "When decisions are unclear, you:", options: [
-        { title: "Gather facts and options", pts:{info:2} },
-        { title: "Call a quick vote and move", pts:{action:2} },
-        { title: "Make sure everyone's heard", pts:{voice:2, care:1} },
-        { title: "Lead a structured discussion", pts:{leadership:2} },
-      ]},
-      { topic: "Follow-through", title: "After a successful action, you:", options: [
-        { title: "Document what worked and share", pts:{info:2, voice:1} },
-        { title: "Celebrate and thank contributors", pts:{care:2} },
-        { title: "Plan the next practical step", pts:{action:2} },
-        { title: "Invite others to lead the next phase", pts:{leadership:2} },
-      ]},
-      { topic: "Personal Growth", title: "To get better at activism you:", options: [
-        { title: "Practice speaking and feedback", pts:{voice:2} },
-        { title: "Study examples and research", pts:{info:2} },
-        { title: "Volunteer for hands-on roles", pts:{action:2} },
-        { title: "Mentor or organize peers", pts:{leadership:2, care:1} },
-      ]},
-    ];
+<script>
+  // 15 preguntas (mismos temas, adaptadas)
+  const QUESTIONS = [
+    { topic:"School", title:"Escuchas un comentario ofensivo en clase. ¿Qué haces primero?", options:[
+      {title:"Pararlo con respeto", pts:{voice:2, leadership:1}, emoji:"🗣️"},
+      {title:"Comprobar cómo está la persona afectada", pts:{care:2, voice:1}, emoji:"🤝"},
+      {title:"Hablar con la persona después en privado", pts:{voice:1, info:1}, emoji:"💬"},
+      {title:"Avisar a un profesor si es grave", pts:{action:2, leadership:1}, emoji:"📣"},
+    ]},
+    { topic:"Social Media", title:"Ves un vídeo viral que parece manipulado. ¿Qué haces?", options:[
+      {title:"Verificar antes de compartir", pts:{info:2}, emoji:"🔎"},
+      {title:"Comentar corrigiendo con respeto", pts:{voice:2, info:1}, emoji:"✍️"},
+      {title:"Reportarlo si es dañino", pts:{action:2}, emoji:"🚩"},
+      {title:"Crear una respuesta informativa", pts:{leadership:2, voice:1}, emoji:"🎬"},
+    ]},
+    { topic:"Participation", title:"Tu colegio pide ayuda para un evento. Sueles:", options:[
+      {title:"Encargarte de tareas prácticas", pts:{action:2, leadership:1}, emoji:"🛠️"},
+      {title:"Hacer la promoción en redes", pts:{voice:2, info:1}, emoji:"📣"},
+      {title:"Asegurar que sea acogedor", pts:{care:2, voice:1}, emoji:"🤗"},
+      {title:"Investigar y proponer mejoras", pts:{info:2, action:1}, emoji:"📊"},
+    ]},
+    { topic:"Conflict", title:"Un grupo discute y nadie se entiende. ¿Qué haces?", options:[
+      {title:"Crear turnos justos para hablar", pts:{voice:2, care:1}, emoji:"🧭"},
+      {title:"Dividir roles claros", pts:{action:2, leadership:1}, emoji:"🧩"},
+      {title:"Pedir pruebas y datos", pts:{info:2}, emoji:"📚"},
+      {title:"Proponer un plan rápido", pts:{leadership:2, action:1}, emoji:"⚡"},
+    ]},
+    { topic:"Impact", title:"Qué proyecto te motiva más ahora?", options:[
+      {title:"Mejorar algo práctico en el cole", pts:{action:2, leadership:1}, emoji:"🏫"},
+      {title:"Campaña creativa de concienciación", pts:{voice:2, info:1}, emoji:"🎨"},
+      {title:"Apoyar el sentido de pertenencia", pts:{care:2, voice:1}, emoji:"💞"},
+      {title:"Encuesta y soluciones", pts:{info:2, action:1}, emoji:"📋"},
+    ]},
+    { topic:"Motivation", title:"Si te sientes nervioso, te ayuda más:", options:[
+      {title:"Hacerlo con alguien", pts:{care:1, leadership:1}, emoji:"👥"},
+      {title:"Un paso pequeño y claro", pts:{info:2}, emoji:"🪜"},
+      {title:"Ver resultados rápidos", pts:{action:2}, emoji:"⚙️"},
+      {title:"Recordar por qué importa", pts:{leadership:2, voice:1}, emoji:"🔥"},
+    ]},
+    { topic:"Listening", title:"Alguien comparte un problema personal. Tú:", options:[
+      {title:"Escuchas y repites para confirmar", pts:{care:2, voice:1}, emoji:"👂"},
+      {title:"Haces preguntas para entender", pts:{info:2}, emoji:"❓"},
+      {title:"Ofreces ayudar a actuar", pts:{action:2}, emoji:"👐"},
+      {title:"Organizas apoyo con otros", pts:{leadership:2}, emoji:"🤝"},
+    ]},
+    { topic:"Online Safety", title:"Ves acoso en línea. ¿Qué haces?", options:[
+      {title:"Reportas y bloqueas", pts:{action:2}, emoji:"⛔"},
+      {title:"Lo señalas con respeto", pts:{voice:2, care:1}, emoji:"🗨️"},
+      {title:"Guardas pruebas y aconsejas a la víctima", pts:{info:2, care:1}, emoji:"📁"},
+      {title:"Coordinar respuesta grupal", pts:{leadership:2}, emoji:"🛡️"},
+    ]},
+    { topic:"Planning", title:"Al planear un evento te centras en:", options:[
+      {title:"Logística y tareas", pts:{action:2}, emoji:"🗂️"},
+      {title:"Mensajes y alcance", pts:{voice:2, info:1}, emoji:"📣"},
+      {title:"Que sea inclusivo", pts:{care:2}, emoji:"🌈"},
+      {title:"Reclutar y liderar", pts:{leadership:2}, emoji:"👑"},
+    ]},
+    { topic:"Research", title:"Antes de compartir una afirmación, tú:", options:[
+      {title:"Compruebas fuentes fiables", pts:{info:2}, emoji:"🔬"},
+      {title:"Aportas contexto y opinión", pts:{voice:2}, emoji:"📝"},
+      {title:"Animar a otros a verificar", pts:{leadership:1, info:1}, emoji:"📢"},
+      {title:"Reportar si es dañino", pts:{action:1, info:1}, emoji:"⚠️"},
+    ]},
+    { topic:"Support", title:"Un compañero está excluido. Tú:", options:[
+      {title:"Lo invitas y escuchas", pts:{care:2}, emoji:"🤗"},
+      {title:"Hablas con el grupo", pts:{voice:2, care:1}, emoji:"🗣️"},
+      {title:"Organizas actividad inclusiva", pts:{leadership:2, action:1}, emoji:"🎯"},
+      {title:"Investigas por qué pasa", pts:{info:2}, emoji:"🔍"},
+    ]},
+    { topic:"Visibility", title:"Para concienciar prefieres:", options:[
+      {title:"Mensaje público potente", pts:{voice:2, leadership:1}, emoji:"📢"},
+      {title:"Compartir datos verificados", pts:{info:2}, emoji:"📈"},
+      {title:"Actividad práctica", pts:{action:2}, emoji:"🛠️"},
+      {title:"Poner voces afectadas al frente", pts:{care:2}, emoji:"🎤"},
+    ]},
+    { topic:"Decision", title:"Si la decisión no está clara, tú:", options:[
+      {title:"Reúnes datos y opciones", pts:{info:2}, emoji:"📚"},
+      {title:"Haces una votación rápida", pts:{action:2}, emoji:"🗳️"},
+      {title:"Aseguras que todos hablen", pts:{voice:2, care:1}, emoji:"🔁"},
+      {title:"Lideras una discusión estructurada", pts:{leadership:2}, emoji:"🧭"},
+    ]},
+    { topic:"Follow-through", title:"Tras una acción exitosa, tú:", options:[
+      {title:"Documentas y compartes lo aprendido", pts:{info:2, voice:1}, emoji:"📝"},
+      {title:"Agradeces y celebras al equipo", pts:{care:2}, emoji:"🎉"},
+      {title:"Planificas el siguiente paso", pts:{action:2}, emoji:"📅"},
+      {title:"Invitas a otros a liderar la fase siguiente", pts:{leadership:2}, emoji:"🤝"},
+    ]},
+    { topic:"Growth", title:"Para mejorar en activismo tú:", options:[
+      {title:"Practicas hablar en público", pts:{voice:2}, emoji:"🎙️"},
+      {title:"Estudias casos y datos", pts:{info:2}, emoji:"📖"},
+      {title:"Te apuntas a roles prácticos", pts:{action:2}, emoji:"🧰"},
+      {title:"Mentoras y organizas a otros", pts:{leadership:2, care:1}, emoji:"🌱"},
+    ]},
+  ];
 
-    // state
-    let currentQuestionIndex = 0;
-    let scores = { voice:0, info:0, action:0, leadership:0, care:0 };
+  // estado
+  let currentQuestionIndex = 0;
+  let scores = { voice:0, info:0, action:0, leadership:0, care:0 };
 
-    // utilities
-    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+  // util
+  function $(id){ return document.getElementById(id); }
+  function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-    // render badges on intro
-    function initBadges(){
-      const container = document.getElementById('badges');
-      if(!container) return;
-      container.innerHTML = '';
-      ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t => {
-        const b = document.createElement('span');
-        b.textContent = t;
-        b.style.display = 'inline-block';
-        b.style.padding = '6px 8px';
-        b.style.marginRight = '6px';
-        b.style.borderRadius = '999px';
-        b.style.background = 'rgba(0,0,0,.03)';
-        b.style.fontSize = '13px';
-        container.appendChild(b);
-      });
+  // render badges (intro)
+  function initBadges(){
+    const intro = document.querySelector('.intro');
+    if(!intro) return;
+    let container = document.getElementById('badges');
+    if(!container){
+      container = document.createElement('div'); container.id='badges'; container.style.marginTop='12px';
+      intro.firstElementChild.appendChild(container);
     }
+    container.innerHTML = '';
+    ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t=>{
+      const b = document.createElement('span');
+      b.textContent = t;
+      b.className = 'pill';
+      container.appendChild(b);
+    });
+  }
 
-    // render a question
-    function renderQuestion(){
-      const q = QUESTIONS[currentQuestionIndex];
-      document.getElementById('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
-      document.getElementById('topicTag').textContent = q.topic;
-      document.getElementById('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
+  // render pregunta
+  function renderQuestion(){
+    const q = QUESTIONS[currentQuestionIndex];
+    $('qLabel').textContent = `Pregunta ${currentQuestionIndex + 1}`;
+    $('topicTag').textContent = q.topic;
+    $('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
+    const denom = Math.max(1, QUESTIONS.length - 1);
+    const percent = Math.round((currentQuestionIndex / denom) * 100);
+    $('fill').style.width = percent + '%';
 
-      // progress percent: index / (n-1) so last question shows 100%
-      const denom = Math.max(1, QUESTIONS.length - 1);
-      const percent = Math.round((currentQuestionIndex / denom) * 100);
-      document.getElementById('fill').style.width = percent + '%';
+    const body = $('body');
+    body.innerHTML = '';
+    const title = document.createElement('h3'); title.className='questionTitle'; title.innerHTML = escapeHtml(q.title);
+    body.appendChild(title);
 
-      const body = document.getElementById('body');
-      body.innerHTML = `<h3 class="questionTitle">${escapeHtml(q.title)}</h3>`;
-      const opts = document.createElement('div');
-      opts.className = 'options';
+    const opts = document.createElement('div'); opts.className='options';
+    q.options.forEach((opt, idx)=>{
+      const b = document.createElement('button');
+      b.type='button'; b.className='optBtn'; b.setAttribute('aria-label', opt.title);
+      b.innerHTML = `<div class="optEmoji">${opt.emoji}</div><div class="optText">${escapeHtml(opt.title)}<div class="optSub"></div></div>`;
+      b.addEventListener('click', ()=> selectOption(idx));
+      b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); selectOption(idx); }});
+      opts.appendChild(b);
+    });
+    body.appendChild(opts);
+    // focus
+    const first = opts.querySelector('.optBtn'); if(first) first.focus();
+  }
 
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'optBtn';
-        btn.innerHTML = `<span>${escapeHtml(opt.title)}</span>`;
-        btn.addEventListener('click', () => selectOption(idx));
-        btn.addEventListener('keydown', (e) => {
-          if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(idx); }
-        });
-        opts.appendChild(btn);
-      });
-
-      body.appendChild(opts);
-      // focus first option for keyboard users
-      const first = opts.querySelector('.optBtn');
-      if(first) first.focus();
-    }
-
-    // handle selection
-    function selectOption(index){
-      const q = QUESTIONS[currentQuestionIndex];
-      const opt = q.options[index];
-      Object.keys(opt.pts).forEach(k => {
-        if(scores.hasOwnProperty(k)) scores[k] += opt.pts[k];
-        else scores[k] = opt.pts[k];
-      });
-
-      if(currentQuestionIndex < QUESTIONS.length - 1){
-        currentQuestionIndex++;
-        renderQuestion();
-      } else {
-        showResults();
-      }
-    }
-
-    // show results
-    function showResults(preview=false){
-      document.getElementById('surveyCard').style.display = 'none';
-      document.getElementById('resultCard').style.display = 'block';
-      document.getElementById('resetBtn').style.display = 'inline-block';
-
-      const body = document.getElementById('resultBody');
-      body.innerHTML = '';
-
-      if(preview){
-        body.innerHTML = `<h3 style="margin-top:0">Profiles Preview</h3>
-          <div class="resultGrid">
-            <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Speak up clearly and respectfully.</div></div>
-            <div class="resultItem"><strong>Info</strong><div style="margin-top:8px;color:var(--mut)">Research and verify before sharing.</div></div>
-            <div class="resultItem"><strong>Action</strong><div style="margin-top:8px;color:var(--mut)">Take practical steps to make change happen.</div></div>
-            <div class="resultItem"><strong>Leadership</strong><div style="margin-top:8px;color:var(--mut)">Organize and motivate others.</div></div>
-            <div class="resultItem"><strong>Care</strong><div style="margin-top:8px;color:var(--mut)">Support people and build belonging.</div></div>
-          </div>`;
-        addResultActions();
-        return;
-      }
-
-      // sort strengths
-      const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
-      const grid = document.createElement('div');
-      grid.className = 'resultGrid';
-
-      entries.forEach(([k,v]) => {
-        const item = document.createElement('div');
-        item.className = 'resultItem';
-        item.innerHTML = `<strong style="text-transform:capitalize">${escapeHtml(k)}</strong>
-                          <div style="margin-top:8px;color:var(--mut)">${v} points</div>`;
-        grid.appendChild(item);
-      });
-
-      body.appendChild(grid);
-
-      // next step suggestion based on top strength
-      const top = entries[0];
-      if(top){
-        const tip = document.createElement('div');
-        tip.style.marginTop = '12px';
-        tip.style.padding = '12px';
-        tip.style.borderRadius = '10px';
-        tip.style.background = 'linear-gradient(90deg, rgba(124,58,237,.06), rgba(6,182,212,.04))';
-        tip.innerHTML = `<strong>Next step</strong>: Try one small action that uses your <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong> strength.`;
-        body.appendChild(tip);
-      }
-
-      addResultActions();
-    }
-
-    // add copy and restart actions
-    function addResultActions(){
-      const body = document.getElementById('resultBody');
-      const actions = document.createElement('div');
-      actions.className = 'actionsRow';
-
-      const copyBtn = document.createElement('button');
-      copyBtn.className = 'copyBtn';
-      copyBtn.textContent = 'Copy results';
-      copyBtn.addEventListener('click', copyResults);
-
-      actions.appendChild(copyBtn);
-      body.appendChild(actions);
-    }
-
-    // copy results to clipboard
-    function copyResults(){
-      const entries = Object.entries(scores).sort((a,b) => b[1] - a[1]);
-      let text = 'Youth Activism Survey Results\n';
-      entries.forEach(([k,v]) => text += `${k}: ${v}\n`);
-      const top = entries[0];
-      if(top) text += `Next step: Try one small action that uses your ${top[0]} strength.\n`;
-      navigator.clipboard?.writeText(text).then(() => {
-        alert('Results copied to clipboard');
-      }).catch(() => {
-        alert('Unable to copy automatically. Select and copy the results manually.');
-      });
-    }
-
-    // reset survey
-    function resetSurvey(){
-      currentQuestionIndex = 0;
-      scores = { voice:0, info:0, action:0, leadership:0, care:0 };
-      document.getElementById('resultCard').style.display = 'none';
-      document.getElementById('surveyCard').style.display = 'block';
-      document.getElementById('resetBtn').style.display = 'none';
-      renderQuestion();
-      document.getElementById('surveyCard').scrollIntoView({behavior:'smooth'});
-    }
-
-    // preview
-    function previewProfiles(){
-      document.getElementById('surveyCard').style.display = 'none';
-      showResults(true);
-      document.getElementById('resultCard').scrollIntoView({behavior:'smooth'});
-    }
-
-    // wire events
-    document.getElementById('startBtn').addEventListener('click', () => {
-      currentQuestionIndex = 0;
-      scores = { voice:0, info:0, action:0, leadership:0, care:0 };
-      document.getElementById('surveyCard').style.display = 'block';
-      document.getElementById('resultCard').style.display = 'none';
-      document.getElementById('resetBtn').style.display = 'none';
-      renderQuestion();
-      document.getElementById('surveyCard').scrollIntoView({behavior:'smooth'});
+  // seleccionar opción
+  function selectOption(index){
+    const q = QUESTIONS[currentQuestionIndex];
+    const opt = q.options[index];
+    Object.keys(opt.pts).forEach(k=>{
+      if(scores.hasOwnProperty(k)) scores[k] += opt.pts[k]; else scores[k] = opt.pts[k];
     });
 
-    document.getElementById('previewBtn').addEventListener('click', previewProfiles);
-    document.getElementById('resetBtn').addEventListener('click', resetSurvey);
+    // micro-feedback: pulse animation on selected button
+    // avanzar o mostrar resultados
+    if(currentQuestionIndex < QUESTIONS.length - 1){
+      currentQuestionIndex++;
+      renderQuestion();
+    } else {
+      showResults();
+      celebrate();
+    }
+  }
 
-    // initialize
-    (function init(){
-      // create a small badges container for intro (if desired)
-      const intro = document.querySelector('.intro');
-      if(intro && !document.getElementById('badges')){
-        const div = document.createElement('div');
-        div.id = 'badges';
-        div.style.marginTop = '12px';
-        intro.firstElementChild.appendChild(div);
-      }
-      initBadges();
-      // set initial progress text
-      document.getElementById('ptxt').textContent = `0 / ${QUESTIONS.length}`;
-    })();
-  </script>
+  // mostrar resultados
+  function showResults(preview=false){
+    $('surveyCard').style.display = 'none';
+    $('resultCard').style.display = 'block';
+    $('restartBtn').style.display = 'inline-block';
+    const body = $('resultBody'); body.innerHTML = '';
+
+    if(preview){
+      body.innerHTML = `<h3 style="margin-top:0">Perfiles (vista previa)</h3>
+        <div class="resultGrid">
+          <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Hablar con claridad y respeto.</div></div>
+          <div class="resultItem"><strong>Info</strong><div style="margin-top:8px;color:var(--mut)">Investigar y verificar antes de compartir.</div></div>
+          <div class="resultItem"><strong>Action</strong><div style="margin-top:8px;color:var(--mut)">Tomar pasos prácticos para cambiar cosas.</div></div>
+          <div class="resultItem"><strong>Leadership</strong><div style="margin-top:8px;color:var(--mut)">Organizar y motivar a otros.</div></div>
+          <div class="resultItem"><strong>Care</strong><div style="margin-top:8px;color:var(--mut)">Apoyar a las personas y crear pertenencia.</div></div>
+        </div>`;
+      addResultActions();
+      return;
+    }
+
+    // ordenar por puntaje
+    const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
+    const grid = document.createElement('div'); grid.className='resultGrid';
+    entries.forEach(([k,v])=>{
+      const item = document.createElement('div'); item.className='resultItem';
+      item.innerHTML = `<strong style="text-transform:capitalize">${escapeHtml(k)}</strong>
+        <div style="margin-top:8px;color:var(--mut)">${v} pts</div>
+        <div class="barInner"><div class="barFill" style="width:${Math.min(100, v*10)}%"></div></div>`;
+      grid.appendChild(item);
+    });
+    body.appendChild(grid);
+
+    // sugerencia práctica
+    const top = entries[0];
+    if(top){
+      const tip = document.createElement('div');
+      tip.style.marginTop='12px'; tip.style.padding='12px'; tip.style.borderRadius='10px';
+      tip.style.background='linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))';
+      tip.innerHTML = `<strong>Próximo paso</strong>: prueba una acción pequeña que use tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong>.`;
+      body.appendChild(tip);
+    }
+    addResultActions();
+  }
+
+  // acciones en resultados
+  function addResultActions(){
+    const body = $('resultBody');
+    const actions = document.createElement('div'); actions.className='actionsRow';
+    const copyBtn = document.createElement('button'); copyBtn.className='copyBtn'; copyBtn.textContent='Copiar resultados';
+    copyBtn.addEventListener('click', copyResults);
+    const restart = $('restartBtn'); restart.addEventListener('click', resetSurvey);
+    actions.appendChild(copyBtn); body.appendChild(actions);
+  }
+
+  // copiar resultados
+  function copyResults(){
+    const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
+    let text = 'Youth Activism — Resultados\n';
+    entries.forEach(([k,v])=> text += `${k}: ${v}\n`);
+    const top = entries[0]; if(top) text += `Siguiente paso: prueba una acción con ${top[0]}\n`;
+    navigator.clipboard?.writeText(text).then(()=> alert('Resultados copiados al portapapeles')).catch(()=> alert('No se pudo copiar automáticamente.'));
+  }
+
+  // reiniciar encuesta
+  function resetSurvey(){
+    currentQuestionIndex = 0;
+    scores = { voice:0, info:0, action:0, leadership:0, care:0 };
+    $('resultCard').style.display = 'none';
+    $('surveyCard').style.display = 'block';
+    $('restartBtn').style.display = 'none';
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  // vista previa
+  function previewProfiles(){
+    $('surveyCard').style.display = 'none';
+    showResults(true);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  // micro-celebración (confetti simple)
+  function celebrate(){
+    const conf = $('confetti'); conf.innerHTML=''; conf.style.display='block';
+    const colors = ['#7c3aed','#06b6d4','#ff6b6b','#ffd166','#4ade80'];
+    for(let i=0;i<40;i++){
+      const el = document.createElement('div');
+      el.style.position='absolute';
+      el.style.left = Math.random()*100 + '%';
+      el.style.top = '-10%';
+      el.style.width = (6+Math.random()*8)+'px';
+      el.style.height = el.style.width;
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      el.style.opacity = 0.95;
+      el.style.borderRadius = '3px';
+      el.style.transform = `rotate(${Math.random()*360}deg)`;
+      el.style.transition = `transform 1.6s linear, top 1.6s cubic-bezier(.2,.9,.2,1), opacity 1.6s linear`;
+      conf.appendChild(el);
+      // animate
+      setTimeout(()=> {
+        el.style.top = (60 + Math.random()*40) + '%';
+        el.style.transform = `translateY(0) rotate(${Math.random()*720}deg)`;
+        el.style.opacity = 0.9;
+      }, 20 + i*10);
+      // remove
+      setTimeout(()=> { el.style.opacity = 0; }, 1800 + i*10);
+    }
+    setTimeout(()=> { conf.style.display='none'; conf.innerHTML=''; }, 2600);
+  }
+
+  // eventos
+  $('startBtn').addEventListener('click', ()=>{
+    currentQuestionIndex = 0;
+    scores = { voice:0, info:0, action:0, leadership:0, care:0 };
+    $('surveyCard').style.display = 'block';
+    $('resultCard').style.display = 'none';
+    $('restartBtn').style.display = 'none';
+    renderQuestion();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  $('previewBtn').addEventListener('click', previewProfiles);
+  $('restartBtn').addEventListener('click', resetSurvey);
+
+  // init
+  (function init(){
+    initBadges();
+    $('ptxt').textContent = `0 / ${QUESTIONS.length}`;
+  })();
+</script>
 </body>
 </html>
