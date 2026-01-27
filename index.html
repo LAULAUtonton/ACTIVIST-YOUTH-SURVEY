@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Youth Activism — Social Involvement Profile Survey</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Youth Activism – Social Involvement Profile Survey</title>
   <meta name="description" content="A colorful, classroom-ready survey that gives students a profile at the end." />
 
   <style>
     :root {
-      --bgA: #F7FAFF;
-      --bgB: #F1FFFB;
+      --bgA: #f7faff;
+      --bgB: #f1fffb;
 
       --card: rgba(255, 255, 255, .82);
       --card2: rgba(255, 255, 255, .66);
@@ -25,13 +25,13 @@
       --r2: 26px;
 
       /* Accent palette */
-      --p: #7C3AED;
-      --c: #06B6D4;
-      --g: #10B981;
-      --y: #F59E0B;
-      --pk: #F43F5E;
-      --b: #2563EB;
-      --o: #FB923C;
+      --p: #7c3aed;
+      --c: #06b6d4;
+      --g: #10b981;
+      --y: #f59e0b;
+      --pk: #f43f5e;
+      --b: #2563eb;
+      --o: #fb923c;
 
       --focus: 0 0 0 4px rgba(6, 182, 212, .22);
     }
@@ -452,11 +452,9 @@
     <div class="top">
       <div class="brand">
         <div class="logo" aria-hidden="true">
-          <!-- megaphone illustration -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M4 11v2a3 3 0 0 0 3 3h2l2 4h2l-1.2-4.8L20 16V8l-6.2 1.8L14 5h-2l-2 4H7a3 3 0 0 0-3 3Z"
-              stroke="rgba(8,10,20,.85)" stroke-width="1.7" stroke-linejoin="round"/>
-            <path d="M20 8v8" stroke="rgba(6,182,212,.95)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 11v2a3 3 0 0 0 3 3h2l2 4h2l-1.2-4.8L20 16V8l-6.2 1.8L14 5h-2l-2 4H7a3 3 0 0 0-3 3Z" stroke="rgba(8,10,20,.85)" stroke-width="1.7" stroke-linejoin="round" />
+            <path d="M20 8v8" stroke="rgba(6,182,212,.95)" stroke-width="2" stroke-linecap="round" />
           </svg>
         </div>
         <div>
@@ -520,5 +518,163 @@
 
     <!-- SURVEY PANEL -->
     <section class="panel card" id="surveyCard" style="display:none" role="region" aria-label="Survey">
-      <div class="
+      <div class="head">
+        <div class="leftHead">
+          <span class="tag"><strong id="qLabel">Question</strong></span>
+          <span class="tag" id="topicTag">Topic</span>
+        </div>
 
+        <div class="prog" aria-label="Progress">
+          <div class="bar" aria-hidden="true"><div class="fill" id="fill"></div></div>
+          <div class="ptxt" id="ptxt">0 / 0</div>
+        </div>
+      </div>
+
+      <div class="body" id="body"></div>
+    </section>
+
+    <!-- RESULTS PANEL -->
+    <section class="panel card" id="resultCard" style="display:none" role="region" aria-label="Results">
+      <div class="head">
+        <div class="leftHead">
+          <span class="tag"><strong>Your profile</strong></span>
+          <span class="tag">Results</span>
+        </div>
+        <div class="prog"><div class="ptxt">Done</div></div>
+      </div>
+
+      <div class="body" id="resultBody"></div>
+    </section>
+
+    <div class="small">
+      If you still see the old version after updating: refresh with <strong>Ctrl + F5</strong> (or open in an Incognito window).
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      {
+        topic: "School",
+        title: "You hear an offensive comment about someone in class. What do you do first?",
+        options: [
+          { title: "Stop it respectfully", pts: { voice: 2, leadership: 1 } },
+          { title: "Check on the person", pts: { care: 2, voice: 1 } },
+          { title: "Talk later calmly", pts: { voice: 2, info: 1 } },
+          { title: "Get help right away", pts: { action: 2, leadership: 1 } },
+        ]
+      },
+      {
+        topic: "Social Media",
+        title: "A viral video about a social issue shows up in your feed. What do you do?",
+        options: [
+          { title: "Verify it", pts: { info: 2, voice: 1 } },
+          { title: "Comment thoughtfully", pts: { voice: 2, care: 1 } },
+          { title: "Report if harmful", pts: { action: 1, info: 1 } },
+          { title: "Create a response post", pts: { leadership: 2, voice: 1 } },
+        ]
+      },
+      {
+        topic: "Participation",
+        title: "If your school runs an event and asks for help, you usually…",
+        options: [
+          { title: "Handle practical tasks", pts: { action: 2, leadership: 1 } },
+          { title: "Do the promo", pts: { voice: 2, info: 1 } },
+          { title: "Make it welcoming", pts: { care: 2, voice: 1 } },
+          { title: "Research & propose", pts: { info: 2, action: 1 } },
+        ]
+      },
+      {
+        topic: "Conflict",
+        title: "Your group is arguing and nobody understands each other. What do you do?",
+        options: [
+          { title: "Create fair turn-taking", pts: { voice: 2, care: 1 } },
+          { title: "Divide clear roles", pts: { action: 2, leadership: 1 } },
+          { title: "Ask for evidence", pts: { info: 2 } },
+          { title: "Propose a plan fast", pts: { leadership: 2, action: 1 } },
+        ]
+      },
+      {
+        topic: "Impact",
+        title: "Which project sounds most exciting to you right now?",
+        options: [
+          { title: "Improve something at school", pts: { action: 2, leadership: 1 } },
+          { title: "Creative awareness campaign", pts: { voice: 2, info: 1 } },
+          { title: "Support & belonging", pts: { care: 2, voice: 1 } },
+          { title: "Survey & solutions", pts: { info: 2, action: 1 } },
+        ]
+      },
+      {
+        topic: "Your next step",
+        title: "When I feel nervous or unmotivated, what helps me most is…",
+        options: [
+          { title: "Doing it with someone", pts: { care: 1, leadership: 1 } },
+          { title: "A clear small step", pts: { info: 2 } },
+          { title: "Seeing quick results", pts: { action: 2 } },
+          { title: "Knowing it matters", pts: { leadership: 2, voice: 1 } },
+        ]
+      },
+    ];
+
+    let currentQuestionIndex = 0;
+    let scores = { voice: 0, action: 0, leadership: 0, info: 0, care: 0 };
+
+    function renderQuestion() {
+      const question = QUESTIONS[currentQuestionIndex];
+      document.getElementById('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
+      document.getElementById('topicTag').textContent = question.topic;
+      document.getElementById('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
+      document.getElementById('fill').style.width = `${(currentQuestionIndex / (QUESTIONS.length - 1)) * 100}%`;
+
+      let optionsHtml = '';
+      question.options.forEach((option, index) => {
+        optionsHtml += `
+          <div class="opt" onclick="selectOption(${index})">
+            <div class="txt">
+              <strong>${option.title}</strong>
+            </div>
+          </div>
+        `;
+      });
+      document.getElementById('body').innerHTML = optionsHtml;
+    }
+
+    function selectOption(index) {
+      const question = QUESTIONS[currentQuestionIndex];
+      const selectedOption = question.options[index];
+      Object.keys(selectedOption.pts).forEach(key => {
+        scores[key] += selectedOption.pts[key];
+      });
+
+      if (currentQuestionIndex < QUESTIONS.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('surveyCard').style.display = 'none';
+      document.getElementById('resultCard').style.display = 'block';
+
+      const resultHtml = `
+        <h3>Your Profile</h3>
+        <div>Voice: ${scores.voice}</div>
+        <div>Action: ${scores.action}</div>
+        <div>Leadership: ${scores.leadership}</div>
+        <div>Info: ${scores.info}</div>
+        <div>Care: ${scores.care}</div>
+      `;
+      document.getElementById('resultBody').innerHTML = resultHtml;
+    }
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      document.getElementById('startPanel').style.display = 'none';
+      document.getElementById('surveyCard').style.display = 'block';
+      renderQuestion();
+    });
+  </script>
+
+</body>
+
+</html>
