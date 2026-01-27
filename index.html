@@ -1,15 +1,14 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Youth Activism — Encuesta interactiva mejorada</title>
-<meta name="description" content="Encuesta interactiva para jóvenes: Voice, Info, Action, Leadership, Care" />
+<title>Youth Activism — Interactive Survey (English)</title>
+<meta name="description" content="Interactive youth activism survey measuring Voice, Info, Action, Leadership, Care" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#071022;
-    --card:rgba(255,255,255,0.03);
     --mut:#b9d0e6;
     --accent1:#ff6b6b;
     --accent2:#7c3aed;
@@ -19,7 +18,7 @@
     --glass: rgba(255,255,255,0.03);
     --radius:18px;
     --shadow: 0 18px 50px rgba(2,6,23,0.7);
-    --base-font:18px; /* tamaño base aumentado */
+    --base-font:20px; /* larger base font for readability */
   }
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:#eaf6ff;-webkit-font-smoothing:antialiased;font-size:var(--base-font)}
@@ -92,54 +91,54 @@
         <div class="logo" aria-hidden="true">YA</div>
         <div>
           <h1>Youth Activism</h1>
-          <div class="tagline">Encuesta visual y rápida para estudiantes</div>
+          <div class="tagline">Quick, visual survey — discover your profile</div>
         </div>
       </div>
-      <div class="tagline">15 preguntas • 6–10 minutos</div>
+      <div class="tagline">15 questions • 6–10 minutes</div>
     </header>
 
     <!-- Intro -->
     <section class="card" aria-labelledby="introTitle">
       <div class="intro">
         <div>
-          <h2 id="introTitle" style="margin:0 0 8px;font-size:26px">¿Cómo actúas cuando algo importa?</h2>
-          <p style="margin:0;color:var(--mut);font-size:17px">Responde situaciones reales de escuela y redes. Al final verás un perfil claro con tus fortalezas y pasos prácticos para mejorar.</p>
+          <h2 id="introTitle" style="margin:0 0 8px;font-size:26px">How do you show up when something matters?</h2>
+          <p style="margin:0;color:var(--mut);font-size:17px">Answer short, real-life scenarios from school and social media. At the end you'll get a clear profile with strengths and practical next steps.</p>
 
           <div class="pillRow" aria-hidden="true">
             <span class="pill">🎨 Visual</span>
-            <span class="pill">⚡ Rápido</span>
-            <span class="pill">🧠 Reflexivo</span>
-            <span class="pill">🗣️ Ideal para clase</span>
+            <span class="pill">⚡ Fast</span>
+            <span class="pill">🧠 Reflective</span>
+            <span class="pill">🗣️ Classroom friendly</span>
           </div>
 
           <div class="controls">
-            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Comenzar</button>
-            <button id="previewBtn" class="btn" aria-controls="resultCard">Ver perfiles</button>
-            <button id="restartBtn" class="btn" style="display:none">Reiniciar</button>
+            <button id="startBtn" class="btn primary" aria-controls="surveyCard">Start</button>
+            <button id="previewBtn" class="btn" aria-controls="resultCard">Preview profiles</button>
+            <button id="restartBtn" class="btn" style="display:none">Restart</button>
           </div>
 
-          <div class="small">Consejo: usa Tab + Enter para navegar. Cada pregunta cambia el color de fondo para mantener la energía.</div>
+          <div class="small">Tip: use Tab + Enter to navigate. Each question changes the background color to keep energy high.</div>
         </div>
 
         <aside class="mini" aria-hidden="false">
           <div style="display:flex;align-items:center;justify-content:space-between">
-            <strong style="font-size:16px">Uso rápido para profes</strong>
+            <strong style="font-size:16px">Teacher quick-use</strong>
             <div style="font-size:13px;color:var(--mut)">Editable</div>
           </div>
           <ul style="margin:10px 0 0 18px;padding:0;color:var(--mut);font-size:15px">
-            <li>Individual o en proyector</li>
-            <li>Al final: copiar resultados o hacer captura</li>
-            <li>Reflexión: "Una fortaleza… Un paso a intentar"</li>
+            <li>Use individually or on a projector</li>
+            <li>At the end: copy results or screenshot the profile</li>
+            <li>Reflection prompt: "One strength I have… One step I can try"</li>
           </ul>
         </aside>
       </div>
     </section>
 
     <!-- Survey -->
-    <section id="surveyCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Encuesta">
+    <section id="surveyCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Survey">
       <div class="cardHead">
         <div>
-          <div style="font-size:15px;color:var(--mut)"><strong id="qLabel">Pregunta</strong> <span id="topicTag" style="margin-left:10px"></span></div>
+          <div style="font-size:15px;color:var(--mut)"><strong id="qLabel">Question</strong> <span id="topicTag" style="margin-left:10px"></span></div>
         </div>
         <div class="prog" aria-hidden="false">
           <div class="bar" aria-hidden="true"><div id="fill" class="fill" style="width:0%"></div></div>
@@ -150,10 +149,10 @@
     </section>
 
     <!-- Results -->
-    <section id="resultCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Resultados">
+    <section id="resultCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Results">
       <div class="cardHead">
-        <div><strong style="font-size:18px">Tu perfil</strong></div>
-        <div class="ptxt">¡Listo!</div>
+        <div><strong style="font-size:18px">Your profile</strong></div>
+        <div class="ptxt">Done</div>
       </div>
       <div class="cardBody" id="resultBody"></div>
     </section>
@@ -162,100 +161,101 @@
   </div>
 
 <script>
+  // 15 questions (English)
   const QUESTIONS = [
-    { topic:"School", title:"Escuchas un comentario ofensivo en clase. ¿Qué haces primero?", options:[
-      {title:"Pararlo con respeto", pts:{voice:2, leadership:1}, emoji:"🗣️"},
-      {title:"Comprobar cómo está la persona afectada", pts:{care:2, voice:1}, emoji:"🤝"},
-      {title:"Hablar con la persona después en privado", pts:{voice:1, info:1}, emoji:"💬"},
-      {title:"Avisar a un profesor si es grave", pts:{action:2, leadership:1}, emoji:"📣"},
+    { topic:"School", title:"You hear an offensive comment in class. What do you do first?", options:[
+      {title:"Address it respectfully in the moment", pts:{voice:2, leadership:1}, emoji:"🗣️"},
+      {title:"Check on the person affected", pts:{care:2, voice:1}, emoji:"🤝"},
+      {title:"Talk privately with the person later", pts:{voice:1, info:1}, emoji:"💬"},
+      {title:"Get a teacher involved if it's serious", pts:{action:2, leadership:1}, emoji:"📣"},
     ]},
-    { topic:"Social Media", title:"Ves un vídeo viral que parece manipulado. ¿Qué haces?", options:[
-      {title:"Verificar antes de compartir", pts:{info:2}, emoji:"🔎"},
-      {title:"Comentar corrigiendo con respeto", pts:{voice:2, info:1}, emoji:"✍️"},
-      {title:"Reportarlo si es dañino", pts:{action:2}, emoji:"🚩"},
-      {title:"Crear una respuesta informativa", pts:{leadership:2, voice:1}, emoji:"🎬"},
+    { topic:"Social Media", title:"A viral post looks misleading. What do you do?", options:[
+      {title:"Verify sources before sharing", pts:{info:2}, emoji:"🔎"},
+      {title:"Comment to correct it respectfully", pts:{voice:2, info:1}, emoji:"✍️"},
+      {title:"Report it if it's harmful", pts:{action:2}, emoji:"🚩"},
+      {title:"Create an informative response post", pts:{leadership:2, voice:1}, emoji:"🎬"},
     ]},
-    { topic:"Participation", title:"Tu colegio pide ayuda para un evento. Sueles:", options:[
-      {title:"Encargarte de tareas prácticas", pts:{action:2, leadership:1}, emoji:"🛠️"},
-      {title:"Hacer la promoción en redes", pts:{voice:2, info:1}, emoji:"📣"},
-      {title:"Asegurar que sea acogedor", pts:{care:2, voice:1}, emoji:"🤗"},
-      {title:"Investigar y proponer mejoras", pts:{info:2, action:1}, emoji:"📊"},
+    { topic:"Participation", title:"Your school asks for volunteers. You usually:", options:[
+      {title:"Handle practical tasks", pts:{action:2, leadership:1}, emoji:"🛠️"},
+      {title:"Do the promotion online", pts:{voice:2, info:1}, emoji:"📣"},
+      {title:"Make the event welcoming", pts:{care:2, voice:1}, emoji:"🤗"},
+      {title:"Research and propose improvements", pts:{info:2, action:1}, emoji:"📊"},
     ]},
-    { topic:"Conflict", title:"Un grupo discute y nadie se entiende. ¿Qué haces?", options:[
-      {title:"Crear turnos justos para hablar", pts:{voice:2, care:1}, emoji:"🧭"},
-      {title:"Dividir roles claros", pts:{action:2, leadership:1}, emoji:"🧩"},
-      {title:"Pedir pruebas y datos", pts:{info:2}, emoji:"📚"},
-      {title:"Proponer un plan rápido", pts:{leadership:2, action:1}, emoji:"⚡"},
+    { topic:"Conflict", title:"Your group is arguing and stuck. What do you do?", options:[
+      {title:"Create fair turn-taking", pts:{voice:2, care:1}, emoji:"🧭"},
+      {title:"Divide clear roles and tasks", pts:{action:2, leadership:1}, emoji:"🧩"},
+      {title:"Ask for evidence and sources", pts:{info:2}, emoji:"📚"},
+      {title:"Propose a quick plan to move forward", pts:{leadership:2, action:1}, emoji:"⚡"},
     ]},
-    { topic:"Impact", title:"Qué proyecto te motiva más ahora?", options:[
-      {title:"Mejorar algo práctico en el cole", pts:{action:2, leadership:1}, emoji:"🏫"},
-      {title:"Campaña creativa de concienciación", pts:{voice:2, info:1}, emoji:"🎨"},
-      {title:"Apoyar el sentido de pertenencia", pts:{care:2, voice:1}, emoji:"💞"},
-      {title:"Encuesta y soluciones", pts:{info:2, action:1}, emoji:"📋"},
+    { topic:"Impact", title:"Which project excites you most right now?", options:[
+      {title:"Improve something practical at school", pts:{action:2, leadership:1}, emoji:"🏫"},
+      {title:"Run a creative awareness campaign", pts:{voice:2, info:1}, emoji:"🎨"},
+      {title:"Support belonging and inclusion", pts:{care:2, voice:1}, emoji:"💞"},
+      {title:"Survey and propose solutions", pts:{info:2, action:1}, emoji:"📋"},
     ]},
-    { topic:"Motivation", title:"Si te sientes nervioso, te ayuda más:", options:[
-      {title:"Hacerlo con alguien", pts:{care:1, leadership:1}, emoji:"👥"},
-      {title:"Un paso pequeño y claro", pts:{info:2}, emoji:"🪜"},
-      {title:"Ver resultados rápidos", pts:{action:2}, emoji:"⚙️"},
-      {title:"Recordar por qué importa", pts:{leadership:2, voice:1}, emoji:"🔥"},
+    { topic:"Motivation", title:"When you're nervous, what helps most?", options:[
+      {title:"Do it with someone", pts:{care:1, leadership:1}, emoji:"👥"},
+      {title:"Break it into a clear small step", pts:{info:2}, emoji:"🪜"},
+      {title:"Start with a quick visible win", pts:{action:2}, emoji:"⚙️"},
+      {title:"Remind yourself why it matters", pts:{leadership:2, voice:1}, emoji:"🔥"},
     ]},
-    { topic:"Listening", title:"Alguien comparte un problema personal. Tú:", options:[
-      {title:"Escuchas y repites para confirmar", pts:{care:2, voice:1}, emoji:"👂"},
-      {title:"Haces preguntas para entender", pts:{info:2}, emoji:"❓"},
-      {title:"Ofreces ayudar a actuar", pts:{action:2}, emoji:"👐"},
-      {title:"Organizas apoyo con otros", pts:{leadership:2}, emoji:"🤝"},
+    { topic:"Listening", title:"Someone shares a personal concern. You:", options:[
+      {title:"Listen and reflect back", pts:{care:2, voice:1}, emoji:"👂"},
+      {title:"Ask clarifying questions", pts:{info:2}, emoji:"❓"},
+      {title:"Offer to help take action", pts:{action:2}, emoji:"👐"},
+      {title:"Organize support from others", pts:{leadership:2}, emoji:"🤝"},
     ]},
-    { topic:"Online Safety", title:"Ves acoso en línea. ¿Qué haces?", options:[
-      {title:"Reportas y bloqueas", pts:{action:2}, emoji:"⛔"},
-      {title:"Lo señalas con respeto", pts:{voice:2, care:1}, emoji:"🗨️"},
-      {title:"Guardas pruebas y aconsejas a la víctima", pts:{info:2, care:1}, emoji:"📁"},
-      {title:"Coordinar respuesta grupal", pts:{leadership:2}, emoji:"🛡️"},
+    { topic:"Online Safety", title:"You see harassment online. You:", options:[
+      {title:"Report and block the harasser", pts:{action:2}, emoji:"⛔"},
+      {title:"Call out the behavior respectfully", pts:{voice:2, care:1}, emoji:"🗨️"},
+      {title:"Collect evidence and advise the target", pts:{info:2, care:1}, emoji:"📁"},
+      {title:"Coordinate a group response", pts:{leadership:2}, emoji:"🛡️"},
     ]},
-    { topic:"Planning", title:"Al planear un evento te centras en:", options:[
-      {title:"Logística y tareas", pts:{action:2}, emoji:"🗂️"},
-      {title:"Mensajes y alcance", pts:{voice:2, info:1}, emoji:"📣"},
-      {title:"Que sea inclusivo", pts:{care:2}, emoji:"🌈"},
-      {title:"Reclutar y liderar", pts:{leadership:2}, emoji:"👑"},
+    { topic:"Planning", title:"When planning an event you focus on:", options:[
+      {title:"Logistics and tasks", pts:{action:2}, emoji:"🗂️"},
+      {title:"Messaging and outreach", pts:{voice:2, info:1}, emoji:"📣"},
+      {title:"Making it inclusive", pts:{care:2}, emoji:"🌈"},
+      {title:"Recruiting and leading volunteers", pts:{leadership:2}, emoji:"👑"},
     ]},
-    { topic:"Research", title:"Antes de compartir una afirmación, tú:", options:[
-      {title:"Compruebas fuentes fiables", pts:{info:2}, emoji:"🔬"},
-      {title:"Aportas contexto y opinión", pts:{voice:2}, emoji:"📝"},
-      {title:"Animar a otros a verificar", pts:{leadership:1, info:1}, emoji:"📢"},
-      {title:"Reportar si es dañino", pts:{action:1, info:1}, emoji:"⚠️"},
+    { topic:"Research", title:"Before sharing a claim you:", options:[
+      {title:"Check multiple reliable sources", pts:{info:2}, emoji:"🔬"},
+      {title:"Add context and your perspective", pts:{voice:2}, emoji:"📝"},
+      {title:"Encourage others to verify", pts:{leadership:1, info:1}, emoji:"📢"},
+      {title:"Report if it's harmful", pts:{action:1, info:1}, emoji:"⚠️"},
     ]},
-    { topic:"Support", title:"Un compañero está excluido. Tú:", options:[
-      {title:"Lo invitas y escuchas", pts:{care:2}, emoji:"🤗"},
-      {title:"Hablas con el grupo", pts:{voice:2, care:1}, emoji:"🗣️"},
-      {title:"Organizas actividad inclusiva", pts:{leadership:2, action:1}, emoji:"🎯"},
-      {title:"Investigas por qué pasa", pts:{info:2}, emoji:"🔍"},
+    { topic:"Support", title:"A peer is being excluded. You:", options:[
+      {title:"Invite them in and listen", pts:{care:2}, emoji:"🤗"},
+      {title:"Speak up to the group", pts:{voice:2, care:1}, emoji:"🗣️"},
+      {title:"Organize an inclusive activity", pts:{leadership:2, action:1}, emoji:"🎯"},
+      {title:"Research why exclusion happens", pts:{info:2}, emoji:"🔍"},
     ]},
-    { topic:"Visibility", title:"Para concienciar prefieres:", options:[
-      {title:"Mensaje público potente", pts:{voice:2, leadership:1}, emoji:"📢"},
-      {title:"Compartir datos verificados", pts:{info:2}, emoji:"📈"},
-      {title:"Actividad práctica", pts:{action:2}, emoji:"🛠️"},
-      {title:"Poner voces afectadas al frente", pts:{care:2}, emoji:"🎤"},
+    { topic:"Visibility", title:"To raise awareness you prefer to:", options:[
+      {title:"Create a bold public message", pts:{voice:2, leadership:1}, emoji:"📢"},
+      {title:"Share verified facts and resources", pts:{info:2}, emoji:"📈"},
+      {title:"Run a hands-on activity", pts:{action:2}, emoji:"🛠️"},
+      {title:"Center affected people's voices", pts:{care:2}, emoji:"🎤"},
     ]},
-    { topic:"Decision", title:"Si la decisión no está clara, tú:", options:[
-      {title:"Reúnes datos y opciones", pts:{info:2}, emoji:"📚"},
-      {title:"Haces una votación rápida", pts:{action:2}, emoji:"🗳️"},
-      {title:"Aseguras que todos hablen", pts:{voice:2, care:1}, emoji:"🔁"},
-      {title:"Lideras una discusión estructurada", pts:{leadership:2}, emoji:"🧭"},
+    { topic:"Decision", title:"When decisions are unclear, you:", options:[
+      {title:"Gather facts and options", pts:{info:2}, emoji:"📚"},
+      {title:"Call a quick vote and move", pts:{action:2}, emoji:"🗳️"},
+      {title:"Make sure everyone's heard", pts:{voice:2, care:1}, emoji:"🔁"},
+      {title:"Lead a structured discussion", pts:{leadership:2}, emoji:"🧭"},
     ]},
-    { topic:"Follow-through", title:"Tras una acción exitosa, tú:", options:[
-      {title:"Documentas y compartes lo aprendido", pts:{info:2, voice:1}, emoji:"📝"},
-      {title:"Agradeces y celebras al equipo", pts:{care:2}, emoji:"🎉"},
-      {title:"Planificas el siguiente paso", pts:{action:2}, emoji:"📅"},
-      {title:"Invitas a otros a liderar la fase siguiente", pts:{leadership:2}, emoji:"🤝"},
+    { topic:"Follow-through", title:"After a successful action you:", options:[
+      {title:"Document what worked and share", pts:{info:2, voice:1}, emoji:"📝"},
+      {title:"Celebrate and thank contributors", pts:{care:2}, emoji:"🎉"},
+      {title:"Plan the next practical step", pts:{action:2}, emoji:"📅"},
+      {title:"Invite others to lead the next phase", pts:{leadership:2}, emoji:"🤝"},
     ]},
-    { topic:"Growth", title:"Para mejorar en activismo tú:", options:[
-      {title:"Practicas hablar en público", pts:{voice:2}, emoji:"🎙️"},
-      {title:"Estudias casos y datos", pts:{info:2}, emoji:"📖"},
-      {title:"Te apuntas a roles prácticos", pts:{action:2}, emoji:"🧰"},
-      {title:"Mentoras y organizas a otros", pts:{leadership:2, care:1}, emoji:"🌱"},
+    { topic:"Growth", title:"To get better at activism you:", options:[
+      {title:"Practice speaking and feedback", pts:{voice:2}, emoji:"🎙️"},
+      {title:"Study examples and research", pts:{info:2}, emoji:"📖"},
+      {title:"Volunteer for hands-on roles", pts:{action:2}, emoji:"🧰"},
+      {title:"Mentor or organize peers", pts:{leadership:2, care:1}, emoji:"🌱"},
     ]},
   ];
 
-  // colores de fondo por pregunta (gradientes)
+  // background gradients per question
   const BG_COLORS = [
     'radial-gradient(900px 400px at 10% 10%, rgba(255,107,107,0.12), transparent), linear-gradient(180deg,#071022,#071827)',
     'radial-gradient(900px 400px at 90% 20%, rgba(124,58,237,0.12), transparent), linear-gradient(180deg,#041226,#071022)',
@@ -302,7 +302,7 @@
   function renderQuestion(){
     setBackgroundForQuestion(currentQuestionIndex);
     const q = QUESTIONS[currentQuestionIndex];
-    $('qLabel').textContent = `Pregunta ${currentQuestionIndex + 1}`;
+    $('qLabel').textContent = `Question ${currentQuestionIndex + 1}`;
     $('topicTag').textContent = q.topic;
     $('ptxt').textContent = `${currentQuestionIndex + 1} / ${QUESTIONS.length}`;
     const denom = Math.max(1, QUESTIONS.length - 1);
@@ -325,6 +325,40 @@
     const first = opts.querySelector('.optBtn'); if(first) first.focus();
   }
 
+  // profile descriptions (English)
+  const PROFILE_DESCRIPTIONS = {
+    voice: {
+      title: "Voice",
+      short: "You speak up clearly and confidently.",
+      long: "You are skilled at communicating ideas and standing up for what matters. You help start conversations, moderate debates, and make sure voices are heard.",
+      tips: ["Practice short, clear messages", "Use personal examples to connect", "Prepare respectful responses for tough moments"]
+    },
+    info: {
+      title: "Researcher",
+      short: "You check facts and verify before sharing.",
+      long: "You value accuracy. You research sources, compare information, and help decisions be based on evidence.",
+      tips: ["Learn to evaluate sources", "Summarize key facts in 1–2 sentences", "Share reliable links when posting"]
+    },
+    action: {
+      title: "Doer",
+      short: "You prefer practical steps that create change.",
+      long: "You focus on results: organizing, executing, and solving. You turn ideas into real actions that move things forward.",
+      tips: ["Break tasks into small steps", "Find allies to share the work", "Celebrate small wins"]
+    },
+    leadership: {
+      title: "Leader",
+      short: "You organize and motivate others to act.",
+      long: "You coordinate teams, delegate, and keep projects on track. You inspire others to join and sustain efforts.",
+      tips: ["Practice clear delegation", "Set roles and deadlines", "Ask for feedback from your team"]
+    },
+    care: {
+      title: "Carer",
+      short: "You prioritize people's wellbeing and inclusion.",
+      long: "You listen, support, and create safe spaces. Your empathy helps projects stay human and sustainable.",
+      tips: ["Follow up personally with peers", "Create welcoming spaces", "Balance care with healthy boundaries"]
+    }
+  };
+
   function selectOption(index){
     const q = QUESTIONS[currentQuestionIndex];
     const opt = q.options[index];
@@ -341,40 +375,6 @@
     }
   }
 
-  // perfiles explicativos y atractivos
-  const PROFILE_DESCRIPTIONS = {
-    voice: {
-      title: "Voz",
-      short: "Te expresas con claridad y convicción.",
-      long: "Eres bueno/a comunicando ideas y defendiendo lo que importa. Puedes liderar conversaciones, moderar debates y ayudar a que otros se escuchen.",
-      tips: ["Practica mensajes breves y claros", "Usa ejemplos personales para conectar", "Ensaya respuestas respetuosas para situaciones difíciles"]
-    },
-    info: {
-      title: "Investigador/a",
-      short: "Buscas datos y verificas antes de compartir.",
-      long: "Te importa la precisión. Investigas fuentes, contrastas información y ayudas a que las decisiones se basen en hechos.",
-      tips: ["Aprende a evaluar fuentes", "Resume datos en 1–2 frases", "Comparte enlaces fiables cuando publiques"]
-    },
-    action: {
-      title: "Hacedor/a",
-      short: "Prefieres hacer cosas concretas que generan cambio.",
-      long: "Te enfocas en resultados: organizar, ejecutar y resolver. Eres quien hace que las ideas se conviertan en acciones reales.",
-      tips: ["Divide tareas en pasos pequeños", "Busca aliados para compartir trabajo", "Celebra los pequeños logros"]
-    },
-    leadership: {
-      title: "Líder",
-      short: "Organizas y motivas a otros para lograr objetivos.",
-      long: "Tienes facilidad para coordinar equipos, delegar y mantener el rumbo. Inspiras a otros a participar y sostener proyectos.",
-      tips: ["Practica delegar con claridad", "Define roles y plazos", "Pide feedback al equipo"]
-    },
-    care: {
-      title: "Cuidador/a",
-      short: "Prioriza el bienestar y la inclusión de las personas.",
-      long: "Eres quien escucha, apoya y crea espacios seguros. Tu empatía ayuda a que los proyectos sean sostenibles y humanos.",
-      tips: ["Haz seguimiento personal a compañeros", "Crea espacios de bienvenida", "Combina cuidado con límites saludables"]
-    }
-  };
-
   function showResults(preview=false){
     $('surveyCard').style.display = 'none';
     $('resultCard').style.display = 'block';
@@ -382,24 +382,22 @@
     const body = $('resultBody'); body.innerHTML = '';
 
     if(preview){
-      body.innerHTML = `<h3 style="margin-top:0;font-size:20px">Perfiles (vista previa)</h3>
+      body.innerHTML = `<h3 style="margin-top:0;font-size:20px">Profiles (preview)</h3>
         <div class="resultGrid">
-          <div class="resultItem"><strong>Voz</strong><div style="margin-top:8px;color:var(--mut)">Hablar con claridad y respeto.</div></div>
-          <div class="resultItem"><strong>Investigador/a</strong><div style="margin-top:8px;color:var(--mut)">Verificar antes de compartir.</div></div>
-          <div class="resultItem"><strong>Hacedor/a</strong><div style="margin-top:8px;color:var(--mut)">Tomar pasos prácticos.</div></div>
-          <div class="resultItem"><strong>Líder</strong><div style="margin-top:8px;color:var(--mut)">Organizar y motivar.</div></div>
-          <div class="resultItem"><strong>Cuidador/a</strong><div style="margin-top:8px;color:var(--mut)">Apoyar y crear pertenencia.</div></div>
+          <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Speak up clearly and respectfully.</div></div>
+          <div class="resultItem"><strong>Researcher</strong><div style="margin-top:8px;color:var(--mut)">Verify before sharing.</div></div>
+          <div class="resultItem"><strong>Doer</strong><div style="margin-top:8px;color:var(--mut)">Take practical steps.</div></div>
+          <div class="resultItem"><strong>Leader</strong><div style="margin-top:8px;color:var(--mut)">Organize and motivate.</div></div>
+          <div class="resultItem"><strong>Carer</strong><div style="margin-top:8px;color:var(--mut)">Support and include others.</div></div>
         </div>`;
       addResultActions();
       return;
     }
 
-    // ordenar y mostrar barras con explicación
     const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
     const grid = document.createElement('div'); grid.className='resultGrid';
     entries.forEach(([k,v])=>{
-      const key = k;
-      const desc = PROFILE_DESCRIPTIONS[key];
+      const desc = PROFILE_DESCRIPTIONS[k];
       const item = document.createElement('div'); item.className='resultItem';
       item.innerHTML = `<div style="display:flex;align-items:center;gap:12px">
           <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(90deg,var(--accent2),var(--accent3));display:grid;place-items:center;font-weight:900;color:#071022;font-size:22px">${desc.title.charAt(0)}</div>
@@ -410,8 +408,8 @@
         </div>
         <div style="margin-top:12px;color:var(--mut)">${escapeHtml(desc.long)}</div>
         <div class="barInner"><div class="barFill" style="width:${Math.min(100, v*10)}%"></div></div>
-        <div style="margin-top:10px;font-weight:800">Puntaje: ${v} pts</div>
-        <div style="margin-top:10px"><strong>Sugerencias prácticas</strong>
+        <div style="margin-top:10px;font-weight:800">Score: ${v} pts</div>
+        <div style="margin-top:10px"><strong>Practical tips</strong>
           <ul style="margin:8px 0 0 18px;color:var(--mut)">
             ${desc.tips.map(t => `<li>${escapeHtml(t)}</li>`).join('')}
           </ul>
@@ -420,18 +418,17 @@
     });
     body.appendChild(grid);
 
-    // recomendación personalizada basada en top 2
     const top1 = entries[0];
     const top2 = entries[1];
     if(top1){
       const rec = document.createElement('div');
       rec.style.marginTop='18px'; rec.style.padding='16px'; rec.style.borderRadius='12px';
       rec.style.background='linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))';
-      rec.innerHTML = `<strong style="font-size:18px">Plan corto de 3 pasos</strong>
+      rec.innerHTML = `<strong style="font-size:18px">Quick 3-step plan</strong>
         <div style="margin-top:10px;color:var(--mut)">
-          1. Usa tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top1[0])}</strong> para liderar una pequeña acción (ej. 1 reunión o post informativo).<br>
-          2. Complementa con <strong style="text-transform:capitalize">${escapeHtml(top2 ? top2[0] : 'info')}</strong> para mejorar el enfoque (ej. datos o apoyo).<br>
-          3. Comparte lo aprendido con tu grupo en 5 minutos.
+          1. Use your strength <strong style="text-transform:capitalize">${escapeHtml(top1[0])}</strong> to lead a small action (e.g., one meeting or an informative post).<br>
+          2. Complement it with <strong style="text-transform:capitalize">${escapeHtml(top2 ? top2[0] : 'info')}</strong> to sharpen the approach (e.g., add data or recruit support).<br>
+          3. Share what you learned with your group in 5 minutes.
         </div>`;
       body.appendChild(rec);
     }
@@ -442,7 +439,7 @@
   function addResultActions(){
     const body = $('resultBody');
     const actions = document.createElement('div'); actions.className='actionsRow';
-    const copyBtn = document.createElement('button'); copyBtn.className='copyBtn'; copyBtn.textContent='Copiar resultados';
+    const copyBtn = document.createElement('button'); copyBtn.className='copyBtn'; copyBtn.textContent='Copy results';
     copyBtn.addEventListener('click', copyResults);
     actions.appendChild(copyBtn);
     body.appendChild(actions);
@@ -450,10 +447,10 @@
 
   function copyResults(){
     const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
-    let text = 'Youth Activism — Resultados\n';
+    let text = 'Youth Activism — Results\n';
     entries.forEach(([k,v])=> text += `${k}: ${v}\n`);
-    const top = entries[0]; if(top) text += `Siguiente paso: prueba una acción con ${top[0]}\n`;
-    navigator.clipboard?.writeText(text).then(()=> alert('Resultados copiados al portapapeles')).catch(()=> alert('No se pudo copiar automáticamente.'));
+    const top = entries[0]; if(top) text += `Next step: try a small action using ${top[0]}\n`;
+    navigator.clipboard?.writeText(text).then(()=> alert('Results copied to clipboard')).catch(()=> alert('Unable to copy automatically.'));
   }
 
   function resetSurvey(){
@@ -498,7 +495,7 @@
     setTimeout(()=> { conf.style.display='none'; conf.innerHTML=''; }, 2600);
   }
 
-  // eventos
+  // wire events
   $('startBtn').addEventListener('click', ()=>{
     currentQuestionIndex = 0;
     scores = { voice:0, info:0, action:0, leadership:0, care:0 };
@@ -511,7 +508,7 @@
   $('previewBtn').addEventListener('click', previewProfiles);
   $('restartBtn').addEventListener('click', resetSurvey);
 
-  // inicialización
+  // initialize
   (function init(){ initBadges(); $('ptxt').textContent = `0 / ${QUESTIONS.length}`; })();
 </script>
 </body>
