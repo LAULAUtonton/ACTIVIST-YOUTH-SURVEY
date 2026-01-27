@@ -3,65 +3,92 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Youth Activism — Encuesta interactiva</title>
+<title>Youth Activism — Encuesta interactiva (mejorada)</title>
 <meta name="description" content="Encuesta interactiva para jóvenes: Voice, Info, Action, Leadership, Care" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0f1724;
-    --card:#0b1220;
-    --mut:#9aa6b2;
-    --accent1:#7c3aed;
-    --accent2:#06b6d4;
-    --accent3:#ff6b6b;
-    --glass: rgba(255,255,255,0.04);
-    --radius:16px;
-    --shadow: 0 12px 40px rgba(2,6,23,0.6);
+    --bg:#071022;
+    --card:#071827;
+    --mut:#9fb0c6;
+    --accent1:#ff6b6b;   /* coral */
+    --accent2:#7c3aed;   /* purple */
+    --accent3:#06b6d4;   /* cyan */
+    --accent4:#ffd166;   /* yellow */
+    --accent5:#4ade80;   /* green */
+    --glass: rgba(255,255,255,0.03);
+    --radius:18px;
+    --shadow: 0 18px 50px rgba(2,6,23,0.7);
   }
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;background:
-    radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 20%),
-    radial-gradient(800px 400px at 90% 30%, rgba(6,182,212,0.08), transparent 20%),
-    var(--bg); color:#e6eef6;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:980px;margin:28px auto;padding:20px}
+    radial-gradient(900px 400px at 10% 10%, rgba(124,58,237,0.12), transparent 20%),
+    radial-gradient(900px 400px at 90% 30%, rgba(6,182,212,0.08), transparent 20%),
+    var(--bg); color:#eaf6ff;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:28px auto;padding:22px}
   header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-weight:800;color:white;font-size:18px;box-shadow:0 8px 30px rgba(124,58,237,0.18)}
-  h1{font-size:20px;margin:0}
-  .tagline{color:var(--mut);font-size:13px}
+  .brand{display:flex;gap:14px;align-items:center}
+  .logo{
+    width:72px;height:72px;border-radius:14px;
+    background:linear-gradient(135deg,var(--accent2),var(--accent3));
+    display:grid;place-items:center;font-weight:900;color:white;font-size:22px;
+    box-shadow:0 12px 40px rgba(124,58,237,0.18)
+  }
+  h1{font-size:22px;margin:0}
+  .tagline{color:var(--mut);font-size:14px}
   .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(255,255,255,0.03);overflow:hidden}
-  .intro{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:18px}
-  @media (max-width:880px){.intro{grid-template-columns:1fr}}
-  .pillRow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-  .pill{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:6px 10px;border-radius:999px;font-size:13px;color:var(--mut);display:inline-flex;align-items:center;gap:8px}
-  .controls{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-  .btn{padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#e6eef6;cursor:pointer;font-weight:700;transition:transform .12s ease,box-shadow .12s ease}
-  .btn:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-  .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));border:none;color:white}
-  .mini{padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
-  .cardHead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.02)}
-  .cardBody{padding:18px}
-  .prog{display:flex;align-items:center;gap:12px}
-  .bar{width:260px;height:12px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
-  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent1));transition:width .45s cubic-bezier(.2,.9,.2,1)}
-  .ptxt{font-size:13px;color:var(--mut)}
-  .questionTitle{margin:0 0 12px;font-size:20px}
-  .options{display:grid;gap:12px}
-  .optBtn{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
-  .optBtn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
-  .optEmoji{width:44px;height:44px;border-radius:10px;background:var(--glass);display:grid;place-items:center;font-size:20px}
-  .optText{flex:1;font-weight:600}
-  .optSub{font-size:13px;color:var(--mut)}
-  .small{font-size:13px;color:var(--mut);margin-top:12px}
-  .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .intro{display:grid;grid-template-columns:1fr 340px;gap:20px;padding:20px}
+  @media (max-width:920px){.intro{grid-template-columns:1fr}}
+  .pillRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .pill{
+    background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:8px 12px;border-radius:999px;font-size:14px;color:var(--mut);display:inline-flex;align-items:center;gap:10px
+  }
+  .controls{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+  .btn{
+    padding:12px 16px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);
+    background:transparent;color:#eaf6ff;cursor:pointer;font-weight:800;font-size:15px;
+    transition:transform .12s ease,box-shadow .12s ease
+  }
+  .btn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+  .btn.primary{
+    background:linear-gradient(90deg,var(--accent1),var(--accent3));
+    border:none;color:white;box-shadow:0 12px 30px rgba(6,182,212,0.12)
+  }
+  .mini{padding:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+  .cardHead{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.02)}
+  .cardBody{padding:20px}
+  .prog{display:flex;align-items:center;gap:14px}
+  .bar{width:300px;height:14px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+  .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent3),var(--accent2));transition:width .45s cubic-bezier(.2,.9,.2,1)}
+  .ptxt{font-size:15px;color:var(--mut);font-weight:700}
+  .questionTitle{margin:0 0 14px;font-size:22px;line-height:1.15}
+  .options{display:grid;gap:14px}
+  .optBtn{
+    display:flex;align-items:center;gap:16px;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
+    background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));cursor:pointer;transition:transform .12s ease,box-shadow .12s ease;
+    font-size:16px;font-weight:700;color:#eaf6ff
+  }
+  .optBtn:hover{transform:translateY(-8px);box-shadow:0 22px 50px rgba(2,6,23,0.7)}
+  .optEmoji{
+    width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    display:grid;place-items:center;font-size:30px;font-weight:800;color:#071022
+  }
+  .optText{flex:1}
+  .optSub{font-size:14px;color:var(--mut);font-weight:600;margin-top:6px}
+  .small{font-size:14px;color:var(--mut);margin-top:12px}
+  .resultGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media (max-width:640px){.resultGrid{grid-template-columns:1fr}}
-  .resultItem{padding:12px;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border:1px solid rgba(255,255,255,0.02)}
-  .barInner{height:12px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:8px}
-  .barFill{height:100%;width:0;background:linear-gradient(90deg,var(--accent1),var(--accent3));transition:width .8s cubic-bezier(.2,.9,.2,1)}
-  .actionsRow{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-  .copyBtn{background:#111;color:#fff;padding:8px 10px;border-radius:8px;border:none;cursor:pointer}
-  .avatarRow{display:flex;gap:8px;align-items:center;margin-top:12px}
-  .avatar{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:grid;place-items:center;font-weight:800;color:#071022}
+  .resultItem{
+    padding:14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    border:1px solid rgba(255,255,255,0.02)
+  }
+  .barInner{height:16px;border-radius:999px;background:rgba(255,255,255,0.04);overflow:hidden;margin-top:10px}
+  .barFill{height:100%;width:0;background:linear-gradient(90deg,var(--accent2),var(--accent5));transition:width .9s cubic-bezier(.2,.9,.2,1)}
+  .actionsRow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .copyBtn{background:#071022;color:#fff;padding:10px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  .avatarRow{display:flex;gap:12px;align-items:center;margin-top:14px}
+  .avatar{width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent3),var(--accent2));display:grid;place-items:center;font-weight:900;color:#071022;font-size:22px}
   .confetti{pointer-events:none;position:fixed;left:0;top:0;width:100%;height:100%;z-index:9999;display:none}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 </style>
@@ -83,8 +110,8 @@
     <section class="card" aria-labelledby="introTitle">
       <div class="intro">
         <div>
-          <h2 id="introTitle" style="margin:0 0 8px">¿Cómo actúas cuando algo importa?</h2>
-          <p style="margin:0;color:var(--mut)">Responde situaciones reales de escuela y redes. Al final verás tus puntos fuertes en <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong> y <strong>Care</strong>.</p>
+          <h2 id="introTitle" style="margin:0 0 8px;font-size:24px">¿Cómo actúas cuando algo importa?</h2>
+          <p style="margin:0;color:var(--mut);font-size:16px">Responde situaciones reales de escuela y redes. Al final verás tus puntos fuertes en <strong>Voice</strong>, <strong>Info</strong>, <strong>Action</strong>, <strong>Leadership</strong> y <strong>Care</strong>.</p>
 
           <div class="pillRow" aria-hidden="true">
             <span class="pill">🎨 Visual</span>
@@ -99,15 +126,15 @@
             <button id="restartBtn" class="btn" style="display:none">Reiniciar</button>
           </div>
 
-          <div class="small">Consejo: puedes usar el teclado (Tab + Enter) para responder.</div>
+          <div class="small">Consejo: usa Tab + Enter para navegar y responder. Los iconos son grandes para facilitar la lectura.</div>
         </div>
 
         <aside class="mini" aria-hidden="false">
           <div style="display:flex;align-items:center;justify-content:space-between">
-            <strong>Uso rápido para profes</strong>
-            <div style="font-size:12px;color:var(--mut)">Editable</div>
+            <strong style="font-size:16px">Uso rápido para profes</strong>
+            <div style="font-size:13px;color:var(--mut)">Editable</div>
           </div>
-          <ul style="margin:8px 0 0 18px;padding:0;color:var(--mut)">
+          <ul style="margin:10px 0 0 18px;padding:0;color:var(--mut);font-size:15px">
             <li>Individual o en proyector</li>
             <li>Al final: copiar resultados o hacer captura</li>
             <li>Reflexión: "Una fortaleza… Un paso a intentar"</li>
@@ -117,10 +144,10 @@
     </section>
 
     <!-- Survey -->
-    <section id="surveyCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Encuesta">
+    <section id="surveyCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Encuesta">
       <div class="cardHead">
         <div>
-          <div style="font-size:13px;color:var(--mut)"><strong id="qLabel">Pregunta</strong> <span id="topicTag" style="margin-left:8px"></span></div>
+          <div style="font-size:15px;color:var(--mut)"><strong id="qLabel">Pregunta</strong> <span id="topicTag" style="margin-left:10px"></span></div>
         </div>
         <div class="prog" aria-hidden="false">
           <div class="bar" aria-hidden="true"><div id="fill" class="fill" style="width:0%"></div></div>
@@ -131,9 +158,9 @@
     </section>
 
     <!-- Results -->
-    <section id="resultCard" class="card" style="margin-top:16px;display:none" role="region" aria-label="Resultados">
+    <section id="resultCard" class="card" style="margin-top:18px;display:none" role="region" aria-label="Resultados">
       <div class="cardHead">
-        <div><strong>Tu perfil</strong></div>
+        <div><strong style="font-size:18px">Tu perfil</strong></div>
         <div class="ptxt">¡Listo!</div>
       </div>
       <div class="cardBody" id="resultBody"></div>
@@ -143,7 +170,6 @@
   </div>
 
 <script>
-  // 15 preguntas (mismos temas, adaptadas)
   const QUESTIONS = [
     { topic:"School", title:"Escuchas un comentario ofensivo en clase. ¿Qué haces primero?", options:[
       {title:"Pararlo con respeto", pts:{voice:2, leadership:1}, emoji:"🗣️"},
@@ -237,15 +263,12 @@
     ]},
   ];
 
-  // estado
   let currentQuestionIndex = 0;
   let scores = { voice:0, info:0, action:0, leadership:0, care:0 };
 
-  // util
   function $(id){ return document.getElementById(id); }
   function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  // render badges (intro)
   function initBadges(){
     const intro = document.querySelector('.intro');
     if(!intro) return;
@@ -256,14 +279,10 @@
     }
     container.innerHTML = '';
     ['VOICE','INFO','ACTION','LEADERSHIP','CARE'].forEach(t=>{
-      const b = document.createElement('span');
-      b.textContent = t;
-      b.className = 'pill';
-      container.appendChild(b);
+      const b = document.createElement('span'); b.className='pill'; b.textContent = t; container.appendChild(b);
     });
   }
 
-  // render pregunta
   function renderQuestion(){
     const q = QUESTIONS[currentQuestionIndex];
     $('qLabel').textContent = `Pregunta ${currentQuestionIndex + 1}`;
@@ -273,26 +292,22 @@
     const percent = Math.round((currentQuestionIndex / denom) * 100);
     $('fill').style.width = percent + '%';
 
-    const body = $('body');
-    body.innerHTML = '';
+    const body = $('body'); body.innerHTML = '';
     const title = document.createElement('h3'); title.className='questionTitle'; title.innerHTML = escapeHtml(q.title);
     body.appendChild(title);
 
     const opts = document.createElement('div'); opts.className='options';
     q.options.forEach((opt, idx)=>{
-      const b = document.createElement('button');
-      b.type='button'; b.className='optBtn'; b.setAttribute('aria-label', opt.title);
+      const b = document.createElement('button'); b.type='button'; b.className='optBtn'; b.setAttribute('aria-label', opt.title);
       b.innerHTML = `<div class="optEmoji">${opt.emoji}</div><div class="optText">${escapeHtml(opt.title)}<div class="optSub"></div></div>`;
       b.addEventListener('click', ()=> selectOption(idx));
       b.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); selectOption(idx); }});
       opts.appendChild(b);
     });
     body.appendChild(opts);
-    // focus
     const first = opts.querySelector('.optBtn'); if(first) first.focus();
   }
 
-  // seleccionar opción
   function selectOption(index){
     const q = QUESTIONS[currentQuestionIndex];
     const opt = q.options[index];
@@ -300,8 +315,6 @@
       if(scores.hasOwnProperty(k)) scores[k] += opt.pts[k]; else scores[k] = opt.pts[k];
     });
 
-    // micro-feedback: pulse animation on selected button
-    // avanzar o mostrar resultados
     if(currentQuestionIndex < QUESTIONS.length - 1){
       currentQuestionIndex++;
       renderQuestion();
@@ -311,7 +324,6 @@
     }
   }
 
-  // mostrar resultados
   function showResults(preview=false){
     $('surveyCard').style.display = 'none';
     $('resultCard').style.display = 'block';
@@ -319,7 +331,7 @@
     const body = $('resultBody'); body.innerHTML = '';
 
     if(preview){
-      body.innerHTML = `<h3 style="margin-top:0">Perfiles (vista previa)</h3>
+      body.innerHTML = `<h3 style="margin-top:0;font-size:20px">Perfiles (vista previa)</h3>
         <div class="resultGrid">
           <div class="resultItem"><strong>Voice</strong><div style="margin-top:8px;color:var(--mut)">Hablar con claridad y respeto.</div></div>
           <div class="resultItem"><strong>Info</strong><div style="margin-top:8px;color:var(--mut)">Investigar y verificar antes de compartir.</div></div>
@@ -331,41 +343,37 @@
       return;
     }
 
-    // ordenar por puntaje
     const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
     const grid = document.createElement('div'); grid.className='resultGrid';
     entries.forEach(([k,v])=>{
       const item = document.createElement('div'); item.className='resultItem';
       item.innerHTML = `<strong style="text-transform:capitalize">${escapeHtml(k)}</strong>
-        <div style="margin-top:8px;color:var(--mut)">${v} pts</div>
+        <div style="margin-top:8px;color:var(--mut);font-weight:700">${v} pts</div>
         <div class="barInner"><div class="barFill" style="width:${Math.min(100, v*10)}%"></div></div>`;
       grid.appendChild(item);
     });
     body.appendChild(grid);
 
-    // sugerencia práctica
     const top = entries[0];
     if(top){
       const tip = document.createElement('div');
-      tip.style.marginTop='12px'; tip.style.padding='12px'; tip.style.borderRadius='10px';
+      tip.style.marginTop='14px'; tip.style.padding='14px'; tip.style.borderRadius='12px';
       tip.style.background='linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03))';
-      tip.innerHTML = `<strong>Próximo paso</strong>: prueba una acción pequeña que use tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong>.`;
+      tip.innerHTML = `<strong style="font-size:16px">Próximo paso</strong>: prueba una acción pequeña que use tu fortaleza <strong style="text-transform:capitalize">${escapeHtml(top[0])}</strong>.`;
       body.appendChild(tip);
     }
     addResultActions();
   }
 
-  // acciones en resultados
   function addResultActions(){
     const body = $('resultBody');
     const actions = document.createElement('div'); actions.className='actionsRow';
     const copyBtn = document.createElement('button'); copyBtn.className='copyBtn'; copyBtn.textContent='Copiar resultados';
     copyBtn.addEventListener('click', copyResults);
-    const restart = $('restartBtn'); restart.addEventListener('click', resetSurvey);
-    actions.appendChild(copyBtn); body.appendChild(actions);
+    actions.appendChild(copyBtn);
+    body.appendChild(actions);
   }
 
-  // copiar resultados
   function copyResults(){
     const entries = Object.entries(scores).sort((a,b)=> b[1]-a[1]);
     let text = 'Youth Activism — Resultados\n';
@@ -374,7 +382,6 @@
     navigator.clipboard?.writeText(text).then(()=> alert('Resultados copiados al portapapeles')).catch(()=> alert('No se pudo copiar automáticamente.'));
   }
 
-  // reiniciar encuesta
   function resetSurvey(){
     currentQuestionIndex = 0;
     scores = { voice:0, info:0, action:0, leadership:0, care:0 };
@@ -385,23 +392,21 @@
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  // vista previa
   function previewProfiles(){
     $('surveyCard').style.display = 'none';
     showResults(true);
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  // micro-celebración (confetti simple)
   function celebrate(){
     const conf = $('confetti'); conf.innerHTML=''; conf.style.display='block';
-    const colors = ['#7c3aed','#06b6d4','#ff6b6b','#ffd166','#4ade80'];
+    const colors = ['#ff6b6b','#7c3aed','#06b6d4','#ffd166','#4ade80'];
     for(let i=0;i<40;i++){
       const el = document.createElement('div');
       el.style.position='absolute';
       el.style.left = Math.random()*100 + '%';
       el.style.top = '-10%';
-      el.style.width = (6+Math.random()*8)+'px';
+      el.style.width = (8+Math.random()*12)+'px';
       el.style.height = el.style.width;
       el.style.background = colors[Math.floor(Math.random()*colors.length)];
       el.style.opacity = 0.95;
@@ -409,19 +414,16 @@
       el.style.transform = `rotate(${Math.random()*360}deg)`;
       el.style.transition = `transform 1.6s linear, top 1.6s cubic-bezier(.2,.9,.2,1), opacity 1.6s linear`;
       conf.appendChild(el);
-      // animate
       setTimeout(()=> {
         el.style.top = (60 + Math.random()*40) + '%';
         el.style.transform = `translateY(0) rotate(${Math.random()*720}deg)`;
         el.style.opacity = 0.9;
       }, 20 + i*10);
-      // remove
       setTimeout(()=> { el.style.opacity = 0; }, 1800 + i*10);
     }
     setTimeout(()=> { conf.style.display='none'; conf.innerHTML=''; }, 2600);
   }
 
-  // eventos
   $('startBtn').addEventListener('click', ()=>{
     currentQuestionIndex = 0;
     scores = { voice:0, info:0, action:0, leadership:0, care:0 };
@@ -434,11 +436,7 @@
   $('previewBtn').addEventListener('click', previewProfiles);
   $('restartBtn').addEventListener('click', resetSurvey);
 
-  // init
-  (function init(){
-    initBadges();
-    $('ptxt').textContent = `0 / ${QUESTIONS.length}`;
-  })();
+  (function init(){ initBadges(); $('ptxt').textContent = `0 / ${QUESTIONS.length}`; })();
 </script>
 </body>
 </html>
